@@ -13,8 +13,7 @@ $(document).ready(function($) {
 	var database = firebase.database();
 	var n = 0;
 	var m= 0;
-	// var items = [];
-	var quantities = [];
+	var totalPrice = 0;
 
 	String.prototype.capitalizeFirstLetter = function() {
 	    return this.charAt(0).toUpperCase() + this.slice(1);
@@ -82,8 +81,8 @@ $(document).ready(function($) {
 		console.log("Errors handled: " + errorObject.code);
 	});
 
-	function putOnPage() {
-		$("#cart-items").empty(); // empties out the html
+	function showCart() {
+		$("#cart-items").empty();
 
 		itemsList = JSON.parse(localStorage.getItem("items"));
 		quantitiesList = JSON.parse(localStorage.getItem("quantities"));
@@ -96,64 +95,100 @@ $(document).ready(function($) {
 			quantitiesList = [];
 		}
 
+		if (itemsList.length > 0) {
+			$(".cart").removeClass("hidden");
+		} else {
+			$(".cart").addClass("hidden");
+		}
+
 		database.ref().on("value", function(snapshot) {
 			sv = snapshot.val();
 
 			for (var i = 0; i < itemsList.length; i++) {
 				var name = $("<p>").text(sv[itemsList[i]].name);
-				var price = $("<p>").text("$" + sv[itemsList[i]].price);
-				var quantity = $("<p>").text(quantitiesList[i]);
-				var b = $("<button class='delete'>").text("x").attr("data-index", i);
+				var price = $("<p>").text("$" + (parseFloat(sv[itemsList[i]].price) * parseInt(quantitiesList[i])));
+				var quantity = $("<select>");
+				quantity.addClass("form-control");
+				quantity.attr("data-index", i);
+				for (var j = 0; j < 10; j++) {
+					var option = $("<option>");
+					option.attr("value", j+1);
+					if (j+1 === parseInt(quantitiesList[i])) {
+						option.attr("selected", "selected");
+					}
+					option.text(j+1);
+					quantity.append(option);
+				}
+				var b = $("<button class='btn btn-default delete'>").text("Remove").attr("data-index", i);
+				totalPrice += (parseFloat(sv[itemsList[i]].price) * parseInt(quantitiesList[i]));
 	        	name.append(price);
 	        	name.append(quantity);
 	        	name.append(b);
 				$("#cart-items").append(name);
+				$("#total-price").text("Total: $" + totalPrice);
 			}
 		});
 	}
 
-	putOnPage();
+	showCart();
 
-	$(document).on("click", "button.delete", function() {
-		var items = JSON.parse(localStorage.getItem("items"));
-		var quantities = JSON.parse(localStorage.getItem("quantities"));
-		var currentIndex = $(this).attr("data-index");
-
-		items.splice(currentIndex, 1);
-		itemsList = items;
-
-		quantities.splice(currentIndex, 1);
-		quantitiesList = quantities;
-
-		localStorage.setItem("items", JSON.stringify(items));
-		localStorage.setItem("quantities", JSON.stringify(quantities));
-
-		$(this).parent().remove();
-	});
-
+	// Add item to cart
 	$(document).on("click", "#add-to-cart", function() {
 		event.preventDefault();
 		var items = JSON.parse(localStorage.getItem("items"));
 		if (!Array.isArray(items)) {
 			items = [];
 		}
+		totalPrice = 0;
 		var quantities = JSON.parse(localStorage.getItem("quantities"));
+
+		// If item is not in cart
 		if (items.indexOf($(this).attr("data-key")) === -1) {
-			var val = $(this).attr("data-key");
-			var val2 = 1;
-			itemsList.push(val);
-			quantitiesList.push(val2);
+			var itemKey = $(this).attr("data-key");
+			var quantity = 1;
+			itemsList.push(itemKey);
+			quantitiesList.push(quantity);
 			localStorage.setItem("items", JSON.stringify(itemsList));
 			localStorage.setItem("quantities", JSON.stringify(quantitiesList));
-			putOnPage();
+			showCart();
+
+		// If item is in the cart
 		} else {
 			var itemIndex = items.indexOf($(this).attr("data-key"));
 			var newQuantity = parseInt(quantities[itemIndex]);
 			newQuantity++;
 			quantities[itemIndex] = newQuantity;
-			quantitiesList = quantities;
 			localStorage.setItem("quantities", JSON.stringify(quantities));
-			putOnPage();
+			showCart();
 		}
+	});
+
+	// Update item quantity
+	$(document).on("change", "select", function() {
+		totalPrice = 0;
+		var itemIndex = $(this).attr("data-index");
+		var quantities = JSON.parse(localStorage.getItem("quantities"));
+		var newQuantity = parseInt($(this).val());
+		quantities[itemIndex] = newQuantity;
+		localStorage.setItem("quantities", JSON.stringify(quantities));
+		showCart();
+	});
+
+	// Remove item from cart
+	$(document).on("click", "button.delete", function() {
+		var items = JSON.parse(localStorage.getItem("items"));
+		var quantities = JSON.parse(localStorage.getItem("quantities"));
+		var currentIndex = $(this).attr("data-index");
+
+		items.splice(currentIndex, 1);
+		quantities.splice(currentIndex, 1);
+
+		localStorage.setItem("items", JSON.stringify(items));
+		localStorage.setItem("quantities", JSON.stringify(quantities));
+
+		$(this).parent().remove();
+
+		totalPrice = 0;
+		showCart();
 	});
 });
