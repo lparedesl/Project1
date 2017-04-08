@@ -20,66 +20,66 @@ $(document).ready(function($) {
 	};
 
 	// Add item to page
-	database.ref().on("child_added", function(snapshot) {
-		var child = snapshot.val();
-		var key = snapshot.key;
-		var name = child.name.capitalizeFirstLetter();
-	  	var description = child.description.capitalizeFirstLetter();
-	  	var price = child.price;
-	  	var img = "assets/images/" + child.imgName;
+	// database.ref().on("child_added", function(snapshot) {
+	// 	var child = snapshot.val();
+	// 	var key = snapshot.key;
+	// 	var name = child.name.capitalizeFirstLetter();
+	//   	var description = child.description.capitalizeFirstLetter();
+	//   	var price = child.price;
+	//   	var img = "assets/images/" + child.imgName;
 
-	  	// Create row
-	  	if (n % 3 === 0) {
-	  		var row = $("<div>");
-	  		row.addClass("row");
-	  		row.attr("data-index", m);
-	  		$(".products-content").append(row);
-	  	}
+	//   	// Create row
+	//   	if (n % 3 === 0) {
+	//   		var row = $("<div>");
+	//   		row.addClass("row");
+	//   		row.attr("data-index", m);
+	//   		$(".products-content").append(row);
+	//   	}
 
-	  	var itemPrice = $("<div>");
-	  	itemPrice.addClass("price pull-left");
-	  	itemPrice.text("$" + price);
+	//   	var itemPrice = $("<div>");
+	//   	itemPrice.addClass("price pull-left");
+	//   	itemPrice.text("$" + price);
 
-	  	var addToCart = $("<button>");
-	  	addToCart.addClass("btn btn-primary pull-right");
-	  	addToCart.attr("type", "button");
-	  	addToCart.attr("id", "add-to-cart");
-	  	addToCart.attr("data-key", key);
-	  	addToCart.text("Add to cart");
+	//   	var addToCart = $("<button>");
+	//   	addToCart.addClass("btn btn-primary pull-right");
+	//   	addToCart.attr("type", "button");
+	//   	addToCart.attr("id", "add-to-cart");
+	//   	addToCart.attr("data-key", key);
+	//   	addToCart.text("Add to cart");
 
-	  	var buyContent = $("<div>");
-	  	buyContent.addClass("clearfix");
-	  	buyContent.append(itemPrice);
-	  	buyContent.append(addToCart);
+	//   	var buyContent = $("<div>");
+	//   	buyContent.addClass("clearfix");
+	//   	buyContent.append(itemPrice);
+	//   	buyContent.append(addToCart);
 
-	  	var caption = $("<div>");
-	  	caption.addClass("caption");
-	  	caption.html("<h3>" + name + "</h3><p class=\"description\">" + description + "</p>");
-	  	caption.append(buyContent);
+	//   	var caption = $("<div>");
+	//   	caption.addClass("caption");
+	//   	caption.html("<h3>" + name + "</h3><p class=\"description\">" + description + "</p>");
+	//   	caption.append(buyContent);
 
-	  	var itemImg = $("<img>");
-	  	itemImg.attr("src", img);
-	  	itemImg.attr("alt", name);
+	//   	var itemImg = $("<img>");
+	//   	itemImg.attr("src", img);
+	//   	itemImg.attr("alt", name);
 
-	  	var itemCard = $("<div>");
-	  	itemCard.addClass("thumbnail");
-	  	itemCard.append(itemImg);
-	  	itemCard.append(caption);
+	//   	var itemCard = $("<div>");
+	//   	itemCard.addClass("thumbnail");
+	//   	itemCard.append(itemImg);
+	//   	itemCard.append(caption);
 
-	  	var item = $("<div>");
-	  	item.addClass("col-sm-6 col-md-4");
-	  	item.append(itemCard);
+	//   	var item = $("<div>");
+	//   	item.addClass("col-sm-6 col-md-4");
+	//   	item.append(itemCard);
 
-	  	$(".row[data-index=" + m + "]").append(item);
+	//   	$(".row[data-index=" + m + "]").append(item);
 
-	  	if (n % 3 === 2) {
-	  		m++;
-	  	}
+	//   	if (n % 3 === 2) {
+	//   		m++;
+	//   	}
 
-	  	n++;
-	}, function(errorObject) {
-		console.log("Errors handled: " + errorObject.code);
-	});
+	//   	n++;
+	// }, function(errorObject) {
+	// 	console.log("Errors handled: " + errorObject.code);
+	// });
 
 	function showCart() {
 		$("#cart-items").empty();

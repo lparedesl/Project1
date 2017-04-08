@@ -1,55 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Products</title>
-	<!-- <link rel="icon" href="#"> -->
-
-	<!-- Reset CSS -->
-	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
-
-	<!-- Latest compiled and minified Bootstrap CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-	<!-- Optional Bootstrap theme -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-	<!-- jQuery -->
-	<script src="https://code.jquery.com/jquery-3.2.0.min.js" integrity="sha256-JAW99MJVpJBGcbzEuXk4Az05s/XyDdBomFqNlM3ic+I=" crossorigin="anonymous"></script>
-	<script src="https://cdn.rawgit.com/nnattawat/flip/master/dist/jquery.flip.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js"></script>
-
-	<!-- Latest compiled and minified Bootstrap JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-	<!-- CSS -->
-	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
-
-	<!-- JavaScript -->
-	<script src="https://use.fontawesome.com/d1c076a58a.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
-	<script type="text/javascript" src="assets/javascript/js-products.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Products</title>
+    <!-- <link rel="icon" href="#"> -->
+    <!-- Reset CSS -->
+    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+    <!-- Latest compiled and minified Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Optional Bootstrap theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.2.0.min.js" integrity="sha256-JAW99MJVpJBGcbzEuXk4Az05s/XyDdBomFqNlM3ic+I=" crossorigin="anonymous"></script>
+    <script src="https://cdn.rawgit.com/nnattawat/flip/master/dist/jquery.flip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js"></script>
+    <!-- Latest compiled and minified Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <!-- JavaScript -->
+    <script src="https://use.fontawesome.com/d1c076a58a.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+    <script type="text/javascript" src="assets/javascript/js-products.js"></script>
 </head>
+
 <body>
-	<div class="container">
-		<!-- Header -->
-		<div class="jumbotron header">
-			<div class="container">
-				<h1>Products</h1>
+    <div class="container">
+        <!-- Header -->
+        <div class="jumbotron header">
+            <div class="container">
+                <h1>Products</h1>
+            </div>
+        </div>
+        <nav class="navbar navbar-inverse">
+            <ul class="nav nav-pills">
+                <li role="presentation"><a href="#">Home</a></li>
+                <li role="presentation" class="active"><a href="#">Products</a></li>
+                <li>
+                    <button type="button" class="btn btn-default navbar-btn navbar-right" id="signIn">Sign in</button>
+                </li>
+            </ul>
+        </nav>
+        <!-- Content -->
+       <div class="products-content">
+	<div class="row" data-index="0">
+		<div class="col-sm-6 col-md-4">
+			<div class="thumbnail">
+				<img src="assets/images/bakesale1.jpg" alt="Cookie">
+				<div class="caption">
+					<h3>Cookie</h3>
+					<p class="description">This is a cookie</p>
+					<div class="clearfix">
+						<div class="price pull-left">$2</div>
+						<button class="btn btn-primary pull-right" type="button" id="add-to-cart" data-key="-Kh5bMrfQY_Y-zxhg3NY">Add to cart</button>
+					</div>
+				</div>
 			</div>
 		</div>
-
-		<!-- Content -->
-		<div class="products-content"></div>
-
-		<div class="col-md-4 hidden cart">
-			<h3>Cart</h3>
-			<div id="cart-items"></div>
-			<div id="total-price"></div>
-			<a href="" type="button" class="btn btn-success" id="checkout">Checkout</a>
+		<div class="col-sm-6 col-md-4">
+			<div class="thumbnail">
+				<img src="assets/images/bakesale9.jpg" alt="Cake">
+				<div class="caption">
+					<h3>Cake</h3>
+					<p class="description">Chocolate cake</p>
+					<div class="clearfix">
+						<div class="price pull-left">$8</div>
+						<button class="btn btn-primary pull-right" type="button" id="add-to-cart" data-key="-Kh5bXVtgzJNqNJXxk_c">Add to cart</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-6 col-md-4">
+			<div class="thumbnail">
+				<img src="assets/images/bakesale4.jpg" alt="Cinnamon rolls">
+				<div class="caption">
+					<h3>Cinnamon rolls</h3>
+					<p class="description">These are rolls</p>
+					<div class="clearfix">
+						<div class="price pull-left">$6</div>
+						<button class="btn btn-primary pull-right" type="button" id="add-to-cart" data-key="-Kh5bevApuIYSiZUU7aa">Add to cart</button>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
+	<div class="row" data-index="1">
+		<div class="col-sm-6 col-md-4">
+			<div class="thumbnail">
+				<img src="assets/images/bakesale3.jpg" alt="Test"><div class="caption">
+				<h3>Test</h3>
+				<p class="description">Test item</p>
+				<div class="clearfix"><div class="price pull-left">$4</div>
+				<button class="btn btn-primary pull-right" type="button" id="add-to-cart" data-key="-Kh5p_9a8xYjdXK6fEpx">Add to cart</button>
+			</div>
+		</div>
+	</div>
+</div>
+Add Comment
+    </div>
 </body>
+
 </html>
