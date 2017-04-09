@@ -26,6 +26,7 @@
 
 	<!-- JavaScript -->
 	<script src="https://use.fontawesome.com/d1c076a58a.js"></script>
+	<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
 	<script src="https://js.stripe.com/v2/"></script>
 	<script src="https://js.stripe.com/v3/"></script>
@@ -34,37 +35,35 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<!-- <div class="col-sm-6 col-md-4 col-md-offset-4 col-sm-offset-3"> -->
-				<h1>Checkout</h1>
-				<h4>Your Total: $<span id="cart-total"></span></h4>
-				<form method="post" id="checkout-form">
-					<div class="group">
-						<label>
-							<span>Name</span>
-							<input name="cardholder-name" class="field" placeholder="Jane Doe" required/>
-						</label>
-						<label>
-							<span>E-mail</span>
-							<input class="field" placeholder="name@email.com" required/>
-						</label>
-						<label>
-							<span>Phone</span>
-							<input class="field" placeholder="(123) 456-7890" type="tel" required/>
-						</label>
-					</div>
-					<div class="group">
-						<label>
-							<span>Card</span>
-							<div id="card-element" class="field"></div>
-						</label>
-					</div>
-					<button type="submit">Pay $<span id="chargeAmount"></span></button>
-					<div class="outcome">
-						<div class="error"></div>
-						<div class="success"></div>
-					</div>
-				</form>
-			<!-- </div> -->
+			<h1>Checkout</h1>
+			<h4>Your Total: $<span id="cart-total"></span></h4>
+			<form method="post" id="checkout-form">
+				<div class="group">
+					<label>
+						<span>Name</span>
+						<input name="cardholder-name" class="field" id="name-input" placeholder="Jane Doe" required/>
+					</label>
+					<label>
+						<span>E-mail</span>
+						<input class="field" id="email-input" placeholder="name@email.com" required/>
+					</label>
+					<label>
+						<span>Phone</span>
+						<input class="field" id="phone-input" placeholder="(123) 456-7890" type="tel" required/>
+					</label>
+				</div>
+				<div class="group">
+					<label>
+						<span>Card</span>
+						<div id="card-element" class="field"></div>
+					</label>
+				</div>
+				<button type="submit">Pay $<span id="chargeAmount"></span></button>
+				<div class="outcome">
+					<div class="error"></div>
+					<div class="success"></div>
+				</div>
+			</form>
 		</div>
 	</div>
 </body>
