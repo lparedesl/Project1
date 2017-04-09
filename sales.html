@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Train Scheduler</title>
+	<!-- <link rel="icon" href="#"> -->
+
+	<!-- Reset CSS -->
+	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+
+	<!-- Latest compiled and minified Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- Optional Bootstrap theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+	<!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-3.2.0.min.js" integrity="sha256-JAW99MJVpJBGcbzEuXk4Az05s/XyDdBomFqNlM3ic+I=" crossorigin="anonymous"></script>
+	<script src="https://cdn.rawgit.com/nnattawat/flip/master/dist/jquery.flip.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js"></script>
+
+	<!-- Latest compiled and minified Bootstrap JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+	<!-- JavaScript -->
+	<script src="https://use.fontawesome.com/d1c076a58a.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+	<script type="text/javascript" src="assets/javascript/js-sales.js"></script>
+</head>
+<body>
+	<!-- Content -->
+	<div class="container">
+		<!-- Header -->
+		<div class="jumbotron header">
+			<div class="container">
+				<h1>Sales</h1>
+			</div>
+		</div>
+
+		<h2>Open Orders</h2>
+		<table class="table table-hover" id="open-table">
+			<thead>
+				<tr>
+					<th>Order #<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="0" data-table="open-table"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="0" data-table="open-table"></i></th>
+					<th>Date<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="1" data-table="open-table"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="1" data-table="open-table"></i></th>
+					<th>Name<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="2" data-table="open-table"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="2" data-table="open-table"></i></th>
+					<th>Amount ($)<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="3" data-table="open-table"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="3" data-table="open-table"></i></th>
+					<th>Description<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="4" data-table="open-table"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="4" data-table="open-table"></i></th>
+					<th>Card<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="5" data-table="open-table"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="5" data-table="open-table"></i></th>
+					<th>Last 4<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="6" data-table="open-table"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="6" data-table="open-table"></i></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody></tbody>
+		</table>
+
+		<h2>Picked Up Orders</h2>
+		<table class="table table-hover" id="picked-up-table">
+			<thead>
+				<tr>
+					<th>Order #<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="0" data-table="picked-up-table"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="0" data-table="picked-up-table"></i></th>
+					<th>Date<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="1" data-table="picked-up-table"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="1" data-table="picked-up-table"></i></th>
+					<th>Name<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="2" data-table="picked-up-table"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="2" data-table="picked-up-table"></i></th>
+					<th>Amount ($)<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="3" data-table="picked-up-table"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="3" data-table="picked-up-table"></i></th>
+					<th>Description<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="4" data-table="picked-up-table"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="4" data-table="picked-up-table"></i></th>
+					<th>Card<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="5" data-table="picked-up-table"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="5" data-table="picked-up-table"></i></th>
+					<th>Last 4<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="6" data-table="picked-up-table"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="6" data-table="picked-up-table"></i></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody></tbody>
+		</table>
+	</div>
+
+	<!-- Footer -->
+	<footer class="footer" role="contentinfo">
+		<section style="position:relative;">
+			<div class="centered">
+				<div class="col-md-4 footer-contact">
+					<h3>Contact</h3>
+					<ul>
+						<li><i class="fa fa-envelope" aria-hidden="true"></i><a href="mailto:lparedesl@gmail.com">lparedesl@gmail.com</a></li>
+						<li><i class="fa fa-phone" aria-hidden="true"></i><a href="tel:980-428-6491">(980) 428-6491</a></li>
+					</ul>
+				</div>
+				<div class="col-md-4 footer-connect">
+					<h3>Connect</h3>
+					<ul class="social">
+						<li><a href="https://www.linkedin.com/in/luis-paredes-23aab657/" class="linkedin" target="_blank">
+							<i class="fa fa-linkedin fa-2x" aria-hidden="true"></i>
+						</a></li>
+						<li><a href="https://github.com/lparedesl" class="github" target="_blank">
+							<i class="fa fa-github fa-2x" aria-hidden="true"></i>
+						</a></li>
+						<li><a href="https://www.facebook.com/" class="facebook" target="_blank">
+							<i class="fa fa-facebook fa-2x" aria-hidden="true"></i>
+						</a></li>
+						<li><a href="https://twitter.com/" class="twitter" target="_blank">
+							<i class="fa fa-twitter fa-2x" aria-hidden="true"></i>
+						</a></li>
+						<li><a href="https://plus.google.com/" class="googleplus" target="_blank">
+							<i class="fa fa-google-plus fa-2x" aria-hidden="true"></i>
+						</a></li>
+					</ul>
+				</div>
+				<div class="col-md-4 footer-navigation">
+					<h3>Navigate</h3>
+					<ul>
+						<li><i class="fa fa-chevron-right" aria-hidden="true"></i><a href="https://lparedesl.github.io/Portfolio/index.html#about_section">About</a></li>
+						<li><i class="fa fa-chevron-right" aria-hidden="true"></i><a href="https://lparedesl.github.io/Portfolio/portfolio.html">Portfolio</a></li>
+						<li><i class="fa fa-chevron-right" aria-hidden="true"></i><a href="https://lparedesl.github.io/Portfolio/contact.html">Contact</a></li>
+					</ul>
+				</div>
+			</div>
+		</section>
+		<section class="bottom-bar">
+			<p>© 2017 | Luis Paredes</p>
+		</section>
+	</footer>
+</body>
+</html>
