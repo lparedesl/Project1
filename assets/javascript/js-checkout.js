@@ -238,34 +238,46 @@ $(document).ready(function($) {
 			},
 			success: function(response) {
 				var dateTime = moment(response.created, "X").format("MMM DD, YYYY hh:mm:ss");
-				// Push sale to database
-				salesDB.ref().child(response.id).set({
-					name: name,
-					created: dateTime,
-					description: response.description,
-					amount: response.amount / 100,
-					card: response.source.brand,
-					zipCode: response.source.address_zip,
-				});
-
-				// Update inventory
-				inventoryDB.ref().on("child_added", function(snapshot) {
-					var sv = snapshot.val();
-					var key = snapshot.key;
-					if (cartItems.indexOf(key) !== -1) {
-						var index = cartItems.indexOf(key);
-						var newCartQty = sv.quantity - cartQuantities[index];
-						inventoryDB.ref("/" + key).update({
-							quantity: newCartQty,
-						});
+				salesDB.ref().once("value", function(snapshot) {
+					var orderNumber = snapshot.numChildren() + 1;
+					if (orderNumber < 10) {
+						orderNumber = "000" + String(orderNumber);
+					} else if (orderNumber < 100) {
+						orderNumber = "00" + String(orderNumber);
+					} else if (orderNumber < 1000) {
+						orderNumber = "0" + String(orderNumber);
 					}
+
+					// Push sale to database
+					salesDB.ref().child(response.id).set({
+						orderNumber: orderNumber,
+						name: name,
+						created: dateTime,
+						description: response.description,
+						amount: response.amount / 100,
+						card: response.source.brand,
+						last4: response.source.last4,
+					});
+
+					// Update inventory
+					inventoryDB.ref().on("child_added", function(snapshot) {
+						var sv = snapshot.val();
+						var key = snapshot.key;
+						if (cartItems.indexOf(key) !== -1) {
+							var index = cartItems.indexOf(key);
+							var newCartQty = sv.quantity - cartQuantities[index];
+							inventoryDB.ref("/" + key).update({
+								quantity: newCartQty,
+							});
+						}
+					});
+
+					window.location = "paysuccess.html";
+
+					// Empty cart
+					localStorage.setItem("items", JSON.stringify([]));
+					localStorage.setItem("quantities", JSON.stringify([]));
 				});
-
-				window.location = "paysuccess.html";
-
-				// Empty cart
-				localStorage.setItem("items", JSON.stringify([]));
-				localStorage.setItem("quantities", JSON.stringify([]));
 			},
 			error: function(response) {
 				console.log("error payment: ", response);
