@@ -40,12 +40,12 @@ $(document).ready(function($) {
 			}
 
 			// Append Remove Button
-			var removeButton = $("<button>");
-			removeButton.attr("type", "button");
-			removeButton.attr("data-key", key);
-			removeButton.attr("class", "btn btn-warning picked-up-button");
-			removeButton.text("Picked Up");
-			$("#open-table tbody tr:last td:last").append(removeButton);
+			var prickedUpButton = $("<button>");
+			prickedUpButton.attr("type", "button");
+			prickedUpButton.attr("data-key", key);
+			prickedUpButton.attr("class", "btn btn-warning picked-up-button");
+			prickedUpButton.text("Picked Up");
+			$("#open-table tbody tr:last td:last").append(prickedUpButton);
 
 			n++;
 		} else if (child.status === "Picked Up") {
@@ -65,12 +65,12 @@ $(document).ready(function($) {
 			}
 
 			// Append Remove Button
-			var removeButton = $("<button>");
-			removeButton.attr("type", "button");
-			removeButton.attr("data-key", key);
-			removeButton.attr("class", "btn btn-success unpicked-up-button");
-			removeButton.text("Picked Up");
-			$("#picked-up-table tbody tr:last td:last").append(removeButton);
+			var unPickedUpButton = $("<button>");
+			unPickedUpButton.attr("type", "button");
+			unPickedUpButton.attr("data-key", key);
+			unPickedUpButton.attr("class", "btn btn-success unpicked-up-button");
+			unPickedUpButton.text("Picked Up");
+			$("#picked-up-table tbody tr:last td:last").append(unPickedUpButton);
 
 			m++;
 		}
@@ -120,12 +120,12 @@ $(document).ready(function($) {
 			}
 
 			// Append Remove Button
-			var removeButton = $("<button>");
-			removeButton.attr("type", "button");
-			removeButton.attr("data-key", key);
-			removeButton.attr("class", "btn btn-success unpicked-up-button");
-			removeButton.text("Picked Up");
-			$("#picked-up-table tbody tr:last td:last").append(removeButton);
+			var unPickedUpButton = $("<button>");
+			unPickedUpButton.attr("type", "button");
+			unPickedUpButton.attr("data-key", key);
+			unPickedUpButton.attr("class", "btn btn-success unpicked-up-button");
+			unPickedUpButton.text("Picked Up");
+			$("#picked-up-table tbody tr:last td:last").append(unPickedUpButton);
 
 			m++;
 		} else if (child.status === "Open") {
@@ -149,12 +149,12 @@ $(document).ready(function($) {
 			}
 
 			// Append Remove Button
-			var removeButton = $("<button>");
-			removeButton.attr("type", "button");
-			removeButton.attr("data-key", key);
-			removeButton.attr("class", "btn btn-warning picked-up-button");
-			removeButton.text("Picked Up");
-			$("#open-table tbody tr:last td:last").append(removeButton);
+			var pickedUpButton = $("<button>");
+			pickedUpButton.attr("type", "button");
+			pickedUpButton.attr("data-key", key);
+			pickedUpButton.attr("class", "btn btn-warning picked-up-button");
+			pickedUpButton.text("Picked Up");
+			$("#open-table tbody tr:last td:last").append(pickedUpButton);
 
 			n++;
 		}
@@ -172,8 +172,14 @@ $(document).ready(function($) {
 				shouldSwitch = false;
 				x = rows[i].getElementsByTagName("TD")[$(this).attr("data-index")];
 				y = rows[i+1].getElementsByTagName("TD")[$(this).attr("data-index")];
-				if ($(this).attr("data-index") === "1" || $(this).attr("data-index") === "4") {
+				if ($(this).attr("data-index") === "0" || $(this).attr("data-index") === "3" || $(this).attr("data-index") === "6") {
 					if (parseInt(x.innerHTML) > parseInt(y.innerHTML)) {
+						shouldSwitch= true;
+						break;
+					}
+				}
+				else if ($(this).attr("data-index") === "1") {
+					if (moment(x.innerHTML, "MMM DD, YYYY hh:mm:ss").format("X") > moment(y.innerHTML, "MMM DD, YYYY hh:mm:ss").format("X")) {
 						shouldSwitch= true;
 						break;
 					}
@@ -207,8 +213,14 @@ $(document).ready(function($) {
 				shouldSwitch = false;
 				x = rows[i].getElementsByTagName("TD")[$(this).attr("data-index")];
 				y = rows[i+1].getElementsByTagName("TD")[$(this).attr("data-index")];
-				if ($(this).attr("data-index") === "1" || $(this).attr("data-index") === "4") {
+				if ($(this).attr("data-index") === "0" || $(this).attr("data-index") === "3" || $(this).attr("data-index") === "6") {
 					if (parseInt(x.innerHTML) < parseInt(y.innerHTML)) {
+						shouldSwitch= true;
+						break;
+					}
+				}
+				else if ($(this).attr("data-index") === "1") {
+					if (moment(x.innerHTML, "MMM DD, YYYY hh:mm:ss").format("X") < moment(y.innerHTML, "MMM DD, YYYY hh:mm:ss").format("X")) {
 						shouldSwitch= true;
 						break;
 					}
