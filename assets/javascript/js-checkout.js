@@ -9,7 +9,7 @@ $(document).ready(function($) {
 		messagingSenderId: "554989098289"
 	};
 	firebase.initializeApp(config);
-	var database = firebase.database();
+	var inventoryDB = firebase.database();
 
 	// Initialize sales database
 	var configSales = {
@@ -38,14 +38,14 @@ $(document).ready(function($) {
 	// Get total price from cart
 	function getTotalPrice() {
 		totalPrice = 0;
-		items = JSON.parse(localStorage.getItem("items"));
-		quantities = JSON.parse(localStorage.getItem("quantities"));
+		cartItems = JSON.parse(localStorage.getItem("items"));
+		cartQuantities = JSON.parse(localStorage.getItem("quantities"));
 
-		database.ref().on("value", function(snapshot) {
+		inventoryDB.ref().on("value", function(snapshot) {
 			sv = snapshot.val();
 
-			for (var i = 0; i < items.length; i++) {
-				totalPrice += (parseFloat(sv[items[i]].price) * quantities[i]);
+			for (var i = 0; i < cartItems.length; i++) {
+				totalPrice += (parseFloat(sv[cartItems[i]].price) * cartQuantities[i]);
 			}
 
 			$("#cart-total").text(totalPrice);
@@ -180,6 +180,20 @@ $(document).ready(function($) {
 								card: response.source.brand,
 								zipCode: response.source.address_zip,
 							});
+
+							// Update inventory
+							inventoryDB.ref().on("child_added", function(snapshot) {
+								var sv = snapshot.val();
+								var key = snapshot.key;
+								if (cartItems.indexOf(key) !== -1) {
+									var index = cartItems.indexOf(key);
+									var newCartQty = sv.quantity - cartQuantities[index];
+									inventoryDB.ref("/" + key).update({
+										quantity: newCartQty,
+									});
+								}
+							});
+
 							window.location = "paysuccess.html";
 						},
 						error: function(response) {
@@ -220,6 +234,20 @@ $(document).ready(function($) {
 						card: response.source.brand,
 						zipCode: response.source.address_zip,
 					});
+
+					// Update inventory
+					inventoryDB.ref().on("child_added", function(snapshot) {
+						var sv = snapshot.val();
+						var key = snapshot.key;
+						if (cartItems.indexOf(key) !== -1) {
+							var index = cartItems.indexOf(key);
+							var newCartQty = sv.quantity - cartQuantities[index];
+							inventoryDB.ref("/" + key).update({
+								quantity: newCartQty,
+							});
+						}
+					});
+
 					window.location = "paysuccess.html";
 
 					// Empty cart
