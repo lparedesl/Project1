@@ -85,17 +85,27 @@
 		</div>
 	</div>
 
+	<div class="navbar-wrap">
+        <div class="container">
+            <a href="index.html" class="logo"></a>
+            <div class="navbar-links-container">
+                <a href="inventory.html">Inventory</a>
+                <a href="products.html">Products</a>
+                <button type="button" class="nav-btn" id="signIn">Sign in</button>
+            </div>
+        </div>
+     </div>
+
 	<!-- Content -->
+	<div class="page-hero">
+        <div class="container">
+        	<h1>Inventory</h1>
+        </div>
+    </div>
 	<div class="container">
 		<!-- Header -->
-		<div class="jumbotron header">
-			<div class="container">
-				<h1>Inventory</h1>
-			</div>
-		</div>
-
 		<button type="button" class="btn btn-default pull-right" id="create-item">Create item</button>
-		<table class="table table-hover" id="inventory-table">
+		<table class="table table-hover admin-table" id="inventory-table">
 			<thead>
 				<tr>
 					<th>Name<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="0"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="0"></i></th>

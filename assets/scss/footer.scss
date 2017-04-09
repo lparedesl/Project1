@@ -1,8 +1,26 @@
 $footer-link-hover: #65c2ed;
 $gray-darker: lighten(#000, 13.5%) !default; // #222
 $gray-darker-inactive: #9d9d9d;
+.footer-logo {
+	background-image: url("../images/bakesale2go-logo.svg");
+	background-repeat: no-repeat;
+	background-position: center;
+	height: 100px;
+	width: 100%;
+	max-width: 300px;
+	display: block;
+	margin: auto;
+}
+span.copy {
+	color: #fff;
+	font-size: 10px;
+	width: 100%;
+	text-align: center;
+	display: block;
+	padding: 20px;
+}
 footer {
-	background: $gray-darker;
+	background: #74dbf1;
 	color: #fff;
 	margin: 0;
 	font-family: 'Open Sans', sans-serif;
@@ -10,7 +28,9 @@ footer {
 	bottom: 0;
 	width: 100%;
 	height: 241px;
-
+	&.product-footer {
+		height: auto;
+	}
 	h3 {
 		color: $gray-darker-inactive;
 		font-weight: lighter;
