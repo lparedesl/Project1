@@ -129,7 +129,7 @@ $(document).ready(function($) {
 
 	// Payment
 	function payment() {
-		var name = $("#name-input").val().trim();
+		name = $("#name-input").val().trim();
 		var email = $("#email-input").val().trim();
 		var phone = $("#phone-input").val().trim();
 
@@ -147,7 +147,7 @@ $(document).ready(function($) {
 					source: token,
 				},
 				success: function(response) {
-					var customerId = response.id;
+					customerId = response.id;
 					var dateTime = moment(response.created, "X").format("MMM DD, YYYY hh:mm:ss");
 					// Push customer to database
 					customersDB.ref().child(customerId).set({
@@ -157,107 +157,119 @@ $(document).ready(function($) {
 						phone: phone,
 					});
 
-					// Create charge
-					$.ajax({
-						type: "POST",
-						url: "https://api.stripe.com/v1/charges",
-						headers: {
-							Authorization: "Bearer sk_test_WGpUaEkdiJuUYiXlaDEeow10"
-						},
-						data: {
-							amount: totalPrice * 100,
-							currency: "usd",
-							customer: customerId,
-							description: "BakeSale2Go sale"
-						},
-						success: function(response) {
-							// Push sale to database
-							salesDB.ref().child(response.id).set({
-								name: name,
-								created: dateTime,
-								description: response.description,
-								amount: response.amount / 100,
-								card: response.source.brand,
-								zipCode: response.source.address_zip,
-							});
-
-							// Update inventory
-							inventoryDB.ref().on("child_added", function(snapshot) {
-								var sv = snapshot.val();
-								var key = snapshot.key;
-								if (cartItems.indexOf(key) !== -1) {
-									var index = cartItems.indexOf(key);
-									var newCartQty = sv.quantity - cartQuantities[index];
-									inventoryDB.ref("/" + key).update({
-										quantity: newCartQty,
-									});
-								}
-							});
-
-							window.location = "paysuccess.html";
-						},
-						error: function(response) {
-							console.log("error payment: ", response);
-						}
-					});
-
-					// Empty cart
-					localStorage.setItem("items", JSON.stringify([]));
-					localStorage.setItem("quantities", JSON.stringify([]));
+					createCharge();
 				},
 				error: function(response) {
 					console.log("error payment: ", response);
 				}
 			});
 		} else {
-			// Create charge
-			$.ajax({
-				type: "POST",
-				url: "https://api.stripe.com/v1/charges",
-				headers: {
-					Authorization: "Bearer sk_test_WGpUaEkdiJuUYiXlaDEeow10"
-				},
-				data: {
-					amount: totalPrice * 100,
-					currency: "usd",
-					source: token,
-					description: "BakeSale2Go sale"
-				},
-				success: function(response) {
-					var dateTime = moment(response.created, "X").format("MMM DD, YYYY hh:mm:ss");
-					// Push sale to database
-					salesDB.ref().child(response.id).set({
-						name: name,
-						created: dateTime,
-						description: response.description,
-						amount: response.amount / 100,
-						card: response.source.brand,
-						zipCode: response.source.address_zip,
-					});
+			// Get the customer id
+			customersDB.ref().on("child_added", function(snapshot) {
+				var sv = snapshot.val();
+				if (sv.email === email) {
+					customerId = snapshot.key;
 
-					// Update inventory
-					inventoryDB.ref().on("child_added", function(snapshot) {
-						var sv = snapshot.val();
-						var key = snapshot.key;
-						if (cartItems.indexOf(key) !== -1) {
-							var index = cartItems.indexOf(key);
-							var newCartQty = sv.quantity - cartQuantities[index];
-							inventoryDB.ref("/" + key).update({
-								quantity: newCartQty,
+					// Create new card for customer
+					$.ajax({
+						type: "POST",
+						url: "https://api.stripe.com/v1/customers/" + customerId + "/sources",
+						headers: {
+							Authorization: "Bearer sk_test_WGpUaEkdiJuUYiXlaDEeow10"
+						},
+						data: {
+							source: token,
+						},
+						success: function(response) {
+							cardId = response.id;
+
+							// Check if new card exists in customer profile
+							$.ajax({
+								type: "GET",
+								url: "https://api.stripe.com/v1/customers/" + customerId,
+								headers: {
+									Authorization: "Bearer sk_test_WGpUaEkdiJuUYiXlaDEeow10"
+								},
+								success: function(response) {
+									var lastCardIndex = response.sources.data.length - 1;
+									for (var i = 0; i < lastCardIndex; i++) {
+										var expMonth = response.sources.data[i].exp_month;
+										var expYear = response.sources.data[i].exp_year;
+										var last4 = response.sources.data[i].last4;
+
+										if (expMonth === response.sources.data[lastCardIndex].exp_month && expYear === response.sources.data[lastCardIndex].exp_year && last4 === response.sources.data[lastCardIndex].last4) {
+											// Delete created card
+											$.ajax({
+												type: "DELETE",
+												url: "https://api.stripe.com/v1/customers/" + customerId + "/sources/" + cardId,
+												headers: {
+													Authorization: "Bearer sk_test_WGpUaEkdiJuUYiXlaDEeow10"
+												},
+												success: function(response) {
+													createCharge();
+												},
+											});
+											break;
+										} else {
+											createCharge();
+										}
+									}
+								},
 							});
-						}
+						},
 					});
-
-					window.location = "paysuccess.html";
-
-					// Empty cart
-					localStorage.setItem("items", JSON.stringify([]));
-					localStorage.setItem("quantities", JSON.stringify([]));
-				},
-				error: function(response) {
-					console.log("error payment: ", response);
 				}
 			});
 		}
+	}
+
+	function createCharge() {
+		$.ajax({
+			type: "POST",
+			url: "https://api.stripe.com/v1/charges",
+			headers: {
+				Authorization: "Bearer sk_test_WGpUaEkdiJuUYiXlaDEeow10"
+			},
+			data: {
+				amount: totalPrice * 100,
+				currency: "usd",
+				customer: customerId,
+				description: "BakeSale2Go sale"
+			},
+			success: function(response) {
+				var dateTime = moment(response.created, "X").format("MMM DD, YYYY hh:mm:ss");
+				// Push sale to database
+				salesDB.ref().child(response.id).set({
+					name: name,
+					created: dateTime,
+					description: response.description,
+					amount: response.amount / 100,
+					card: response.source.brand,
+					zipCode: response.source.address_zip,
+				});
+
+				// Update inventory
+				inventoryDB.ref().on("child_added", function(snapshot) {
+					var sv = snapshot.val();
+					var key = snapshot.key;
+					if (cartItems.indexOf(key) !== -1) {
+						var index = cartItems.indexOf(key);
+						var newCartQty = sv.quantity - cartQuantities[index];
+						inventoryDB.ref("/" + key).update({
+							quantity: newCartQty,
+						});
+					}
+				});
+
+				window.location = "paysuccess.html";
+
+				// Empty cart
+				localStorage.setItem("items", JSON.stringify([]));
+				localStorage.setItem("quantities", JSON.stringify([]));
+			},
+			error: function(response) {
+				console.log("error payment: ", response);
+			}
+		});
 	}
 });
