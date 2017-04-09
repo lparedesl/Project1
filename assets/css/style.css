@@ -5,14 +5,72 @@
   font-weight: normal;
   font-style: normal;
 }
-html {
-  min-height: 100%;
-  position: relative;
+.header {
+  margin-top: 20px;
+  background-color: #0E0D10;
+  background-image: none;
+  color: #fff;
+  text-align: center;
 }
 
-body {
+.navbar-wrap {
+  float: left;
+  width: 100%;
+  background-color: #74dbf1;
+}
+
+.logo {
+  background-image: url("../images/bakesale2go-logo.svg");
+  background-position: 0 12px;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  float: left;
+  height: 100px;
+  width: 100%;
+  max-width: 300px;
+}
+
+.navbar-links-container {
+  float: right;
+}
+.navbar-links-container button.nav-btn {
+  background-color: #5babff;
+  border: 0;
+  color: #fff;
   font-family: "museo_sans500";
-  margin-bottom: 241px;
+  font-size: 20px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  transition: all 0.2s ease-in-out;
+}
+.navbar-links-container button.nav-btn:hover {
+  background-color: #ff00a4;
+}
+.navbar-links-container a {
+  display: inline-block;
+  color: #fff;
+  font-size: 20px;
+  margin-top: 40px;
+  padding: 20px;
+  position: relative;
+}
+.navbar-links-container a:focus, .navbar-links-container a:hover {
+  text-decoration: none;
+}
+.navbar-links-container a:focus:after, .navbar-links-container a:hover:after {
+  opacity: 1;
+}
+.navbar-links-container a:after {
+  opacity: 0;
+  content: '';
+  position: absolute;
+  bottom: 13px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #fff;
+  transition: all 0.2s ease-in-out;
 }
 
 .update-bg {
@@ -64,19 +122,13 @@ body {
   font-size: 14px;
   width: 30%;
 }
-.update-bg #create-item-window form #add-new-item, .update-bg #create-item-window form #submit-update, .update-bg #update-window form #add-new-item, .update-bg #update-window form #submit-update {
+
+#add-new-item, #submit-update {
   margin-left: 17.5%;
 }
-.update-bg #create-item-window form #cancel-new-item, .update-bg #create-item-window form #cancel-update, .update-bg #update-window form #cancel-new-item, .update-bg #update-window form #cancel-update {
-  margin-left: 5%;
-}
 
-.header {
-  margin-top: 20px;
-  background-color: #0E0D10;
-  background-image: none;
-  color: #fff;
-  text-align: center;
+#cancel-new-item, #cancel-update {
+  margin-left: 5%;
 }
 
 #create-item {
@@ -94,7 +146,8 @@ body {
 #inventory-table td:nth-child(1) {
   width: 20%;
 }
-#inventory-table td:nth-child(2), #inventory-table td:nth-child(5) {
+#inventory-table td:nth-child(2),
+#inventory-table td:nth-child(5) {
   width: 12%;
 }
 #inventory-table td:nth-child(3) {
@@ -115,17 +168,13 @@ body {
   margin-right: 5px;
 }
 
-input {
-  margin-bottom: 20px;
-}
-
 .products-content .thumbnail img {
   max-height: 235px;
 }
 
 .cart {
   border-width: 2px;
-  border-color: black;
+  border-color: #000;
   border-style: solid;
   margin-bottom: 20px;
 }
@@ -133,7 +182,6 @@ input {
   text-align: center;
 }
 
-/*! Footer */
 footer {
   background: #222222;
   color: #fff;
@@ -229,7 +277,29 @@ footer ul {
   box-sizing: border-box;
 }
 
-/*! Footer */
+html {
+  min-height: 100%;
+  position: relative;
+}
+
+body {
+  font-family: "museo_sans500";
+  margin-bottom: 241px;
+  background-color: #653918;
+}
+
+input {
+  margin-bottom: 20px;
+}
+
+.page-hero {
+  float: left;
+  width: 100%;
+}
+.page-hero h1 {
+  color: #fff;
+}
+
 @media only screen and (max-width: 769px) {
   .card {
     margin-bottom: 99px;

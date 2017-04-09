@@ -1,0 +1,121 @@
+.update-bg {
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0,0,0); /* Fallback color */
+	background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
+
+  #create-item-window, #update-window {
+  	font-size: 14px;
+  	position: fixed;
+  	top: 18vh;
+  	margin-left: 37.5%;
+  	height: 64vh;
+  	width: 25%;
+  	z-index: 2;
+  	border-radius: 10px;
+
+  	legend {
+  		text-align: center;
+  		font-size: 24px;
+  	}
+
+  	form {
+  		height: 26vh;
+  		width: 80%;
+  		margin-left: auto;
+  		margin-right: auto;
+
+  		input {
+  			margin-bottom: 10px;
+  			font-size: 14px;
+  		}
+
+  		button {
+  			float: left;
+  			margin-bottom: 10px;
+  			margin-top: 10px;
+  			font-size: 14px;
+  			width: 30%;
+  		}	
+  	}
+  }
+}
+
+#add-new-item, #submit-update {
+	margin-left: 17.5%;
+}
+
+#cancel-new-item, #cancel-update {
+	margin-left: 5%;
+}
+
+#create-item {
+	margin-bottom: 20px;
+}
+
+#inventory-table {
+	.sorter {
+		float: right;
+		padding: 2px 6px;
+		font-size: 16px;
+	}
+
+	.fa-caret-down {
+		margin-right: 5px;
+	}
+
+	td:nth-child(1) {
+		width: 20%;
+	}
+
+	td:nth-child(2),
+	td:nth-child(5) {
+		width: 12%;
+	}
+
+	td:nth-child(3) {
+		width: 15%;
+	}
+
+	td:nth-child(4) {
+		width: 34%;
+	}
+
+	td:nth-child(6) {
+		width: 7%;
+	}
+
+	button {
+		float: right;
+		padding: 2px 6px;
+		font-size: 12px;
+	}
+
+	.edit-button {
+		margin-right: 5px;
+	}
+}
+
+.products-content {
+	.thumbnail {
+		img {
+			max-height: 235px;
+		}
+	}
+}
+
+.cart {
+	border-width: 2px;
+	border-color: #000;
+	border-style: solid;
+	margin-bottom: 20px;
+
+	h3 {
+		text-align: center;
+	}
+}
