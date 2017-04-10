@@ -32,6 +32,12 @@ $(document).ready(function($) {
 			var sortedAsc = false;
 			var sortedDesc = false;
 
+			$("#user").text(firebaseUser.email + " ");
+
+			$("#btn-logout").click(function(event) {
+				firebase.auth().signOut();
+			});
+
 			// Add item to table
 			salesDB.ref().on("child_added", function(snapshot) {
 				var child = snapshot.val();
