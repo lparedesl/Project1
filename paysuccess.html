@@ -30,6 +30,22 @@
 	<script src="https://js.stripe.com/v3/"></script>
 </head>
 <body>
+	<!-- Navbar -->
+	<button type="button" class="btn btn-default" id="btn-login"><i class="fa fa-sign-in" aria-hidden="true"></i> Sign In</button>
+	<button type="button" class="btn btn-default hidden" id="userMenu">
+	<li class="dropdown">
+	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span id="user"></span><i class="fa fa-caret-down" aria-hidden="true"></i></a>
+	    <ul class="dropdown-menu language-selector">
+	        <li><a href="inventory.html">Inventory</a></li>
+	        <li><a href="#">Sales</a></li>
+	        <li><a href="#">Customers</a></li>
+	        <li role="separator" class="divider"></li>
+	        <li><a id="btn-logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Sign Out</a></li>
+	    </ul>
+	</li>
+	</button>
+
+	<!-- Content -->
 	<div class="container">
 		<div class="row">
 			<h1>Your payment was successful</h1>
