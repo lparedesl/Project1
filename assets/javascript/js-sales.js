@@ -38,7 +38,7 @@ $(document).ready(function($) {
 				firebase.auth().signOut();
 			});
 
-			// Add item to table
+			// Add sales to open orders table
 			salesDB.ref().on("child_added", function(snapshot) {
 				var child = snapshot.val();
 				var key = snapshot.key;
@@ -59,7 +59,7 @@ $(document).ready(function($) {
 						rowTds.eq(i).text(headings[i]);
 					}
 
-					// Append Remove Button
+					// Append button
 					var prickedUpButton = $("<button>");
 					prickedUpButton.attr("type", "button");
 					prickedUpButton.attr("data-key", key);
@@ -68,6 +68,7 @@ $(document).ready(function($) {
 					$("#open-table tbody tr:last td:last").append(prickedUpButton);
 
 					n++;
+				// Add sales to picked up orders table
 				} else if (child.status === "Picked Up") {
 					// Create row
 					$("#picked-up-table tbody").append("<tr data-key=\"" + key + "\"><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
@@ -84,7 +85,7 @@ $(document).ready(function($) {
 						rowTds.eq(i).text(headings[i]);
 					}
 
-					// Append Remove Button
+					// Append button
 					var unPickedUpButton = $("<button>");
 					unPickedUpButton.attr("type", "button");
 					unPickedUpButton.attr("data-key", key);
@@ -100,7 +101,7 @@ $(document).ready(function($) {
 
 			// Mark order as picked up
 			$(document).on("click", ".picked-up-button", function() {
-				// Update object in database
+				// Update sale status in database
 				salesDB.ref("/" + $(this).attr("data-key")).update({
 					status: "Picked Up",
 				});
@@ -108,13 +109,13 @@ $(document).ready(function($) {
 
 			// Unmark order as picked up
 			$(document).on("click", ".unpicked-up-button", function() {
-				// Update object in database
+				// Update sale status in database
 				salesDB.ref("/" + $(this).attr("data-key")).update({
 					status: "Open",
 				});
 			});
 
-			// Update item in table
+			// Update tables
 			salesDB.ref().on("child_changed", function(snapshot) {
 				var child = snapshot.val();
 				var key = snapshot.key;
@@ -139,7 +140,7 @@ $(document).ready(function($) {
 						rowTds.eq(i).text(headings[i]);
 					}
 
-					// Append Remove Button
+					// Append button
 					var unPickedUpButton = $("<button>");
 					unPickedUpButton.attr("type", "button");
 					unPickedUpButton.attr("data-key", key);
@@ -168,7 +169,7 @@ $(document).ready(function($) {
 						rowTds.eq(i).text(headings[i]);
 					}
 
-					// Append Remove Button
+					// Append button
 					var pickedUpButton = $("<button>");
 					pickedUpButton.attr("type", "button");
 					pickedUpButton.attr("data-key", key);
