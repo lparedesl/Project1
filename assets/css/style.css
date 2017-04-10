@@ -1,37 +1,269 @@
-html,
-body {
-    margin: 0;
-    padding: 0;
+@font-face {
+  font-family: "museo_sans500";
+  src: url("../fonts/museosans_500/MuseoSans_500-webfont.eot");
+  src: url("../fonts/museosans_500/MuseoSans_500-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/museosans_500/MuseoSans_500-webfont.woff2") format("woff2"), url("../fonts/museosans_500/MuseoSans_500-webfont.woff") format("woff"), url("../fonts/museosans_500/MuseoSans_500-webfont.ttf") format("truetype"), url("../fonts/museosans_500/MuseoSans_500-webfont.svg#museo_sans500") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+html {
+  min-height: 100%;
+  position: relative;
 }
 
 body {
-    background-color: #402b2b;
+  font-family: "museo_sans500";
+  background: black;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5 {
-    color: #7dc9d4;
-    font-family: 'helvetica';
+#login-window {
+  border-radius: 10px;
+  font-size: 16px;
+  height: 46vh;
+  margin-left: 21%;
+  padding: 2vh 2vh;
+  position: fixed;
+  top: 27vh;
+  width: 18%;
+  z-index: 1000;
+}
+#login-window form {
+  height: 26vh;
+}
+#login-window form legend {
+  text-align: center;
+  font-size: 22px;
+}
+#login-window form input {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+#login-window form .alert {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+#login-window form .alert button {
+  font-size: 22px;
+  width: 40px;
+}
+#login-window form button {
+  float: left;
+  margin-bottom: 10px;
+  font-size: 16px;
+  width: 80px;
+}
+#login-window form .external-logins {
+  border-color: #b2b2b2;
+  border-style: solid;
+  border-width: 0 0 1px 0;
+  height: 15vh;
+  margin-bottom: 5px;
+}
+#login-window form .external-logins #btn-google, #login-window form .external-logins #btn-facebook, #login-window form .external-logins #btn-github {
+  width: 100%;
+}
+#login-window form .external-logins .btn {
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 8px 12px;
+  line-height: 1.42857143;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+#login-window form .external-logins .btn-default {
+  color: #ffffff;
+  background-color: #3a3f44;
+  border-color: #3a3f44;
+  font-weight: 100;
+}
+#login-window form .external-logins .btn-default:focus,
+#login-window form .external-logins .btn-default.focus {
+  color: #ffffff;
+  background-color: #232628;
+  border-color: #000000;
+}
+#login-window form .external-logins .btn-default:hover {
+  color: #ffffff;
+  background-color: #232628;
+  border-color: #1e2023;
+}
+#login-window form .external-logins .btn-default:active,
+#login-window form .external-logins .btn-default.active,
+#login-window form .external-logins .open > .dropdown-toggle.btn-default {
+  color: #ffffff;
+  background-color: #232628;
+  border-color: #1e2023;
+}
+#login-window form .external-logins .btn-default:active:hover,
+#login-window form .external-logins .btn-default.active:hover,
+#login-window form .external-logins .open > .dropdown-toggle.btn-default:hover,
+#login-window form .external-logins .btn-default:active:focus,
+#login-window form .external-logins .btn-default.active:focus,
+#login-window form .external-logins .open > .dropdown-toggle.btn-default:focus,
+#login-window form .external-logins .btn-default:active.focus,
+#login-window form .external-logins .btn-default.active.focus,
+#login-window form .external-logins .open > .dropdown-toggle.btn-default.focus {
+  color: #ffffff;
+  background-color: #121415;
+  border-color: #000000;
+}
+#login-window form .external-logins .btn-default:active,
+#login-window form .external-logins .btn-default.active,
+#login-window form .external-logins .open > .dropdown-toggle.btn-default {
+  background-image: none;
+}
+#login-window form .external-logins .btn-default.disabled:hover,
+#login-window form .external-logins .btn-default[disabled]:hover,
+#login-window form .external-logins fieldset[disabled] .btn-default:hover,
+#login-window form .external-logins .btn-default.disabled:focus,
+#login-window form .external-logins .btn-default[disabled]:focus,
+#login-window form .external-logins fieldset[disabled] .btn-default:focus,
+#login-window form .external-logins .btn-default.disabled.focus,
+#login-window form .external-logins .btn-default[disabled].focus,
+#login-window form .external-logins fieldset[disabled] .btn-default.focus {
+  background-color: #3a3f44;
+  border-color: #3a3f44;
+}
+#login-window form .external-logins .btn-default .badge {
+  color: #3a3f44;
+  background-color: #ffffff;
+}
+#login-window form #login {
+  margin-left: 61px;
+}
+#login-window form #signup {
+  margin-left: 20px;
+}
+#login-window form a {
+  clear: both;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
 
-form {
-    float: center;
-    width: auto;
+#signup-window {
+  font-size: 16px;
+  position: fixed;
+  top: 25vh;
+  margin-left: 285px;
+  height: 50vh;
+  width: 570px;
+  z-index: 1000;
+  border-radius: 10px;
 }
-
-#mapid {
-    width: 100%;
-    position: inherit;
-    height: 400px;
-    margin: 0;
-    padding: 0;
-    border: 1px solid black;
-    border-radius: 8px;
+#signup-window form {
+  height: 26vh;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
 }
-
-.leaflet-routing-container-hide {
-    display: none;
+#signup-window form legend {
+  text-align: center;
+  font-size: 20px;
+}
+#signup-window form input {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+#signup-window form .alert {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+#signup-window form .alert button {
+  font-size: 22px;
+  width: 40px;
+}
+#signup-window form button {
+  float: left;
+  margin-bottom: 10px;
+  font-size: 16px;
+  width: 80px;
+}
+#signup-window form .external-signups {
+  border-color: #b2b2b2;
+  border-style: solid;
+  border-width: 0 0 1px 0;
+  height: 15vh;
+  margin-bottom: 5px;
+}
+#signup-window form .external-signups #btn-google-signup, #signup-window form .external-signups #btn-facebook-signup, #signup-window form .external-signups #btn-github-signup {
+  width: 100%;
+}
+#signup-window form .external-signups .btn {
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 8px 12px;
+  line-height: 1.42857143;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+#signup-window form .external-signups .btn-default {
+  color: #ffffff;
+  background-color: #3a3f44;
+  border-color: #3a3f44;
+  font-weight: 100;
+}
+#signup-window form .external-signups .btn-default:focus,
+#signup-window form .external-signups .btn-default.focus {
+  color: #ffffff;
+  background-color: #232628;
+  border-color: #000000;
+}
+#signup-window form .external-signups .btn-default:hover {
+  color: #ffffff;
+  background-color: #232628;
+  border-color: #1e2023;
+}
+#signup-window form .external-signups .btn-default:active,
+#signup-window form .external-signups .btn-default.active,
+#signup-window form .external-signups .open > .dropdown-toggle.btn-default {
+  color: #ffffff;
+  background-color: #232628;
+  border-color: #1e2023;
+}
+#signup-window form .external-signups .btn-default:active:hover,
+#signup-window form .external-signups .btn-default.active:hover,
+#signup-window form .external-signups .open > .dropdown-toggle.btn-default:hover,
+#signup-window form .external-signups .btn-default:active:focus,
+#signup-window form .external-signups .btn-default.active:focus,
+#signup-window form .external-signups .open > .dropdown-toggle.btn-default:focus,
+#signup-window form .external-signups .btn-default:active.focus,
+#signup-window form .external-signups .btn-default.active.focus,
+#signup-window form .external-signups .open > .dropdown-toggle.btn-default.focus {
+  color: #ffffff;
+  background-color: #121415;
+  border-color: #000000;
+}
+#signup-window form .external-signups .btn-default:active,
+#signup-window form .external-signups .btn-default.active,
+#signup-window form .external-signups .open > .dropdown-toggle.btn-default {
+  background-image: none;
+}
+#signup-window form .external-signups .btn-default.disabled:hover,
+#signup-window form .external-signups .btn-default[disabled]:hover,
+#signup-window form .external-signups fieldset[disabled] .btn-default:hover,
+#signup-window form .external-signups .btn-default.disabled:focus,
+#signup-window form .external-signups .btn-default[disabled]:focus,
+#signup-window form .external-signups fieldset[disabled] .btn-default:focus,
+#signup-window form .external-signups .btn-default.disabled.focus,
+#signup-window form .external-signups .btn-default[disabled].focus,
+#signup-window form .external-signups fieldset[disabled] .btn-default.focus {
+  background-color: #3a3f44;
+  border-color: #3a3f44;
+}
+#signup-window form .external-signups .btn-default .badge {
+  color: #3a3f44;
+  background-color: #ffffff;
+}
+#signup-window form #register-user {
+  margin-left: 125px;
+}
+#signup-window form #close-signup-window {
+  margin-left: 20px;
 }
