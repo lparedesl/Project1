@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Checkout</title>
+
+	<!-- Reset CSS -->
+	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+
+	<!-- Latest compiled and minified Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- Optional Bootstrap theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+	<!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-3.2.0.min.js" integrity="sha256-JAW99MJVpJBGcbzEuXk4Az05s/XyDdBomFqNlM3ic+I=" crossorigin="anonymous"></script>
+
+	<!-- Latest compiled and minified Bootstrap JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="assets/css/style - Copy.css" />
+
+	<!-- JavaScript -->
+	<script src="https://use.fontawesome.com/d1c076a58a.js"></script>
+	<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+	<script src="https://js.stripe.com/v2/"></script>
+	<script src="https://js.stripe.com/v3/"></script>
+	<script src="assets/javascript/js-checkout.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<h1>Checkout</h1>
+			<h4>Your Total: $<span id="cart-total"></span></h4>
+			<form method="post" id="checkout-form">
+				<div class="group">
+					<label>
+						<span>Name</span>
+						<input name="cardholder-name" class="field" id="name-input" placeholder="Jane Doe" required/>
+					</label>
+					<label>
+						<span>E-mail</span>
+						<input class="field" id="email-input" placeholder="name@email.com" required/>
+					</label>
+					<label>
+						<span>Phone</span>
+						<input class="field" id="phone-input" placeholder="(123) 456-7890" type="tel" required/>
+					</label>
+				</div>
+				<div class="group">
+					<label>
+						<span>Card</span>
+						<div id="card-element" class="field"></div>
+					</label>
+				</div>
+				<button type="submit">Pay $<span id="chargeAmount"></span></button>
+				<div class="outcome">
+					<div class="error"></div>
+					<div class="success"></div>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>
