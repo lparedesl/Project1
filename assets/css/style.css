@@ -33,42 +33,256 @@ body {
   background-color: rgba(0, 0, 0, 0.6);
   /* Black w/ opacity */
 }
-.update-bg #create-item-window, .update-bg #update-window {
-  font-size: 14px;
+.update-bg #login-window {
+  border-radius: 10px;
+  font-size: 16px;
+  height: 46vh;
+  margin-left: 41%;
+  padding: 2vh 2vh;
   position: fixed;
-  top: 18vh;
-  margin-left: 37.5%;
-  height: 64vh;
-  width: 25%;
-  z-index: 2;
+  top: 27vh;
+  width: 18%;
+  z-index: 1000;
+}
+.update-bg #login-window form {
+  height: 26vh;
+}
+.update-bg #login-window form legend {
+  text-align: center;
+  font-size: 22px;
+}
+.update-bg #login-window form input {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+.update-bg #login-window form .alert {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.update-bg #login-window form .alert button {
+  font-size: 22px;
+  width: 40px;
+}
+.update-bg #login-window form button {
+  float: left;
+  margin-bottom: 10px;
+  font-size: 16px;
+  width: 80px;
+}
+.update-bg #login-window form .external-logins {
+  border-color: #b2b2b2;
+  border-style: solid;
+  border-width: 0 0 1px 0;
+  height: 15vh;
+  margin-bottom: 5px;
+}
+.update-bg #login-window form .external-logins #btn-google, .update-bg #login-window form .external-logins #btn-facebook, .update-bg #login-window form .external-logins #btn-github {
+  width: 100%;
+}
+.update-bg #login-window form .external-logins .btn {
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 8px 12px;
+  line-height: 1.42857143;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.update-bg #login-window form .external-logins .btn-default {
+  color: #ffffff;
+  background-color: #3a3f44;
+  border-color: #3a3f44;
+  font-weight: 100;
+}
+.update-bg #login-window form .external-logins .btn-default:focus,
+.update-bg #login-window form .external-logins .btn-default.focus {
+  color: #ffffff;
+  background-color: #232628;
+  border-color: #000000;
+}
+.update-bg #login-window form .external-logins .btn-default:hover {
+  color: #ffffff;
+  background-color: #232628;
+  border-color: #1e2023;
+}
+.update-bg #login-window form .external-logins .btn-default:active,
+.update-bg #login-window form .external-logins .btn-default.active,
+.update-bg #login-window form .external-logins .open > .dropdown-toggle.btn-default {
+  color: #ffffff;
+  background-color: #232628;
+  border-color: #1e2023;
+}
+.update-bg #login-window form .external-logins .btn-default:active:hover,
+.update-bg #login-window form .external-logins .btn-default.active:hover,
+.update-bg #login-window form .external-logins .open > .dropdown-toggle.btn-default:hover,
+.update-bg #login-window form .external-logins .btn-default:active:focus,
+.update-bg #login-window form .external-logins .btn-default.active:focus,
+.update-bg #login-window form .external-logins .open > .dropdown-toggle.btn-default:focus,
+.update-bg #login-window form .external-logins .btn-default:active.focus,
+.update-bg #login-window form .external-logins .btn-default.active.focus,
+.update-bg #login-window form .external-logins .open > .dropdown-toggle.btn-default.focus {
+  color: #ffffff;
+  background-color: #121415;
+  border-color: #000000;
+}
+.update-bg #login-window form .external-logins .btn-default:active,
+.update-bg #login-window form .external-logins .btn-default.active,
+.update-bg #login-window form .external-logins .open > .dropdown-toggle.btn-default {
+  background-image: none;
+}
+.update-bg #login-window form .external-logins .btn-default.disabled:hover,
+.update-bg #login-window form .external-logins .btn-default[disabled]:hover,
+.update-bg #login-window form .external-logins fieldset[disabled] .btn-default:hover,
+.update-bg #login-window form .external-logins .btn-default.disabled:focus,
+.update-bg #login-window form .external-logins .btn-default[disabled]:focus,
+.update-bg #login-window form .external-logins fieldset[disabled] .btn-default:focus,
+.update-bg #login-window form .external-logins .btn-default.disabled.focus,
+.update-bg #login-window form .external-logins .btn-default[disabled].focus,
+.update-bg #login-window form .external-logins fieldset[disabled] .btn-default.focus {
+  background-color: #3a3f44;
+  border-color: #3a3f44;
+}
+.update-bg #login-window form .external-logins .btn-default .badge {
+  color: #3a3f44;
+  background-color: #ffffff;
+}
+.update-bg #login-window form #login {
+  margin-left: 61px;
+}
+.update-bg #login-window form #signup {
+  margin-left: 20px;
+}
+.update-bg #login-window form a {
+  clear: both;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+.update-bg #signup-window {
+  font-size: 16px;
+  position: fixed;
+  top: 25vh;
+  margin-left: 285px;
+  height: 50vh;
+  width: 570px;
+  z-index: 1000;
   border-radius: 10px;
 }
-.update-bg #create-item-window legend, .update-bg #update-window legend {
-  text-align: center;
-  font-size: 24px;
-}
-.update-bg #create-item-window form, .update-bg #update-window form {
+.update-bg #signup-window form {
   height: 26vh;
   width: 80%;
   margin-left: auto;
   margin-right: auto;
 }
-.update-bg #create-item-window form input, .update-bg #update-window form input {
-  margin-bottom: 10px;
-  font-size: 14px;
+.update-bg #signup-window form legend {
+  text-align: center;
+  font-size: 20px;
 }
-.update-bg #create-item-window form button, .update-bg #update-window form button {
+.update-bg #signup-window form input {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+.update-bg #signup-window form .alert {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.update-bg #signup-window form .alert button {
+  font-size: 22px;
+  width: 40px;
+}
+.update-bg #signup-window form button {
   float: left;
   margin-bottom: 10px;
-  margin-top: 10px;
-  font-size: 14px;
-  width: 30%;
+  font-size: 16px;
+  width: 80px;
 }
-.update-bg #create-item-window form #add-new-item, .update-bg #create-item-window form #submit-update, .update-bg #update-window form #add-new-item, .update-bg #update-window form #submit-update {
-  margin-left: 17.5%;
+.update-bg #signup-window form .external-signups {
+  border-color: #b2b2b2;
+  border-style: solid;
+  border-width: 0 0 1px 0;
+  height: 15vh;
+  margin-bottom: 5px;
 }
-.update-bg #create-item-window form #cancel-new-item, .update-bg #create-item-window form #cancel-update, .update-bg #update-window form #cancel-new-item, .update-bg #update-window form #cancel-update {
-  margin-left: 5%;
+.update-bg #signup-window form .external-signups #btn-google-signup, .update-bg #signup-window form .external-signups #btn-facebook-signup, .update-bg #signup-window form .external-signups #btn-github-signup {
+  width: 100%;
+}
+.update-bg #signup-window form .external-signups .btn {
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 8px 12px;
+  line-height: 1.42857143;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.update-bg #signup-window form .external-signups .btn-default {
+  color: #ffffff;
+  background-color: #3a3f44;
+  border-color: #3a3f44;
+  font-weight: 100;
+}
+.update-bg #signup-window form .external-signups .btn-default:focus,
+.update-bg #signup-window form .external-signups .btn-default.focus {
+  color: #ffffff;
+  background-color: #232628;
+  border-color: #000000;
+}
+.update-bg #signup-window form .external-signups .btn-default:hover {
+  color: #ffffff;
+  background-color: #232628;
+  border-color: #1e2023;
+}
+.update-bg #signup-window form .external-signups .btn-default:active,
+.update-bg #signup-window form .external-signups .btn-default.active,
+.update-bg #signup-window form .external-signups .open > .dropdown-toggle.btn-default {
+  color: #ffffff;
+  background-color: #232628;
+  border-color: #1e2023;
+}
+.update-bg #signup-window form .external-signups .btn-default:active:hover,
+.update-bg #signup-window form .external-signups .btn-default.active:hover,
+.update-bg #signup-window form .external-signups .open > .dropdown-toggle.btn-default:hover,
+.update-bg #signup-window form .external-signups .btn-default:active:focus,
+.update-bg #signup-window form .external-signups .btn-default.active:focus,
+.update-bg #signup-window form .external-signups .open > .dropdown-toggle.btn-default:focus,
+.update-bg #signup-window form .external-signups .btn-default:active.focus,
+.update-bg #signup-window form .external-signups .btn-default.active.focus,
+.update-bg #signup-window form .external-signups .open > .dropdown-toggle.btn-default.focus {
+  color: #ffffff;
+  background-color: #121415;
+  border-color: #000000;
+}
+.update-bg #signup-window form .external-signups .btn-default:active,
+.update-bg #signup-window form .external-signups .btn-default.active,
+.update-bg #signup-window form .external-signups .open > .dropdown-toggle.btn-default {
+  background-image: none;
+}
+.update-bg #signup-window form .external-signups .btn-default.disabled:hover,
+.update-bg #signup-window form .external-signups .btn-default[disabled]:hover,
+.update-bg #signup-window form .external-signups fieldset[disabled] .btn-default:hover,
+.update-bg #signup-window form .external-signups .btn-default.disabled:focus,
+.update-bg #signup-window form .external-signups .btn-default[disabled]:focus,
+.update-bg #signup-window form .external-signups fieldset[disabled] .btn-default:focus,
+.update-bg #signup-window form .external-signups .btn-default.disabled.focus,
+.update-bg #signup-window form .external-signups .btn-default[disabled].focus,
+.update-bg #signup-window form .external-signups fieldset[disabled] .btn-default.focus {
+  background-color: #3a3f44;
+  border-color: #3a3f44;
+}
+.update-bg #signup-window form .external-signups .btn-default .badge {
+  color: #3a3f44;
+  background-color: #ffffff;
+}
+.update-bg #signup-window form #register-user {
+  margin-left: 125px;
+}
+.update-bg #signup-window form #close-signup-window {
+  margin-left: 20px;
 }
 
 .header {
@@ -77,46 +291,6 @@ body {
   background-image: none;
   color: #fff;
   text-align: center;
-}
-
-#create-item {
-  margin-bottom: 20px;
-}
-
-#inventory-table .sorter {
-  float: right;
-  padding: 2px 6px;
-  font-size: 16px;
-}
-#inventory-table .fa-caret-down {
-  margin-right: 5px;
-}
-#inventory-table td:nth-child(1) {
-  width: 20%;
-}
-#inventory-table td:nth-child(2), #inventory-table td:nth-child(5) {
-  width: 12%;
-}
-#inventory-table td:nth-child(3) {
-  width: 15%;
-}
-#inventory-table td:nth-child(4) {
-  width: 34%;
-}
-#inventory-table td:nth-child(6) {
-  width: 7%;
-}
-#inventory-table button {
-  float: right;
-  padding: 2px 6px;
-  font-size: 12px;
-}
-#inventory-table .edit-button {
-  margin-right: 5px;
-}
-
-input {
-  margin-bottom: 20px;
 }
 
 .products-content .thumbnail img {
