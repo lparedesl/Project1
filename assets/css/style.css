@@ -1,24 +1,37 @@
-@font-face {
-  font-family: "museo_sans500";
-  src: url("../fonts/museosans_500/MuseoSans_500-webfont.eot");
-  src: url("../fonts/museosans_500/MuseoSans_500-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/museosans_500/MuseoSans_500-webfont.woff2") format("woff2"), url("../fonts/museosans_500/MuseoSans_500-webfont.woff") format("woff"), url("../fonts/museosans_500/MuseoSans_500-webfont.ttf") format("truetype"), url("../fonts/museosans_500/MuseoSans_500-webfont.svg#museo_sans500") format("svg");
-  font-weight: normal;
-  font-style: normal;
+html,
+body {
+    margin: 0;
+    padding: 0;
 }
-#customers-table .sorter {
-  float: right;
-  padding: 2px 6px;
-  font-size: 16px;
+
+body {
+    background-color: #402b2b;
 }
-#customers-table .fa-caret-down {
-  margin-right: 5px;
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    color: #7dc9d4;
+    font-family: 'helvetica';
 }
-#customers-table td:nth-child(1), #customers-table td:nth-child(2) {
-  width: 15%;
+
+form {
+    float: center;
+    width: auto;
 }
-#customers-table td:nth-child(3), #customers-table td:nth-child(5) {
-  width: 12%;
+
+#mapid {
+    width: 100%;
+    position: inherit;
+    height: 400px;
+    margin: 0;
+    padding: 0;
+    border: 1px solid black;
+    border-radius: 8px;
 }
-#customers-table td:nth-child(4) {
-  width: 20%;
+
+.leaflet-routing-container-hide {
+    display: none;
 }
