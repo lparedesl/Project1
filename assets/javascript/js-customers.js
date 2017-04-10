@@ -31,7 +31,13 @@ $(document).ready(function($) {
 			var sortedAsc = false;
 			var sortedDesc = false;
 
-			// Add item to table
+			$("#user").text(firebaseUser.email + " ");
+
+			$("#btn-logout").click(function(event) {
+				firebase.auth().signOut();
+			});
+
+			// Add customers to table
 			customersDB.ref().on("child_added", function(snapshot) {
 				var child = snapshot.val();
 				var key = snapshot.key;
