@@ -18,6 +18,12 @@ $(document).ready(function($) {
 			var sortedAsc = false;
 			var sortedDesc = false;
 
+			$("#user").text(firebaseUser.email + " ");
+
+			$("#btn-logout").click(function(event) {
+				firebase.auth().signOut();
+			});
+
 			// Get image name
 			$("#upload").change(function () {
 				imgName = this.value.split(/(\\|\/)/g).pop();
