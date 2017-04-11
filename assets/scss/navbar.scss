@@ -9,6 +9,15 @@
 	float: left;
 	width: 100%;
   background-color: #74dbf1;
+  border-bottom: 5px solid #e24533;
+  @media(max-width:767px){
+    border-bottom: none;
+  }
+  .container {
+    @media(max-width:767px){
+      padding: 0;
+    }
+  }
 }
 .logo {
   background-image: url("../images/bakesale2go-logo.svg");
@@ -19,9 +28,19 @@
   height: 100px;
   width: 100%;
   max-width: 300px;
+  @media(max-width:767px){
+    float: none;
+    display: block;
+    margin: auto;
+  }
 }
 .navbar-links-container {
   float: right;
+  @media(max-width:767px){
+    width: 100%;
+    background-color: #e24533;
+    text-align: center;
+  }
   button.nav-btn {
     background-color: #5babff;
     border: 0;
@@ -31,8 +50,14 @@
     padding: 10px 20px;
     border-radius: 10px;
     transition: all 0.2s ease-in-out;
+    @media(max-width:991px){
+      font-size: 18px;
+    }
     &:hover {
       background-color: #ff00a4;
+      @media(max-width:767px){
+        background-color: #6f3029;
+      }
     }
   }
   a {
@@ -42,6 +67,12 @@
     margin-top: 40px;
     padding: 20px;
     position: relative;
+    @media(max-width:991px){
+      font-size: 18px;
+    }
+    @media(max-width:767px){
+      margin-top: 0;
+    }
     &:focus,
     &:hover {
       text-decoration: none;

@@ -17,6 +17,17 @@
   float: left;
   width: 100%;
   background-color: #74dbf1;
+  border-bottom: 5px solid #e24533;
+}
+@media (max-width: 767px) {
+  .navbar-wrap {
+    border-bottom: none;
+  }
+}
+@media (max-width: 767px) {
+  .navbar-wrap .container {
+    padding: 0;
+  }
 }
 
 .logo {
@@ -29,9 +40,23 @@
   width: 100%;
   max-width: 300px;
 }
+@media (max-width: 767px) {
+  .logo {
+    float: none;
+    display: block;
+    margin: auto;
+  }
+}
 
 .navbar-links-container {
   float: right;
+}
+@media (max-width: 767px) {
+  .navbar-links-container {
+    width: 100%;
+    background-color: #e24533;
+    text-align: center;
+  }
 }
 .navbar-links-container button.nav-btn {
   background-color: #5babff;
@@ -43,8 +68,18 @@
   border-radius: 10px;
   transition: all 0.2s ease-in-out;
 }
+@media (max-width: 991px) {
+  .navbar-links-container button.nav-btn {
+    font-size: 18px;
+  }
+}
 .navbar-links-container button.nav-btn:hover {
   background-color: #ff00a4;
+}
+@media (max-width: 767px) {
+  .navbar-links-container button.nav-btn:hover {
+    background-color: #6f3029;
+  }
 }
 .navbar-links-container a {
   display: inline-block;
@@ -53,6 +88,16 @@
   margin-top: 40px;
   padding: 20px;
   position: relative;
+}
+@media (max-width: 991px) {
+  .navbar-links-container a {
+    font-size: 18px;
+  }
+}
+@media (max-width: 767px) {
+  .navbar-links-container a {
+    margin-top: 0;
+  }
 }
 .navbar-links-container a:focus, .navbar-links-container a:hover {
   text-decoration: none;
@@ -312,7 +357,7 @@ html {
 body {
   font-family: "museo_sans500";
   margin-bottom: 241px;
-  background-color: #653918;
+  background-color: #333333;
 }
 
 input {
