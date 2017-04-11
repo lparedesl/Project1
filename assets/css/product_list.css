@@ -1,35 +1,147 @@
-/*
-Error: Invalid CSS after "...3a71a975aba9e3e": expected "{", was ""
-        on line 220 of /Users/paulinewhang/Desktop/Project1/assets/scss/product_list.scss
+.update-bg {
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: black;
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.6);
+  /* Black w/ opacity */ }
+  .update-bg #create-item-window, .update-bg #update-window {
+    font-size: 14px;
+    position: fixed;
+    top: 18vh;
+    margin-left: 37.5%;
+    height: 64vh;
+    width: 25%;
+    z-index: 2;
+    border-radius: 10px; }
+    .update-bg #create-item-window legend, .update-bg #update-window legend {
+      text-align: center;
+      font-size: 24px; }
+    .update-bg #create-item-window form, .update-bg #update-window form {
+      height: 26vh;
+      width: 80%;
+      margin-left: auto;
+      margin-right: auto; }
+      .update-bg #create-item-window form input, .update-bg #update-window form input {
+        margin-bottom: 10px;
+        font-size: 14px; }
+      .update-bg #create-item-window form button, .update-bg #update-window form button {
+        float: left;
+        margin-bottom: 10px;
+        margin-top: 10px;
+        font-size: 14px;
+        width: 30%; }
 
-215: 			}
-216: 		}
-217: 	}
-218: }
-219: >>>>>>> 7d1fbb64226e1ce9b5aca620b3a71a975aba9e3e
+#add-new-item, #submit-update {
+  margin-left: 17.5%; }
 
-Backtrace:
-/Users/paulinewhang/Desktop/Project1/assets/scss/product_list.scss:220
-/private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:1165:in `expected'
-/private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:1101:in `expected'
-/private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:1096:in `tok!'
-/private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:641:in `block'
-/private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:635:in `ruleset'
-/private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:660:in `block_child'
-/private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:653:in `block_contents'
-/private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:117:in `stylesheet'
-/private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:42:in `parse'
-/private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/engine.rb:393:in `_to_tree'
-/private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/engine.rb:268:in `render'
-/private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/exec/sass_scss.rb:404:in `run'
-/private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/exec/sass_scss.rb:62:in `process_result'
-/private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/exec/base.rb:52:in `parse'
-/private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/exec/base.rb:19:in `parse!'
-/private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/bin/sass:13:in `<top (required)>'
-/private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/bin/sass:18:in `load'
-/private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/bin/sass:18:in `<main>'
-*/
-body:before {
-  white-space: pre;
-  font-family: monospace;
-  content: "Error: Invalid CSS after \"...3a71a975aba9e3e\": expected \"{\", was \"\"\A         on line 220 of /Users/paulinewhang/Desktop/Project1/assets/scss/product_list.scss\A \A 215: 			}\A 216: 		}\A 217: 	}\A 218: }\A 219: >>>>>>> 7d1fbb64226e1ce9b5aca620b3a71a975aba9e3e"; }
+#cancel-new-item, #cancel-update {
+  margin-left: 5%; }
+
+#create-item {
+  margin-bottom: 20px; }
+
+#inventory-table .sorter {
+  float: right;
+  padding: 2px 6px;
+  font-size: 16px; }
+#inventory-table .fa-caret-down {
+  margin-right: 5px; }
+#inventory-table td:nth-child(1) {
+  width: 20%; }
+#inventory-table td:nth-child(2),
+#inventory-table td:nth-child(5) {
+  width: 12%; }
+#inventory-table td:nth-child(3) {
+  width: 15%; }
+#inventory-table td:nth-child(4) {
+  width: 34%; }
+#inventory-table td:nth-child(6) {
+  width: 7%; }
+#inventory-table button {
+  float: right;
+  padding: 2px 6px;
+  font-size: 12px; }
+#inventory-table .edit-button {
+  margin-right: 5px; }
+
+.products-content {
+  float: left;
+  width: 100%; }
+  .products-content .thumbnail img {
+    max-height: 235px; }
+
+.cart {
+  border-width: 2px;
+  border-color: #000;
+  border-style: solid;
+  margin-bottom: 20px; }
+  .cart h3 {
+    text-align: center; }
+
+.content {
+  width: 100%;
+  padding: 0; }
+  .content .margin {
+    width: -webkit-calc((100vw - 1170px) / 2);
+    width: -moz-calc((100vw - 1170px) / 2);
+    width: calc((100vw - 1170px) / 2); }
+  .content .products-content {
+    width: 1140px;
+    padding: 0 15px; }
+    .content .products-content .thumbnail img {
+      height: 235px; }
+  .content .margin-right {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 128.5px; }
+    .content .margin-right .cart {
+      width: 85%;
+      border-width: 2px;
+      border-color: white;
+      border-style: solid;
+      margin-bottom: 20px; }
+      .content .margin-right .cart h3 {
+        text-align: center; }
+      .content .margin-right .cart .container {
+        width: 100%;
+        font-size: 16px; }
+        .content .margin-right .cart .container #cart-items .row {
+          margin-bottom: 20px; }
+          .content .margin-right .cart .container #cart-items .row .col-md-6 a {
+            font-size: 12px; }
+          .content .margin-right .cart .container #cart-items .row .col-md-4, .content .margin-right .cart .container #cart-items .row .col-md-2 {
+            padding: 0; }
+            .content .margin-right .cart .container #cart-items .row .col-md-4 select, .content .margin-right .cart .container #cart-items .row .col-md-2 select {
+              width: 70%; }
+            .content .margin-right .cart .container #cart-items .row .col-md-4 p, .content .margin-right .cart .container #cart-items .row .col-md-2 p {
+              margin-left: 0; }
+        .content .margin-right .cart .container #checkout {
+          margin-bottom: 20px;
+          margin-top: 20px;
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+          width: 90%;
+          text-align: center;
+          text-decoration: none;
+          background-color: #5babff;
+          border: 0;
+          color: #fff;
+          font-family: "museo_sans500";
+          font-size: 20px;
+          padding: 10px 20px;
+          border-radius: 10px;
+          transition: all 0.2s ease-in-out; }
+          .content .margin-right .cart .container #checkout:hover {
+            background-color: #ff00a4; }

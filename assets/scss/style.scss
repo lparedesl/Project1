@@ -1,12 +1,9 @@
 @import 'fonts.scss';
 @import 'navbar.scss';
-<<<<<<< HEAD
 @import 'product_list.scss';
-=======
 @import 'popup_windows.scss';
 @import 'product_list.scss';
 @import 'tables.scss';
->>>>>>> 7d1fbb64226e1ce9b5aca620b3a71a975aba9e3e
 @import 'footer.scss';
 
 * {
@@ -27,24 +24,19 @@ html {
 }
 
 body {
-<<<<<<< HEAD
 	font-family: "museo_sans500"; 
 	margin-bottom: 241px;
 	background-color: #333333;
-=======
 	font-family: "museo_sans500";
 	margin-bottom: 241px;
 	margin-top: 128.5px;
 	background-color: #210D00;
 	color: #fff;
->>>>>>> 7d1fbb64226e1ce9b5aca620b3a71a975aba9e3e
-}
 
 input {
 	margin-bottom: 20px;
 }
 
-<<<<<<< HEAD
 .page-hero {
 	float: left;
 	width: 100%;
@@ -55,7 +47,6 @@ input {
 
 .admin-table {
 	background-color: #fff;
-=======
 .map {
 	#mapid {
 	    position: inherit;
@@ -158,5 +149,3 @@ input {
 			}
 		}
 	}
->>>>>>> 7d1fbb64226e1ce9b5aca620b3a71a975aba9e3e
-}

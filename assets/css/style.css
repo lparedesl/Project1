@@ -1,23 +1,30 @@
 /*
-Error: Invalid CSS after "...duct_list.scss'": expected "{", was ";"
-        on line 4 of /Users/paulinewhang/Desktop/Project1/assets/scss/style.scss
+Error: Invalid CSS after "	}": expected "}", was ""
+        on line 151 of /Users/paulinewhang/Desktop/Project1/assets/scss/style.scss
 
-1: @import 'fonts.scss';
-2: @import 'navbar.scss';
-3: <<<<<<< HEAD
-4: @import 'product_list.scss';
-5: =======
-6: @import 'popup_windows.scss';
-7: @import 'product_list.scss';
-8: @import 'tables.scss';
-9: >>>>>>> 7d1fbb64226e1ce9b5aca620b3a71a975aba9e3e
+146: 			.footer-connect {
+147: 				width  : 100%;
+148: 				margin : 0 auto;
+149: 			}
+150: 		}
+151: 	}
 
 Backtrace:
-/Users/paulinewhang/Desktop/Project1/assets/scss/style.scss:4
+/Users/paulinewhang/Desktop/Project1/assets/scss/style.scss:151
 /private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:1165:in `expected'
 /private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:1101:in `expected'
 /private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:1096:in `tok!'
-/private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:641:in `block'
+/private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:643:in `block'
+/private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:401:in `media_directive'
+/private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:219:in `special_directive'
+/private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:194:in `directive'
+/private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:661:in `block_child'
+/private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:653:in `block_contents'
+/private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:642:in `block'
+/private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:711:in `declaration_or_ruleset'
+/private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:661:in `block_child'
+/private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:653:in `block_contents'
+/private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:642:in `block'
 /private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:635:in `ruleset'
 /private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:660:in `block_child'
 /private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:653:in `block_contents'
@@ -36,4 +43,4 @@ Backtrace:
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Invalid CSS after \"...duct_list.scss'\": expected \"{\", was \";\"\A         on line 4 of /Users/paulinewhang/Desktop/Project1/assets/scss/style.scss\A \A 1: @import 'fonts.scss';\A 2: @import 'navbar.scss';\A 3: <<<<<<< HEAD\A 4: @import 'product_list.scss';\A 5: =======\A 6: @import 'popup_windows.scss';\A 7: @import 'product_list.scss';\A 8: @import 'tables.scss';\A 9: >>>>>>> 7d1fbb64226e1ce9b5aca620b3a71a975aba9e3e"; }
+  content: "Error: Invalid CSS after \"	}\": expected \"}\", was \"\"\A         on line 151 of /Users/paulinewhang/Desktop/Project1/assets/scss/style.scss\A \A 146: 			.footer-connect {\A 147: 				width  : 100%;\A 148: 				margin : 0 auto;\A 149: 			}\A 150: 		}\A 151: 	}"; }
