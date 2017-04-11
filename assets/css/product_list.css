@@ -1,71 +1,35 @@
-.content {
-  width: 100%;
-  padding: 0;
-}
-.content .margin {
-  width: -webkit-calc((100vw - 1170px) / 2);
-  width: -moz-calc((100vw - 1170px) / 2);
-  width: calc((100vw - 1170px) / 2);
-}
-.content .products-content {
-  width: 1140px;
-  padding: 0 15px;
-}
-.content .products-content .thumbnail img {
-  height: 235px;
-}
-.content .margin-right {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 128.5px;
-}
-.content .margin-right .cart {
-  width: 85%;
-  border-width: 2px;
-  border-color: white;
-  border-style: solid;
-  margin-bottom: 20px;
-}
-.content .margin-right .cart h3 {
-  text-align: center;
-}
-.content .margin-right .cart .container {
-  width: 100%;
-  font-size: 16px;
-}
-.content .margin-right .cart .container #cart-items .row {
-  margin-bottom: 20px;
-}
-.content .margin-right .cart .container #cart-items .row .col-md-6 a {
-  font-size: 12px;
-}
-.content .margin-right .cart .container #cart-items .row .col-md-4, .content .margin-right .cart .container #cart-items .row .col-md-2 {
-  padding: 0;
-}
-.content .margin-right .cart .container #cart-items .row .col-md-4 select, .content .margin-right .cart .container #cart-items .row .col-md-2 select {
-  width: 70%;
-}
-.content .margin-right .cart .container #cart-items .row .col-md-4 p, .content .margin-right .cart .container #cart-items .row .col-md-2 p {
-  margin-left: 0;
-}
-.content .margin-right .cart .container #checkout {
-  margin-bottom: 20px;
-  margin-top: 20px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 90%;
-  text-align: center;
-  text-decoration: none;
-  background-color: #5babff;
-  border: 0;
-  color: #fff;
-  font-family: "museo_sans500";
-  font-size: 20px;
-  padding: 10px 20px;
-  border-radius: 10px;
-  transition: all 0.2s ease-in-out;
-}
-.content .margin-right .cart .container #checkout:hover {
-  background-color: #ff00a4;
-}
+/*
+Error: Invalid CSS after "...3a71a975aba9e3e": expected "{", was ""
+        on line 220 of /Users/paulinewhang/Desktop/Project1/assets/scss/product_list.scss
+
+215: 			}
+216: 		}
+217: 	}
+218: }
+219: >>>>>>> 7d1fbb64226e1ce9b5aca620b3a71a975aba9e3e
+
+Backtrace:
+/Users/paulinewhang/Desktop/Project1/assets/scss/product_list.scss:220
+/private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:1165:in `expected'
+/private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:1101:in `expected'
+/private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:1096:in `tok!'
+/private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:641:in `block'
+/private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:635:in `ruleset'
+/private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:660:in `block_child'
+/private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:653:in `block_contents'
+/private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:117:in `stylesheet'
+/private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:42:in `parse'
+/private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/engine.rb:393:in `_to_tree'
+/private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/engine.rb:268:in `render'
+/private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/exec/sass_scss.rb:404:in `run'
+/private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/exec/sass_scss.rb:62:in `process_result'
+/private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/exec/base.rb:52:in `parse'
+/private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/lib/sass/exec/base.rb:19:in `parse!'
+/private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/rubygems/gems/sass-3.4.9/bin/sass:13:in `<top (required)>'
+/private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/bin/sass:18:in `load'
+/private/var/folders/kb/3h39ktvn4bx7rhpklwl30zg00000gn/T/AppTranslocation/88583446-DE4C-41E3-8241-1F1A29084381/d/Koala.app/Contents/Resources/app.nw/bin/sass:18:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: Invalid CSS after \"...3a71a975aba9e3e\": expected \"{\", was \"\"\A         on line 220 of /Users/paulinewhang/Desktop/Project1/assets/scss/product_list.scss\A \A 215: 			}\A 216: 		}\A 217: 	}\A 218: }\A 219: >>>>>>> 7d1fbb64226e1ce9b5aca620b3a71a975aba9e3e"; }

@@ -4,8 +4,13 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+<<<<<<< HEAD
+	<title>Bake Sale</title>
+	<!-- <link rel="icon" href="#"> -->
+=======
 	<title>Bakesale2Go | Inventory</title>
 	<link rel="icon" href="https://img.clipartfest.com/13f531b408a295650b4273a6342b6f54_-gingerbread-manpng-gingerbread-man-bake-sale-clipart_1876-2352.png">
+>>>>>>> 7d1fbb64226e1ce9b5aca620b3a71a975aba9e3e
 
 	<!-- Reset CSS -->
 	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
@@ -18,6 +23,11 @@
 
 	<!-- jQuery -->
 	<script src="https://code.jquery.com/jquery-3.2.0.min.js" integrity="sha256-JAW99MJVpJBGcbzEuXk4Az05s/XyDdBomFqNlM3ic+I=" crossorigin="anonymous"></script>
+<<<<<<< HEAD
+	<script src="https://cdn.rawgit.com/nnattawat/flip/master/dist/jquery.flip.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js"></script>
+=======
+>>>>>>> 7d1fbb64226e1ce9b5aca620b3a71a975aba9e3e
 
 	<!-- Latest compiled and minified Bootstrap JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -31,6 +41,56 @@
 	<script type="text/javascript" src="assets/javascript/js-inventory.js"></script>
 </head>
 <body>
+<<<<<<< HEAD
+	<!-- Popup Windows -->
+	<div class="update-bg hidden">
+		<!-- Add item window -->
+		<div class="jumbotron hidden" id="create-item-window">
+			<div class="container">
+				<legend>Create Item</legend>
+				<form role="form">
+					<div class="form-group">
+						<label for="">Name</label>
+						<input type="text" class="form-control" id="name-input" placeholder="Item Name">
+						<label for="">Price ($)</label>
+						<input type="text" class="form-control" id="price-input" placeholder="10">
+						<label for="">Category</label>
+						<input type="text" class="form-control" id="category-input" placeholder="Category">
+						<label for="">Description</label>
+						<textarea class="form-control" rows="3" id="description-input" placeholder="Description of item"></textarea>
+						<label for="">Quantity</label>
+						<input type="text" class="form-control" id="quantity-input" placeholder="5">
+						<label for="">Image</label>
+						<input type="file" id="upload">
+					</div>
+					<button type="submit" class="btn btn-primary" id="add-new-item">Add item</button>
+					<button type="submit" class="btn btn-danger" id="cancel-new-item">Cancel</button>
+				</form>
+			</div>
+		</div>
+		<!-- Update window -->
+		<div class="jumbotron hidden" id="update-window">
+			<div class="container">
+				<legend>Update Item</legend>
+				<form role="form">
+					<div class="form-group">
+						<label for="">Name</label>
+						<input type="text" class="form-control" id="update-name-input" placeholder="Item Name">
+						<label for="">Price ($)</label>
+						<input type="text" class="form-control" id="update-price-input" placeholder="10">
+						<label for="">Category</label>
+						<input type="text" class="form-control" id="update-category-input" placeholder="Category">
+						<label for="">Description</label>
+						<textarea class="form-control" rows="3" id="update-description-input" placeholder="Description of item"></textarea>
+						<label for="">Quantity</label>
+						<input type="text" class="form-control" id="update-quantity-input" placeholder="5">
+						<label for="">Image</label>
+						<input type="file" id="update-upload">
+					</div>
+					<button type="submit" class="btn btn-primary" id="submit-update">Update item</button>
+					<button type="submit" class="btn btn-danger" id="cancel-update">Cancel</button>
+				</form>
+=======
 	<!-- Navbar -->
 	<div class="navbar-wrap">
 	    <div class="container">
@@ -103,10 +163,92 @@
 						<button type="submit" class="btn btn-danger" id="cancel-update">Cancel</button>
 					</form>
 				</div>
+>>>>>>> 7d1fbb64226e1ce9b5aca620b3a71a975aba9e3e
 			</div>
 		</div>
 	</div>
 
+<<<<<<< HEAD
+	<div class="navbar-wrap">
+        <div class="container">
+            <a href="index.html" class="logo"></a>
+            <div class="navbar-links-container">
+                <a href="inventory.html">Inventory</a>
+                <a href="products.html">Products</a>
+                <button type="button" class="nav-btn" id="signIn">Sign in</button>
+            </div>
+        </div>
+     </div>
+
+	<!-- Content -->
+	<div class="page-hero">
+        <div class="container">
+        	<h1>Inventory</h1>
+        </div>
+    </div>
+	<div class="container">
+		<!-- Header -->
+		<button type="button" class="btn btn-default pull-right" id="create-item">Create item</button>
+		<table class="table table-hover admin-table" id="inventory-table">
+			<thead>
+				<tr>
+					<th>Name<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="0"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="0"></i></th>
+					<th>Price ($)<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="1"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="1"></i></th>
+					<th>Category<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="2"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="2"></i></th>
+					<th>Description<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="3"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="3"></i></th>
+					<th>Quantity<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="4"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="4"></i></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody></tbody>
+		</table>
+	</div>
+
+	<!-- Footer -->
+	<footer class="footer" role="contentinfo">
+		<section style="position:relative;">
+			<div class="centered">
+				<div class="col-md-4 footer-contact">
+					<h3>Contact</h3>
+					<ul>
+						<li><i class="fa fa-envelope" aria-hidden="true"></i><a href="mailto:lparedesl@gmail.com">lparedesl@gmail.com</a></li>
+						<li><i class="fa fa-phone" aria-hidden="true"></i><a href="tel:980-428-6491">(980) 428-6491</a></li>
+					</ul>
+				</div>
+				<div class="col-md-4 footer-connect">
+					<h3>Connect</h3>
+					<ul class="social">
+						<li><a href="https://www.linkedin.com/in/luis-paredes-23aab657/" class="linkedin" target="_blank">
+							<i class="fa fa-linkedin fa-2x" aria-hidden="true"></i>
+						</a></li>
+						<li><a href="https://github.com/lparedesl" class="github" target="_blank">
+							<i class="fa fa-github fa-2x" aria-hidden="true"></i>
+						</a></li>
+						<li><a href="https://www.facebook.com/" class="facebook" target="_blank">
+							<i class="fa fa-facebook fa-2x" aria-hidden="true"></i>
+						</a></li>
+						<li><a href="https://twitter.com/" class="twitter" target="_blank">
+							<i class="fa fa-twitter fa-2x" aria-hidden="true"></i>
+						</a></li>
+						<li><a href="https://plus.google.com/" class="googleplus" target="_blank">
+							<i class="fa fa-google-plus fa-2x" aria-hidden="true"></i>
+						</a></li>
+					</ul>
+				</div>
+				<div class="col-md-4 footer-navigation">
+					<h3>Navigate</h3>
+					<ul>
+						<li><i class="fa fa-chevron-right" aria-hidden="true"></i><a href="https://lparedesl.github.io/Portfolio/index.html#about_section">About</a></li>
+						<li><i class="fa fa-chevron-right" aria-hidden="true"></i><a href="https://lparedesl.github.io/Portfolio/portfolio.html">Portfolio</a></li>
+						<li><i class="fa fa-chevron-right" aria-hidden="true"></i><a href="https://lparedesl.github.io/Portfolio/contact.html">Contact</a></li>
+					</ul>
+				</div>
+			</div>
+		</section>
+		<section class="bottom-bar">
+			<p>© 2017 | Luis Paredes</p>
+		</section>
+=======
 	<!-- Content -->
 	<div class="container">
 		<div class="table-content">
@@ -135,6 +277,7 @@
 	<footer class="product-footer">
 	    <a href= "index.html" class="footer-logo"></a>
 	    <span class= "copy">&copy; 2017 Bake Sale 2 Go</span>
+>>>>>>> 7d1fbb64226e1ce9b5aca620b3a71a975aba9e3e
 	</footer>
 </body>
 </html>
