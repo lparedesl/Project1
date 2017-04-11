@@ -102,6 +102,8 @@
 }
 
 .products-content {
+	float: left;
+	width: 100%;
 	.thumbnail {
 		img {
 			max-height: 235px;

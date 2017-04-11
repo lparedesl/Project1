@@ -75,8 +75,11 @@
 #inventory-table .edit-button {
   margin-right: 5px; }
 
-.products-content .thumbnail img {
-  max-height: 235px; }
+.products-content {
+  float: left;
+  width: 100%; }
+  .products-content .thumbnail img {
+    max-height: 235px; }
 
 .cart {
   border-width: 2px;
