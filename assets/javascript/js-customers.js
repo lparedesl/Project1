@@ -37,6 +37,36 @@ $(document).ready(function($) {
 				firebase.auth().signOut();
 			});
 
+			$("#customers-expand").click(function() {
+				customersDB.ref().once("value", function(snapshot) {
+					var numItems = snapshot.numChildren() + 1;
+					if (numItems > 5) {
+						var height = ((numItems + 1) * 37) + 17;
+						$(".customers-table-wrapper").css({
+							"max-height": height + "px",
+						});
+					}
+				});
+			});
+
+			$("#customers-collapse").click(function() {
+				$(".customers-table-wrapper").css({
+					"max-height": "690px"
+				});
+			});
+
+			function getTotalQty() {
+				var totalQty = 0;
+				cartQuantities = JSON.parse(localStorage.getItem("quantities"));
+
+				for (var i = 0; i < cartQuantities.length; i++) {
+					totalQty += cartQuantities[i];
+				}
+
+				$("#cart-total-qty").text(totalQty);
+			}
+			getTotalQty();
+
 			// Add customers to table
 			customersDB.ref().on("child_added", function(snapshot) {
 				var child = snapshot.val();

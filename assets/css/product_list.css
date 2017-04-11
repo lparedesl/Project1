@@ -1,0 +1,71 @@
+.content {
+  width: 100%;
+  padding: 0;
+}
+.content .margin {
+  width: -webkit-calc((100vw - 1170px) / 2);
+  width: -moz-calc((100vw - 1170px) / 2);
+  width: calc((100vw - 1170px) / 2);
+}
+.content .products-content {
+  width: 1140px;
+  padding: 0 15px;
+}
+.content .products-content .thumbnail img {
+  height: 235px;
+}
+.content .margin-right {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 128.5px;
+}
+.content .margin-right .cart {
+  width: 85%;
+  border-width: 2px;
+  border-color: white;
+  border-style: solid;
+  margin-bottom: 20px;
+}
+.content .margin-right .cart h3 {
+  text-align: center;
+}
+.content .margin-right .cart .container {
+  width: 100%;
+  font-size: 16px;
+}
+.content .margin-right .cart .container #cart-items .row {
+  margin-bottom: 20px;
+}
+.content .margin-right .cart .container #cart-items .row .col-md-6 a {
+  font-size: 12px;
+}
+.content .margin-right .cart .container #cart-items .row .col-md-4, .content .margin-right .cart .container #cart-items .row .col-md-2 {
+  padding: 0;
+}
+.content .margin-right .cart .container #cart-items .row .col-md-4 select, .content .margin-right .cart .container #cart-items .row .col-md-2 select {
+  width: 70%;
+}
+.content .margin-right .cart .container #cart-items .row .col-md-4 p, .content .margin-right .cart .container #cart-items .row .col-md-2 p {
+  margin-left: 0;
+}
+.content .margin-right .cart .container #checkout {
+  margin-bottom: 20px;
+  margin-top: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+  text-align: center;
+  text-decoration: none;
+  background-color: #5babff;
+  border: 0;
+  color: #fff;
+  font-family: "museo_sans500";
+  font-size: 20px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  transition: all 0.2s ease-in-out;
+}
+.content .margin-right .cart .container #checkout:hover {
+  background-color: #ff00a4;
+}

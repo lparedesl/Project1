@@ -18,11 +18,45 @@ $(document).ready(function($) {
 			var sortedAsc = false;
 			var sortedDesc = false;
 
+			$("#userMenu").click(function() {
+				$(this).blur();
+			});
+
 			$("#user").text(firebaseUser.email + " ");
 
 			$("#btn-logout").click(function(event) {
 				firebase.auth().signOut();
 			});
+
+			$("#inventory-expand").click(function() {
+				database.ref().once("value", function(snapshot) {
+					var numItems = snapshot.numChildren() + 1;
+					if (numItems > 5) {
+						var height = (numItems * 40.5 + 37) + 17;
+						$(".inventory-table-wrapper").css({
+							"max-height": height + "px",
+						});
+					}
+				});
+			});
+
+			$("#inventory-collapse").click(function() {
+				$(".inventory-table-wrapper").css({
+					"max-height": "690px"
+				});
+			});
+
+			function getTotalQty() {
+				var totalQty = 0;
+				cartQuantities = JSON.parse(localStorage.getItem("quantities"));
+
+				for (var i = 0; i < cartQuantities.length; i++) {
+					totalQty += cartQuantities[i];
+				}
+
+				$("#cart-total-qty").text(totalQty);
+			}
+			getTotalQty();
 
 			// Get image name
 			$("#upload").change(function () {

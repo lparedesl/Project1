@@ -38,6 +38,56 @@ $(document).ready(function($) {
 				firebase.auth().signOut();
 			});
 
+			$("#open-orders-expand").click(function() {
+				salesDB.ref().once("value", function(snapshot) {
+					var numItems = snapshot.numChildren() + 1;
+					console.log("numItems", numItems);
+					if (numItems > 5) {
+						var height = (numItems * 62.5 + 37) + 17;
+						$(".open-orders-table-wrapper").css({
+							"max-height": height + "px",
+						});
+					}
+				});
+			});
+
+			$("#open-orders-collapse").click(function() {
+				$(".open-orders-table-wrapper").css({
+					"max-height": "345px"
+				});
+			});
+
+			$("#picked-up-orders-expand").click(function() {
+				salesDB.ref().once("value", function(snapshot) {
+					var numItems = snapshot.numChildren() + 1;
+					console.log("numItems", numItems);
+					if (numItems > 5) {
+						var height = (numItems * 62.5 + 37) + 17;
+						$(".picked-up-table-wrapper").css({
+							"max-height": height + "px",
+						});
+					}
+				});
+			});
+
+			$("#picked-up-orders-collapse").click(function() {
+				$(".picked-up-orders-table-wrapper").css({
+					"max-height": "345px"
+				});
+			});
+
+			function getTotalQty() {
+				var totalQty = 0;
+				cartQuantities = JSON.parse(localStorage.getItem("quantities"));
+
+				for (var i = 0; i < cartQuantities.length; i++) {
+					totalQty += cartQuantities[i];
+				}
+
+				$("#cart-total-qty").text(totalQty);
+			}
+			getTotalQty();
+
 			// Add sales to open orders table
 			salesDB.ref().on("child_added", function(snapshot) {
 				var child = snapshot.val();

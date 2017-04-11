@@ -37,6 +37,7 @@ $(document).ready(function($) {
 
 	// Get total price from cart
 	function getTotalPrice() {
+		var totalQty =0;
 		totalPrice = 0;
 		cartItems = JSON.parse(localStorage.getItem("items"));
 		cartQuantities = JSON.parse(localStorage.getItem("quantities"));
@@ -46,10 +47,12 @@ $(document).ready(function($) {
 
 			for (var i = 0; i < cartItems.length; i++) {
 				totalPrice += (parseFloat(sv[cartItems[i]].price) * cartQuantities[i]);
+				totalQty += cartQuantities[i];
 			}
 
 			$("#cart-total").text(totalPrice);
 			$("#chargeAmount").text(totalPrice);
+			$("#cart-total-qty").text(totalQty);
 		});
 	}
 	getTotalPrice();

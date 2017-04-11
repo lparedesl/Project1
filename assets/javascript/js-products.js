@@ -14,6 +14,7 @@ $(document).ready(function($) {
 	var n = 0;
 	var m= 0;
 	var totalPrice = 0;
+	var cartBackup = [];
 
 	String.prototype.capitalizeFirstLetter = function() {
 	    return this.charAt(0).toUpperCase() + this.slice(1);
@@ -22,6 +23,10 @@ $(document).ready(function($) {
 	$("#btn-login").click(function(event) {
 		$("#login-window").removeClass("hidden");
 		$(".update-bg").removeClass("hidden");
+	});
+
+	$("#userMenu").click(function() {
+		$(this).blur();
 	});
 
 	$("#login").click(function(event) {
@@ -156,6 +161,18 @@ $(document).ready(function($) {
 		}
 	});
 
+	function getTotalQty() {
+		var totalQty = 0;
+		cartQuantities = JSON.parse(localStorage.getItem("quantities"));
+
+		for (var i = 0; i < cartQuantities.length; i++) {
+			totalQty += cartQuantities[i];
+		}
+
+		$("#cart-total-qty").text(totalQty);
+	}
+	getTotalQty();
+
 	// Add item to page
 	database.ref().on("child_added", function(snapshot) {
 		var child = snapshot.val();
@@ -244,33 +261,61 @@ $(document).ready(function($) {
 		}
 
 		database.ref().on("value", function(snapshot) {
-			sv = snapshot.val();
+			if (itemsList !== cartBackup) {
+				sv = snapshot.val();
 
-			for (var i = 0; i < itemsList.length; i++) {
-				var name = $("<p>").text(sv[itemsList[i]].name);
-				var price = $("<p>").text("$" + (parseFloat(sv[itemsList[i]].price) * parseInt(quantitiesList[i])));
+				for (var i = 0; i < itemsList.length; i++) {
+					var name = $("<p>")
+					.addClass("cart-item-name")
+					.text(sv[itemsList[i]].name);
+					var remove = $("<a>")
+					.addClass("delete")
+					.attr("data-index", i)
+					.text("Remove");
 
-				var quantity = $("<select>");
-				quantity.addClass("form-control");
-				quantity.attr("data-index", i);
-				for (var j = 0; j < 10; j++) {
-					var option = $("<option>");
-					option.attr("value", j+1);
-					if (j+1 === parseInt(quantitiesList[i])) {
-						option.attr("selected", "selected");
+					var colName = $("<div>");
+					colName.addClass("col-md-6");
+					colName.append(name, remove);
+
+					var quantity = $("<select>");
+					quantity.addClass("form-control");
+					quantity.attr("data-index", i);
+					for (var j = 0; j < 10; j++) {
+						var option = $("<option>");
+						option.attr("value", j+1);
+						if (j+1 === parseInt(quantitiesList[i])) {
+							option.attr("selected", "selected");
+						}
+						option.text(j+1);
+						quantity.append(option);
 					}
-					option.text(j+1);
-					quantity.append(option);
+
+					var colQty = $("<div>");
+					colQty.addClass("col-md-4");
+					colQty.append(quantity);
+
+					var price = $("<p>")
+					.addClass("cart-item-price")
+					.text("$" + (parseFloat(sv[itemsList[i]].price) * parseInt(quantitiesList[i])));
+
+					var colPrice = $("<div>");
+					colPrice.addClass("col-md-2");
+					colPrice.append(price);
+
+					var item = $("<div>")
+					.addClass("row")
+					.attr("id", "item-" + i)
+					.append(colName, colQty, colPrice);
+
+					totalPrice += (parseFloat(sv[itemsList[i]].price) * parseInt(quantitiesList[i]));
+
+					getTotalQty();
+
+					$("#cart-items").append(item);
+					$("#total-price").text("Total: $" + totalPrice);
+
+					cartBackup = itemsList;
 				}
-
-				var remove = $("<button class='btn btn-default delete'>").text("Remove").attr("data-index", i);
-				totalPrice += (parseFloat(sv[itemsList[i]].price) * parseInt(quantitiesList[i]));
-
-	        	name.append(price);
-	        	name.append(quantity);
-	        	name.append(remove);
-				$("#cart-items").append(name);
-				$("#total-price").text("Total: $" + totalPrice);
 			}
 		});
 	}
@@ -346,7 +391,7 @@ $(document).ready(function($) {
 	});
 
 	// Remove item from cart
-	$(document).on("click", "button.delete", function() {
+	$(document).on("click", ".delete", function() {
 		var items = JSON.parse(localStorage.getItem("items"));
 		var quantities = JSON.parse(localStorage.getItem("quantities"));
 		var currentIndex = $(this).attr("data-index");
@@ -357,7 +402,7 @@ $(document).ready(function($) {
 		localStorage.setItem("items", JSON.stringify(items));
 		localStorage.setItem("quantities", JSON.stringify(quantities));
 
-		$(this).parent().remove();
+		$("#item-" + $(this).attr("data-index")).remove();
 
 		totalPrice = 0;
 		showCart();
