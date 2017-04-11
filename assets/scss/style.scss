@@ -1,6 +1,12 @@
 @import 'fonts.scss';
 @import 'navbar.scss';
+<<<<<<< HEAD
 @import 'product_list.scss';
+=======
+@import 'popup_windows.scss';
+@import 'product_list.scss';
+@import 'tables.scss';
+>>>>>>> 7d1fbb64226e1ce9b5aca620b3a71a975aba9e3e
 @import 'footer.scss';
 
 * {
@@ -21,15 +27,24 @@ html {
 }
 
 body {
+<<<<<<< HEAD
 	font-family: "museo_sans500"; 
 	margin-bottom: 241px;
 	background-color: #333333;
+=======
+	font-family: "museo_sans500";
+	margin-bottom: 241px;
+	margin-top: 128.5px;
+	background-color: #210D00;
+	color: #fff;
+>>>>>>> 7d1fbb64226e1ce9b5aca620b3a71a975aba9e3e
 }
 
 input {
 	margin-bottom: 20px;
 }
 
+<<<<<<< HEAD
 .page-hero {
 	float: left;
 	width: 100%;
@@ -40,4 +55,108 @@ input {
 
 .admin-table {
 	background-color: #fff;
+=======
+.map {
+	#mapid {
+	    position: inherit;
+	    height: 680px;
+	    margin: 0;
+	    padding: 0;
+	    // border: 1px solid black;
+	    // border-radius: 8px;
+	    z-index: 0;
+
+	    .leaflet-control-container {
+	    	width: 100%;
+	    }
+	}
+}
+
+.location-content {
+	h1,
+	h2,
+	h3,
+	h4,
+	h5 {
+	    color: #7dc9d4;
+	    font-family: 'helvetica';
+	}
+
+	form {
+	    float: center;
+	    width: auto;
+	}
+
+	.leaflet-routing-container-hide {
+	    display: none;
+	}
+}
+
+ // Responsive Tablet Sizes
+@media only screen and (max-width: 991px) {
+	// body {
+	// 	padding-top: 156px;
+	// }
+}
+
+@media only screen and (max-width: 769px) {
+	// body {
+	// 	padding-top: 100px;
+	// }
+}
+
+@media only screen and (max-width: 749px) {
+	body {
+		margin-bottom: 377px;
+	}
+
+	footer {
+		height: 377px;
+		.centered {
+			flex-wrap:wrap;
+			.footer-contact {
+				width  : 50%;
+				margin : 0 auto;
+			}
+
+			.footer-connect {
+				width  : 50%;
+				margin : 0 auto;
+			}
+			.footer-navigation {
+				width:100%;
+			}
+		}
+	}
+}
+
+ // Responsive Mobile Sizes
+@media only screen and (max-width: 699px) {
+	
+}
+
+
+@media only screen and (max-width: 500px) {
+	body {
+		margin-bottom: 600px !important;
+	}
+
+	footer {
+		height: 505px;
+
+		.centered {
+			margin-right : 0;
+			margin-left  : 0;
+			.footer-contact {
+				width  : 100%;
+				margin : 0 auto;
+			}
+
+			.footer-connect {
+				width  : 100%;
+				margin : 0 auto;
+			}
+		}
+	}
+>>>>>>> 7d1fbb64226e1ce9b5aca620b3a71a975aba9e3e
 }
