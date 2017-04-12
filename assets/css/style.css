@@ -1,0 +1,39 @@
+/*
+Error: Invalid CSS after "...duct_list.scss'": expected "{", was ";"
+        on line 4 of D:\Google Drive\Documents\UNCC Coding Bootcamp\Project1\assets\scss\style.scss
+
+1: @import 'fonts.scss';
+2: @import 'navbar.scss';
+3: <<<<<<< HEAD
+4: @import 'product_list.scss';
+5: =======
+6: @import 'popup_windows.scss';
+7: @import 'product_list.scss';
+8: @import 'tables.scss';
+9: >>>>>>> 7d1fbb64226e1ce9b5aca620b3a71a975aba9e3e
+
+Backtrace:
+D:\Google Drive\Documents\UNCC Coding Bootcamp\Project1\assets\scss\style.scss:4
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:1165:in `expected'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:1101:in `expected'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:1096:in `tok!'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:641:in `block'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:635:in `ruleset'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:660:in `block_child'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:653:in `block_contents'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:117:in `stylesheet'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:42:in `parse'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/engine.rb:393:in `_to_tree'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/engine.rb:268:in `render'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/exec/sass_scss.rb:404:in `run'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/exec/sass_scss.rb:62:in `process_result'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/exec/base.rb:52:in `parse'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/exec/base.rb:19:in `parse!'
+C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/bin/sass:13:in `<top (required)>'
+C:/Program Files (x86)/Koala/bin/sass:18:in `load'
+C:/Program Files (x86)/Koala/bin/sass:18:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: Invalid CSS after \"...duct_list.scss'\": expected \"{\", was \";\"\A         on line 4 of D:\Google Drive\Documents\UNCC Coding Bootcamp\Project1\assets\scss\style.scss\A \A 1: @import 'fonts.scss';\A 2: @import 'navbar.scss';\A 3: <<<<<<< HEAD\A 4: @import 'product_list.scss';\A 5: =======\A 6: @import 'popup_windows.scss';\A 7: @import 'product_list.scss';\A 8: @import 'tables.scss';\A 9: >>>>>>> 7d1fbb64226e1ce9b5aca620b3a71a975aba9e3e"; }
