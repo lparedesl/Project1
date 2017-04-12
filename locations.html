@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Bakesale2Go | Locations</title>
+	<link rel="icon" href="https://img.clipartfest.com/13f531b408a295650b4273a6342b6f54_-gingerbread-manpng-gingerbread-man-bake-sale-clipart_1876-2352.png">
+
+	<!-- Reset CSS -->
+	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+
+	<!-- Latest compiled and minified Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- Optional Bootstrap theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+	<!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-3.2.0.min.js" integrity="sha256-JAW99MJVpJBGcbzEuXk4Az05s/XyDdBomFqNlM3ic+I=" crossorigin="anonymous"></script>
+
+	<!-- Latest compiled and minified Bootstrap JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+	<!-- JavaScript -->
+	<script src="https://use.fontawesome.com/d1c076a58a.js"></script>
+	<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+	<script type="text/javascript" src="assets/javascript/js-locations.js"></script>
+</head>
+<body>
+	<!-- Navbar -->
+	<div class="navbar-wrap">
+	    <div class="container">
+	        <a href="index.html" class="logo"></a>
+	        <div class="navbar-links-container">
+	            <a href="index.html">Home</a>
+	            <a href="products.html">Products</a>
+	            <a href="products.html"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart <span class="badge" id="cart-total-qty"></span></a>
+	            <button type="button" class="nav-btn dropdown" id="userMenu">
+	                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span id="user"></span><i class="fa fa-caret-down" aria-hidden="true"></i></a>
+	                <ul class="dropdown-menu pull-right">
+	                    <li><a href="inventory.html">Inventory</a></li>
+	                    <li><a href="sales.html">Sales</a></li>
+	                    <li><a href="customers.html">Customers</a></li>
+	                    <li role="separator" class="divider"></li>
+	                    <li><a id="btn-logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Sign Out</a></li>
+	                </ul>
+	            </button>
+	        </div>
+	    </div>
+	</div>
+
+	<!-- Popup Windows -->
+	<div class="container popups">
+		<div class="update-bg hidden">
+			<!-- Add locations window -->
+			<div class="jumbotron hidden" id="create-item-window">
+				<div class="container">
+					<legend>Add Location</legend>
+					<form role="form">
+						<div class="form-group">
+							<label for="">Date</label>
+							<input type="text" class="form-control" id="date-input" placeholder="05/08/17">
+							<label for="">From</label>
+							<input type="text" class="form-control" id="hr-from-input" placeholder="09:30">
+							<label for="">To</label>
+							<input type="text" class="form-control" id="hr-to-input" placeholder="13:30">
+							<label for="">Address</label>
+							<input type="text" class="form-control" id="address-input" placeholder="123 Main St">
+							<label for="">City</label>
+							<input type="text" class="form-control" id="city-input" placeholder="Charlotte">
+							<label for="">State</label>
+							<input type="text" class="form-control" id="state-input" placeholder="NC">
+							<label for="">Zip Code</label>
+							<input type="text" class="form-control" id="zip-code-input" placeholder="28262">
+						</div>
+						<button type="submit" class="btn btn-primary" id="add-new-item">Add location</button>
+						<button type="submit" class="btn btn-danger" id="cancel-new-item">Cancel</button>
+					</form>
+				</div>
+			</div>
+			<!-- Update window -->
+			<div class="jumbotron hidden" id="update-window">
+				<div class="container">
+					<legend>Update Location</legend>
+					<form role="form">
+						<div class="form-group">
+							<label for="">Date</label>
+							<input type="text" class="form-control" id="update-date-input" placeholder="05/08/17">
+							<label for="">From</label>
+							<input type="text" class="form-control" id="update-hr-from-input" placeholder="09:30">
+							<label for="">To</label>
+							<input type="text" class="form-control" id="update-hr-to-input" placeholder="13:30">
+							<label for="">Address</label>
+							<input type="text" class="form-control" id="update-address-input" placeholder="123 Main St">
+							<label for="">City</label>
+							<input type="text" class="form-control" id="update-city-input" placeholder="Charlotte">
+							<label for="">State</label>
+							<input type="text" class="form-control" id="update-state-input" placeholder="NC">
+							<label for="">Zip Code</label>
+							<input type="text" class="form-control" id="update-zip-code-input" placeholder="28262">
+						</div>
+						<button type="submit" class="btn btn-primary" id="submit-update">Update location</button>
+						<button type="submit" class="btn btn-danger" id="cancel-update">Cancel</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Content -->
+	<div class="container">
+		<div class="table-content">
+			<h2>Locations</h2>
+			<button type="button" class="btn btn-default pull-right" id="add-location">Add location</button>
+			<div class="wrapper locations-table-wrapper">
+				<table class="table table-hover" id="locations-table">
+					<thead>
+						<tr>
+							<th>Date<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="0"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="0"></i></th>
+							<th>From<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="1"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="1"></i></th>
+							<th>To<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="2"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="2"></i></th>
+							<th>Address<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="3"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="3"></i></th>
+							<th>City<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="4"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="4"></i></th>
+							<th>State<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="5"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="5"></i></th>
+							<th>Zip Code<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="6"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="6"></i></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<!-- Footer -->
+	<footer class="product-footer">
+	    <a href= "index.html" class="footer-logo"></a>
+	    <span class= "copy">&copy; 2017 Bake Sale 2 Go</span>
+	</footer>
+</body>
+</html>
