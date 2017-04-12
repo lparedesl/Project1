@@ -9,8 +9,8 @@ $(document).ready(function($) {
 	};
 	firebase.initializeApp(config);
 
-	firebase.auth().onAuthStateChanged(function(firebaseUser) {
-		if (firebaseUser) {
+	// firebase.auth().onAuthStateChanged(function(firebaseUser) {
+	// 	if (firebaseUser) {
 			var database = firebase.database();
 			var imgName = "";
 			var updateImgName = "";
@@ -22,7 +22,7 @@ $(document).ready(function($) {
 				$(this).blur();
 			});
 
-			$("#user").text(firebaseUser.email + " ");
+			// $("#user").text(firebaseUser.email + " ");
 
 			$("#btn-logout").click(function(event) {
 				firebase.auth().signOut();
@@ -293,8 +293,8 @@ $(document).ready(function($) {
 				sortedDesc = true;
 				sortedByAsc = $(this).attr("data-index");
 			});
-		} else {
-			window.location = "products.html";
-		}
-	});
+	// 	} else {
+	// 		window.location = "products.html";
+	// 	}
+	// });
 });

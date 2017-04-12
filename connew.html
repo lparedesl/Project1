@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Bakesale2Go | Confirmation</title>
+	<link rel="icon" href="https://img.clipartfest.com/13f531b408a295650b4273a6342b6f54_-gingerbread-manpng-gingerbread-man-bake-sale-clipart_1876-2352.png">
+
+	<!-- Reset CSS -->
+	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+
+	<!-- Latest compiled and minified Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- Optional Bootstrap theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+	<!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-3.2.0.min.js" integrity="sha256-JAW99MJVpJBGcbzEuXk4Az05s/XyDdBomFqNlM3ic+I=" crossorigin="anonymous"></script>
+
+	<!-- Latest compiled and minified Bootstrap JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/confirmation.css">
+
+	<!-- JavaScript -->
+	<script src="https://use.fontawesome.com/d1c076a58a.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+	<script type="text/javascript" src="assets/javascript/js-inventory.js"></script>
+</head>
+<body>
+	<!-- Navbar -->
+	<div class="navbar-wrap">
+	    <div class="container">
+	        <a href="index.html" class="logo"></a>
+	        <div class="navbar-links-container">
+	            <a href="index.html">Home</a>
+	            <a href="products.html">Products</a>
+	            <a href="products.html"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart <span class="badge" id="cart-total-qty"></span></a>
+	            <button type="button" class="nav-btn dropdown" id="userMenu">
+	                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span id="user"></span><i class="fa fa-caret-down" aria-hidden="true"></i></a>
+	                <ul class="dropdown-menu pull-right">
+	                    <li><a href="inventory.html">Inventory</a></li>
+	                    <li><a href="sales.html">Sales</a></li>
+	                    <li><a href="customers.html">Customers</a></li>
+	                    <li role="separator" class="divider"></li>
+	                    <li><a id="btn-logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Sign Out</a></li>
+	                </ul>
+	            </button>
+	        </div>
+	    </div>
+	</div>
+
+	<!-- Popup Windows -->
+	<div class="container popups">
+		<div class="update-bg hidden">
+			<!-- Add item window -->
+			<div class="jumbotron hidden" id="create-item-window">
+				<div class="container">
+					<legend>Create Item</legend>
+					<form role="form">
+						<div class="form-group">
+							<label for="">Name</label>
+							<input type="text" class="form-control" id="name-input" placeholder="Item Name">
+							<label for="">Price ($)</label>
+							<input type="text" class="form-control" id="price-input" placeholder="10">
+							<label for="">Category</label>
+							<input type="text" class="form-control" id="category-input" placeholder="Category">
+							<label for="">Description</label>
+							<textarea class="form-control" rows="3" id="description-input" placeholder="Description of item"></textarea>
+							<label for="">Quantity</label>
+							<input type="text" class="form-control" id="quantity-input" placeholder="5">
+							<label for="">Image</label>
+							<input type="file" id="upload">
+						</div>
+						<button type="submit" class="btn btn-primary" id="add-new-item">Add item</button>
+						<button type="submit" class="btn btn-danger" id="cancel-new-item">Cancel</button>
+					</form>
+				</div>
+			</div>
+			<!-- Update window -->
+			<div class="jumbotron hidden" id="update-window">
+				<div class="container">
+					<legend>Update Item</legend>
+					<form role="form">
+						<div class="form-group">
+							<label for="">Name</label>
+							<input type="text" class="form-control" id="update-name-input" placeholder="Item Name">
+							<label for="">Price ($)</label>
+							<input type="text" class="form-control" id="update-price-input" placeholder="10">
+							<label for="">Category</label>
+							<input type="text" class="form-control" id="update-category-input" placeholder="Category">
+							<label for="">Description</label>
+							<textarea class="form-control" rows="3" id="update-description-input" placeholder="Description of item"></textarea>
+							<label for="">Quantity</label>
+							<input type="text" class="form-control" id="update-quantity-input" placeholder="5">
+							<label for="">Image</label>
+							<input type="file" id="update-upload">
+						</div>
+						<button type="submit" class="btn btn-primary" id="submit-update">Update item</button>
+						<button type="submit" class="btn btn-danger" id="cancel-update">Cancel</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Content -->
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                                            
+                            <h1 id="glyph"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></h1>
+                            <div id="confirmation"></div>
+                            <div id="orderNumber"></div>
+                            <div id="total"></div>
+                            <div id="pickUpAddress"></div>
+                            <div id="thankYou"></div>
+                           
+
+                         
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+
+        </div>
+    
+
+
+	<!-- Footer -->
+	<footer class="product-footer">
+	    <a href= "index.html" class="footer-logo"></a>
+	    <span class= "copy">&copy; 2017 Bake Sale 2 Go</span>
+	</footer>
+</body>
+</html>
