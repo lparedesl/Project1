@@ -1,25 +1,24 @@
-<<<<<<< HEAD
-.header {
-	margin-top: 20px;
-	background-color: #0E0D10;
-	background-image: none;
-	color: #fff;
-	text-align: center;
-}
 .navbar-wrap {
 	float: left;
 	width: 100%;
   background-color: #74dbf1;
   border-bottom: 5px solid #e24533;
-  @media(max-width:767px){
+
+  top: 0;
+  position: fixed;
+  z-index: 1000;
+
+  @media(max-width:767px) {
     border-bottom: none;
   }
+
   .container {
-    @media(max-width:767px){
+    @media(max-width:767px) {
       padding: 0;
     }
   }
 }
+
 .logo {
   background-image: url("../images/bakesale2go-logo.svg");
   background-position: 0 12px;
@@ -29,15 +28,16 @@
   height: 100px;
   width: 100%;
   max-width: 300px;
-  @media(max-width:767px){
+  @media(max-width:767px) {
     float: none;
     display: block;
     margin: auto;
   }
 }
+
 .navbar-links-container {
   float: right;
-  @media(max-width:767px){
+  @media(max-width:767px) {
     width: 100%;
     background-color: #e24533;
     text-align: center;
@@ -51,7 +51,7 @@
     padding: 10px 20px;
     border-radius: 10px;
     transition: all 0.2s ease-in-out;
-    @media(max-width:991px){
+    @media(max-width:991px) {
       font-size: 18px;
     }
     &:hover {
@@ -92,92 +92,6 @@
       height: 3px;
       background-color: #fff;
       transition: all 0.2s ease-in-out;
-=======
-.navbar-wrap {
-	width: 100%;
-  background-color: #74dbf1;
-
-  top: 0;
-  position: fixed;
-  right: 0;
-  left: 0;
-  z-index: 999;
-  margin-bottom: 20px;
-
-  .logo {
-    background-image: url("../images/bakesale2go-logo.svg");
-    background-position: 0 12px;
-    background-size: 100%;
-    background-repeat: no-repeat;
-    float: left;
-    height: 100px;
-    width: 100%;
-    max-width: 300px;
-  }
-
-  .navbar-links-container {
-    float: right;
-
-    a {
-      display: inline-block;
-      color: #fff;
-      font-size: 20px;
-      margin-top: 40px;
-      padding: 20px;
-      position: relative;
-      &:focus,
-      &:hover {
-        text-decoration: none;
-        &:after {
-          opacity: 1;
-        }
-      }
-
-      &:after {
-        opacity: 0;
-        content: "";
-        position: absolute;
-        bottom: 13px;
-        left: 0;
-        right: 0;
-        width: 100%;
-        height: 3px;
-        background-color: #fff;
-        transition: all 0.2s ease-in-out;
-      }
-    }
-
-    button.nav-btn {
-      background-color: #5babff;
-      border: 0;
-      color: #fff;
-      font-family: "museo_sans500";
-      font-size: 20px;
-      padding: 10px 20px;
-      border-radius: 10px;
-      transition: all 0.2s ease-in-out;
-
-      &:hover {
-        background-color: #ff00a4;
-      }
-
-      a {
-        margin: 0;
-        padding: 0;
-
-        &:after {
-          height: 0;
-        }
-      }
-
-      .dropdown-menu {
-        a {
-          color: #333;
-          width: 100%;
-          padding: 0 20px;
-        }
-      }
->>>>>>> 7d1fbb64226e1ce9b5aca620b3a71a975aba9e3e
     }
   }
 }

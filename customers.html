@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Bakesale2Go | Customers</title>
+	<link rel="icon" href="https://img.clipartfest.com/13f531b408a295650b4273a6342b6f54_-gingerbread-manpng-gingerbread-man-bake-sale-clipart_1876-2352.png">
+
+	<!-- Reset CSS -->
+	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+
+	<!-- Latest compiled and minified Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- Optional Bootstrap theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+	<!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-3.2.0.min.js" integrity="sha256-JAW99MJVpJBGcbzEuXk4Az05s/XyDdBomFqNlM3ic+I=" crossorigin="anonymous"></script>
+	<script src="https://cdn.rawgit.com/nnattawat/flip/master/dist/jquery.flip.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js"></script>
+
+	<!-- Latest compiled and minified Bootstrap JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+	<!-- JavaScript -->
+	<script src="https://use.fontawesome.com/d1c076a58a.js"></script>
+	<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+	<script type="text/javascript" src="assets/javascript/js-customers.js"></script>
+</head>
+<body>
+	<!-- Navbar -->
+	<div class="navbar-wrap">
+	    <div class="container">
+	        <a href="index.html" class="logo"></a>
+	        <div class="navbar-links-container">
+	            <a href="index.html">Home</a>
+	            <a href="products.html">Products</a>
+	            <a href="products.html"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart <span class="badge" id="cart-total-qty"></span></a>
+	            <button type="button" class="nav-btn dropdown" id="userMenu">
+	                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span id="user"></span><i class="fa fa-caret-down" aria-hidden="true"></i></a>
+	                <ul class="dropdown-menu pull-right">
+	                    <li><a href="inventory.html">Inventory</a></li>
+	                    <li><a href="sales.html">Sales</a></li>
+	                    <li><a href="customers.html">Customers</a></li>
+	                    <li role="separator" class="divider"></li>
+	                    <li><a id="btn-logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Sign Out</a></li>
+	                </ul>
+	            </button>
+	        </div>
+	    </div>
+	</div>
+
+	<!-- Content -->
+	<div class="container">
+		<div class="table-content">
+			<h2>Customers</h2>
+			<button id="customers-expand" type="button" class="btn btn-default expand-table">Expand</button><button id="customers-collapse" type="button" class="btn btn-default collapse-table">Collapse</button>
+			<div class="wrapper customers-table-wrapper">
+				<table class="table table-hover" id="customers-table">
+					<thead>
+						<tr>
+							<th>Customer ID<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="0"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="0"></i></th>
+							<th>Date Created<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="1"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="1"></i></th>
+							<th>Name<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="2"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="2"></i></th>
+							<th>Email<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="3"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="3"></i></th>
+							<th>Phone Number<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="4"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="4"></i></th>
+						</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<!-- Footer -->
+	<footer class="product-footer">
+	    <a href= "index.html" class="footer-logo"></a>
+	    <span class= "copy">&copy; 2017 Bake Sale 2 Go</span>
+	</footer>
+</body>
+</html>

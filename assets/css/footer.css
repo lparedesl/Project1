@@ -1,53 +1,129 @@
-/*
-Error: Invalid CSS after "": expected selector, was "<<<<<<< HEAD"
-        on line 4 of D:\Google Drive\Documents\UNCC Coding Bootcamp\Project1\assets\scss\footer.scss
+.footer-logo {
+  background-image: url("../images/bakesale2go-logo.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100px;
+  width: 100%;
+  max-width: 300px;
+  display: block;
+  margin: auto;
+}
 
-1: $footer-link-hover: #65c2ed;
-2: $gray-darker: lighten(#000, 13.5%) !default; // #222
-3: $gray-darker-inactive: #9d9d9d;
-4: <<<<<<< HEAD
-5: .footer-logo {
-6: 	background-image: url("../images/bakesale2go-logo.svg");
-7: 	background-repeat: no-repeat;
-8: 	background-position: center;
-9: 	height: 100px;
+span.copy {
+  color: #fff;
+  font-size: 10px;
+  width: 100%;
+  text-align: center;
+  display: block;
+  padding: 20px;
+}
 
-Backtrace:
-D:\Google Drive\Documents\UNCC Coding Bootcamp\Project1\assets\scss\footer.scss:4
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:1165:in `expected'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:1101:in `expected'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/scss/parser.rb:1081:in `expr!'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/scss/static_parser.rb:20:in `parse_selector'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:414:in `visit_rule'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/base.rb:36:in `visit'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/stack.rb:79:in `block in with_base'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/stack.rb:115:in `with_frame'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/stack.rb:79:in `with_base'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:158:in `visit'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/base.rb:52:in `map'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/base.rb:52:in `visit_children'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:167:in `block in visit_children'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:166:in `visit_children'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/base.rb:36:in `block in visit'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:186:in `visit_root'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/base.rb:36:in `visit'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:157:in `visit'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:8:in `visit'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/root_node.rb:36:in `css_tree'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/root_node.rb:20:in `render'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/engine.rb:268:in `render'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/exec/sass_scss.rb:404:in `run'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/exec/sass_scss.rb:62:in `process_result'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/exec/base.rb:52:in `parse'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/lib/sass/exec/base.rb:19:in `parse!'
-C:/Program Files (x86)/Koala/rubygems/gems/sass-3.4.9/bin/sass:13:in `<top (required)>'
-C:/Program Files (x86)/Koala/bin/sass:18:in `load'
-C:/Program Files (x86)/Koala/bin/sass:18:in `<main>'
-*/
-body:before {
-  white-space: pre;
-  font-family: monospace;
-  content: "Error: Invalid CSS after \"\": expected selector, was \"<<<<<<< HEAD\"\A         on line 4 of D:\Google Drive\Documents\UNCC Coding Bootcamp\Project1\assets\scss\footer.scss\A \A 1: $footer-link-hover: #65c2ed;\A 2: $gray-darker: lighten(#000, 13.5%) !default; // #222\A 3: $gray-darker-inactive: #9d9d9d;\A 4: <<<<<<< HEAD\A 5: .footer-logo {\A 6: 	background-image: url(\"../images/bakesale2go-logo.svg\");\A 7: 	background-repeat: no-repeat;\A 8: 	background-position: center;\A 9: 	height: 100px;"; }
+footer {
+  background: #74dbf1;
+  color: #fff;
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 241px;
+}
+footer.product-footer {
+  height: auto;
+}
+footer .footer-logo {
+  background-image: url("../images/bakesale2go-logo.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100px;
+  width: 100%;
+  max-width: 300px;
+  display: block;
+  margin: auto;
+}
+footer span.copy {
+  color: #fff;
+  font-size: 10px;
+  width: 100%;
+  text-align: center;
+  display: block;
+  padding: 20px;
+}
+footer h3 {
+  color: #9d9d9d;
+  font-weight: lighter;
+  font-style: italic;
+  margin-bottom: 0;
+  margin-top: 40px;
+}
+footer p, footer li {
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 10px 0;
+}
+footer a {
+  color: #fff;
+  text-decoration: none;
+  -webkit-transition: color .5s, background .5s;
+  transition: color .5s, background .5s;
+}
+footer a:hover {
+  color: #65c2ed;
+}
+footer .centered {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+footer .centered:before, footer .centered:after {
+  content: '\0020';
+  display: block;
+  overflow: hidden;
+  visibility: hidden;
+  width: 0;
+  height: 0;
+  clear: both;
+}
+footer .centered .footer-contact {
+  width: 35%;
+}
+footer .centered .footer-contact .fa {
+  width: 20px;
+  padding-right: 10px;
+}
+footer .centered .footer-connect {
+  width: 35%;
+}
+footer .centered .footer-navigation {
+  width: 30%;
+}
+footer .centered .footer-navigation ul {
+  width: 50%;
+  float: left;
+}
+footer .centered .footer-navigation .fa {
+  padding-right: 10px;
+}
+footer .bottom-bar {
+  position: relative;
+  text-align: center;
+  font-size: .8em;
+  text-transform: uppercase;
+  background: #000;
+  padding: 15px 0;
+}
+footer ul {
+  list-style-type: none;
+}
+
+.social li {
+  float: left;
+}
+.social a {
+  display: inline-block;
+  padding: 0 7px;
+  margin: 3px 10px 10px 0;
+  vertical-align: middle;
+}
