@@ -12,12 +12,101 @@ $(document).ready(function($) {
 
     var database = firebase.database();
     var n = 0;
-    var m= 0;
+    var m = 0;
     var totalPrice = 0;
 
+    // variable for map
     var fLat = 0;
     var fLon = 0;
+    var dLon = 0;
+    var dLat = 0;
     var mymap = "";
+    var routeObj = {};
+    var locMarker = {};
+
+    // initialize map 
+    mymap = L.map("mapid").setView([35.204697, -80.835403], 11);
+
+    mapLink =
+        '<a href="#">ESRI 2017</a>';
+    L.tileLayer(
+        'https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}.png', {
+            attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012',
+            maxZoom: 18,
+        }).addTo(mymap);
+
+    // ----------------------------------------------------------------- //
+
+    var configLocations = {
+        apiKey: "AIzaSyCsJTE4AtEAPYpmZ0gWDDph_8TIlcQap00",
+        authDomain: "project-1-locations.firebaseapp.com",
+        databaseURL: "https://project-1-locations.firebaseio.com",
+        projectId: "project-1-locations",
+        storageBucket: "project-1-locations.appspot.com",
+        messagingSenderId: "431733192725"
+    };
+    var locationsApp = firebase.initializeApp(configLocations, "Locations");
+    var locationsDB = locationsApp.database();
+
+    var n = 0;
+
+    // Add locations to page
+    locationsDB.ref().on("child_added", function(snapshot) {
+        var child = snapshot.val();
+        var key = snapshot.key;
+        var timeFrom = moment(child.date + " " + child.from, "MM/DD/YY HH:mm").format("X");
+        var timeTo = moment(child.date + " " + child.to, "MM/DD/YY HH:mm").format("X");
+        var now = moment().format("X");
+
+        var location = $("<div>")
+            .addClass("row")
+            .attr("data-key", key)
+            .html(`
+        <p class="address" data-index="${n}">${child.address}</p>
+        <p><span class="city" data-index="${n}">${child.city}, </span><span class="state" data-index="${n}">${child.state}</span></p>
+        <p class="zip-code" data-index="${n}">${child.zipCode}</p>
+        <button type="button" class="route btn btn-primary" data-index="${n}" data-lon="${child.lon}" data-lat="${child.lat}">Get Route</button>
+        <span class="label label-success hidden" id="in-progress" data-index="${n}">In progress</span>
+        <hr>
+    `);
+
+        $("#locations-list").append(location);
+
+        if (now > timeFrom && now < timeTo) {
+            $("#locations-list").children(".row[data-key=" + key + "]").children("#in-progress[data-index=" + n + "]").removeClass("hidden");
+        }
+
+        n++;
+
+        //-- add markers to map --//
+        var lon = child.lon;
+        var lat = child.lat;
+        var popupText = child.address;
+        var popupText = "<h5>" + child.address + "</h5><h6>" + child.city + ", " + child.state + " " + child.zipCode + "</h6>";
+        var markerLocation = new L.LatLng(lat, lon);
+        var marker = new L.Marker(markerLocation);
+        mymap.addLayer(marker);
+        marker.bindPopup(popupText);
+        //-----------------------//
+
+    }, function(errorObject) {
+        console.log("Errors handled: " + errorObject.code);
+    });
+
+    // ----------------------------------------------------------------- //
+
+    // get lon & lat from button and call getRoute()
+    function getRoutebtn() {
+        if (fLat === 0) {
+            alert("Click 'Locate Me' or enter your address first.");
+            return;
+        }
+        dLon = $(this).data('lon');
+        dLat = $(this).data('lat');
+
+        getRoute(dLat, dLon, fLat, fLon);
+    }
+
 
     $("#btn-login").click(function(event) {
         $("#login-window").removeClass("hidden");
@@ -34,29 +123,29 @@ $(document).ready(function($) {
         var pass = $("#input-password").val().trim();
         var auth = firebase.auth();
         auth.signInWithEmailAndPassword(email, pass)
-        .catch(function(error) {
-            console.log(error.message);
-            var wrongPass = "The password is invalid or the user does not have a password.";
-            var noUser = "There is no user record corresponding to this identifier. The user may have been deleted.";
-            var badEmail = "The email address is badly formatted.";
+            .catch(function(error) {
+                console.log(error.message);
+                var wrongPass = "The password is invalid or the user does not have a password.";
+                var noUser = "There is no user record corresponding to this identifier. The user may have been deleted.";
+                var badEmail = "The email address is badly formatted.";
 
-            $("#login-window").css({
-                height: "52vh",
+                $("#login-window").css({
+                    height: "52vh",
+                });
+                if (error.message === wrongPass) {
+                    $("#user-nonexistent").addClass("hidden");
+                    $("#bad-email").addClass("hidden");
+                    $("#password-incorrect").removeClass("hidden");
+                } else if (error.message === noUser) {
+                    $("#password-incorrect").addClass("hidden");
+                    $("#bad-email").addClass("hidden");
+                    $("#user-nonexistent").removeClass("hidden");
+                } else if (error.message === badEmail) {
+                    $("#password-incorrect").addClass("hidden");
+                    $("#user-nonexistent").addClass("hidden");
+                    $("#bad-email").removeClass("hidden");
+                }
             });
-            if (error.message === wrongPass) {
-                $("#user-nonexistent").addClass("hidden");
-                $("#bad-email").addClass("hidden");
-                $("#password-incorrect").removeClass("hidden");
-            } else if (error.message === noUser) {
-                $("#password-incorrect").addClass("hidden");
-                $("#bad-email").addClass("hidden");
-                $("#user-nonexistent").removeClass("hidden");
-            } else if (error.message === badEmail) {
-                $("#password-incorrect").addClass("hidden");
-                $("#user-nonexistent").addClass("hidden");
-                $("#bad-email").removeClass("hidden");
-            }
-        });
         $("#input-username").val("");
         $("#input-password").val("");
         $(".update-bg").addClass("hidden");
@@ -88,30 +177,30 @@ $(document).ready(function($) {
             var pass = $("#password-new").val().trim();
             var auth = firebase.auth();
             auth.createUserWithEmailAndPassword(email, pass)
-            .catch(function(error) {
-                console.log(error.message);
-                var passLength = "Password should be at least 6 characters";
-                var userExists = "The email address is already in use by another account.";
-                var badEmail = "The email address is badly formatted.";
+                .catch(function(error) {
+                    console.log(error.message);
+                    var passLength = "Password should be at least 6 characters";
+                    var userExists = "The email address is already in use by another account.";
+                    var badEmail = "The email address is badly formatted.";
 
-                $("#signup-window").css({
-                    height: "55vh",
+                    $("#signup-window").css({
+                        height: "55vh",
+                    });
+                    $("#password-mismatch").addClass("hidden");
+                    if (error.message === badEmail) {
+                        $("#pass-min-length").addClass("hidden");
+                        $("#email-exists").addClass("hidden");
+                        $("#invalid-email").removeClass("hidden");
+                    } else if (error.message === userExists) {
+                        $("#pass-min-length").addClass("hidden");
+                        $("#invalid-email").addClass("hidden");
+                        $("#email-exists").removeClass("hidden");
+                    } else if (error.message === passLength) {
+                        $("#pass-min-length").removeClass("hidden");
+                        $("#email-exists").addClass("hidden");
+                        $("#invalid-email").addClass("hidden");
+                    }
                 });
-                $("#password-mismatch").addClass("hidden");
-                if (error.message === badEmail) {
-                    $("#pass-min-length").addClass("hidden");
-                    $("#email-exists").addClass("hidden");
-                    $("#invalid-email").removeClass("hidden");
-                } else if (error.message === userExists) {
-                    $("#pass-min-length").addClass("hidden");
-                    $("#invalid-email").addClass("hidden");
-                    $("#email-exists").removeClass("hidden");
-                } else if (error.message === passLength) {
-                    $("#pass-min-length").removeClass("hidden");
-                    $("#email-exists").addClass("hidden");
-                    $("#invalid-email").addClass("hidden");
-                }
-            });
         }
     });
 
@@ -172,41 +261,15 @@ $(document).ready(function($) {
     }
     getTotalQty();
 
-    mymap = L.map("mapid").setView([35.065017, -80.782693], 14);
-    var marker = L.marker([35.065017, -80.782693]).addTo(mymap);
-    marker.bindPopup("<h4>BakeSale2Go is here!</h4>").openPopup();
-
-
-    mapLink =
-        '<a href="#">ESRI 2017</a>';
-    L.tileLayer(
-        'https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}.png', {
-            attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012',
-            maxZoom: 18,
-        }).addTo(mymap);
-
-    // alternate map style - fast load, doesn't look that great
-
-    // mapLink =
-    //     '<a href="https://openstreetmap.org">OpenStreetMap</a>';
-    // L.tileLayer(
-    //     'https://a.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    //         attribution: '&copy; ' + mapLink + ' Contributors',
-    //         maxZoom: 18,
-    //     }).addTo(mymap);
-
-
-    // alternate map style - looks good but slow loading
-
-    // mapLink =
-    //     '<a href="http://stamen.com">Stamen Design</a>';
-    // L.tileLayer(
-    //     'https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png', {
-    //         attribution: '&copy; ' + mapLink + ' Contributors',
-    //         maxZoom: 18,
-    //     }).addTo(mymap);
-
+    // get geolocation of user and plot on map. if previous location is on the map, remove it first.
     function mapMe() {
+        if (Object.getOwnPropertyNames(routeObj).length !== 0) {
+            routeObj.remove();
+        }
+        if (Object.getOwnPropertyNames(locMarker).length !== 0) {
+            locMarker.remove();
+        }
+
         var userPositionPromise = new Promise(function(resolve, reject) {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function(data) {
@@ -223,18 +286,51 @@ $(document).ready(function($) {
 
         userPositionPromise
             .then(function(data) {
+                L.Icon.Big = L.Icon.Default.extend({
+                    options: {
+                        // iconSize: new L.Point(45, 81),
+                        iconSize: new L.Point(30, 60),
+                    }
+                });
+
+                var bigIcon = new L.Icon.Big();
+
                 fLat = data.coords.latitude;
                 fLon = data.coords.longitude;
 
-                getRoute(fLat, fLon);
+                var popupText = "<h4>Your Location</h4>";
+                var markerLocation = new L.LatLng(fLat, fLon);
+                locMarker = new L.Marker(markerLocation);
+                locMarker.setIcon(bigIcon);
+                mymap.addLayer(locMarker);
+                locMarker.bindPopup(popupText).openPopup();
+                mymap.panTo(markerLocation);
+
             })
             .catch(function(error) {
                 console.log('Error', error);
             });
     };
 
+    // take user input and call MapQuest API to get lon & lat. place location pin on map. 
     function geocodeAddress() {
         event.preventDefault();
+
+        if (Object.getOwnPropertyNames(routeObj).length !== 0) {
+            routeObj.remove();
+        }
+        if (Object.getOwnPropertyNames(locMarker).length !== 0) {
+            locMarker.remove();
+        }
+
+        L.Icon.Big = L.Icon.Default.extend({
+            options: {
+                // iconSize: new L.Point(45, 81),
+                iconSize: new L.Point(30, 60),
+            }
+        });
+
+        var bigIcon = new L.Icon.Big();
 
         var addr = $("#fAddress").val().trim();
         addr = addr.split(' ').join('+');
@@ -248,27 +344,36 @@ $(document).ready(function($) {
                 url: queryURL,
                 method: "GET"
             })
-            .done(function(response) {
-
-                // console.log(response);
+            .then(function(response) {
 
                 $("#latitude").html("Latitude: " + response.results[0].locations[0].latLng.lat);
                 $("#longitude").html("Longitude: " + response.results[0].locations[0].latLng.lng);
                 $("#locMap").attr("src", response.results[0].locations[0].mapUrl);
-                long = response.results[0].locations[0].latLng.lng;
-                lati = response.results[0].locations[0].latLng.lat;
-                getRoute(lati, long);
-            });
+                fLon = response.results[0].locations[0].latLng.lng;
+                fLat = response.results[0].locations[0].latLng.lat;
 
+                var popupText = "<h4>Your Location</h4>";
+                var markerLocation = new L.LatLng(fLat, fLon);
+                locMarker = new L.Marker(markerLocation);
+                locMarker.setIcon(bigIcon);
+                mymap.addLayer(locMarker);
+                locMarker.bindPopup(popupText).openPopup();
+                mymap.panTo(markerLocation);
+
+            });
     }
 
-    function getRoute(y, x) {
-        // var umarker = L.marker([y, x]).addTo(mymap);
-        // umarker.bindPopup("<h4>You are here!</h4>").openPopup();
-        var routeObj = L.Routing.control({
+    // function to get route and plot on map. remove previous route if there is one
+    function getRoute(y, x, y1, x1) {
+
+        if (Object.getOwnPropertyNames(routeObj).length !== 0) {
+            routeObj.remove();
+        }
+
+        routeObj = L.Routing.control({
             waypoints: [
                 L.latLng(y, x),
-                L.latLng(35.065017, -80.782693)
+                L.latLng(y1, x1)
             ],
             lineOptions: {
                 styles: [{ color: 'red', opacity: .5, weight: 10 }]
@@ -279,10 +384,10 @@ $(document).ready(function($) {
             fitSelectedRoutes: true,
             router: L.Routing.mapbox('pk.eyJ1IjoiZGxwaGlsbGlwcyIsImEiOiJjajE2dW81bDEwNDFmMzJvN3U1MWk4MWNiIn0.xbXgZRPMshuOtr-I8OxIeA')
         }).addTo(mymap);
-        console.log(routeObj);
+        console.log(routeObj._altContainer.innerHTML);
     };
 
-
+    $(document).on("click", ".route", getRoutebtn);
     $(document).on("click", "#locMe", mapMe);
     $(document).on("click", "#aSubmit", geocodeAddress);
 });
