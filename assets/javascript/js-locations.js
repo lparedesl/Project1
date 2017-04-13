@@ -178,15 +178,20 @@ $(document).ready(function($) {
 				$(".update-bg").addClass("hidden");
 				$("#update-window").addClass("hidden");
 
+				var fromTimestamp = parseInt(moment($("#update-date-input").val().trim() + " " + $("#update-hr-from-input").val().trim(), "MM/DD/YY HH:mm").format("X"));
+				var toTimestamp = parseInt(moment($("#update-date-input").val().trim() + " " + $("#update-hr-to-input").val().trim(), "MM/DD/YY HH:mm").format("X"));
+
 				// Update object in database
 				locationsDB.ref("/" + $(this).attr("data-key")).update({
 				  date: $("#update-date-input").val().trim(),
 				  from: $("#update-hr-from-input").val().trim(),
+				  fromTimestamp: fromTimestamp,
 				  to: $("#update-hr-to-input").val().trim(),
+				  toTimestamp: toTimestamp,
 				  address: $("#update-address-input").val().trim(),
 				  city: $("#update-city-input").val().trim(),
 				  state: $("#update-state-input").val().trim(),
-				  zipCode: $("#update-zip-code-input").val().trim(),
+				  zipCode: parseInt($("#update-zip-code-input").val().trim()),
 				});
 
 				$("#submit-update").removeAttr("data-key");
