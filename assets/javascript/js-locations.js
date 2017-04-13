@@ -40,14 +40,16 @@ $(document).ready(function($) {
 			});
 
 			function getTotalQty() {
-				var totalQty = 0;
-				cartQuantities = JSON.parse(localStorage.getItem("quantities"));
+			    var totalQty = 0;
+			    cartQuantities = JSON.parse(localStorage.getItem("quantities"));
 
-				for (var i = 0; i < cartQuantities.length; i++) {
-					totalQty += cartQuantities[i];
-				}
-
-				$("#cart-total-qty").text(totalQty);
+			    if (Array.isArray(cartQuantities)) {
+			        console.log("false");
+			        for (var i = 0; i < cartQuantities.length; i++) {
+			            totalQty += cartQuantities[i];
+			        }
+			    }
+			    $("#cart-total-qty").text(totalQty);
 			}
 			getTotalQty();
 
@@ -62,11 +64,16 @@ $(document).ready(function($) {
 			$("#add-new-item").click(function(event) {
 				event.preventDefault();
 
+				var fromTimestamp = moment($("#date-input").val().trim() + " " + $("#hr-from-input").val().trim(), "MM/DD/YY HH:mm").format("X");
+				var toTimestamp = moment($("#date-input").val().trim() + " " + $("#hr-to-input").val().trim(), "MM/DD/YY HH:mm").format("X");
+
 				// Push data to database
 				locationsDB.ref().push({
 				  date: $("#date-input").val().trim(),
 				  from: $("#hr-from-input").val().trim(),
+				  fromTimestamp: fromTimestamp,
 				  to: $("#hr-to-input").val().trim(),
+				  toTimestamp: toTimestamp,
 				  address: $("#address-input").val().trim(),
 				  city: $("#city-input").val().trim(),
 				  state: $("#state-input").val().trim(),
