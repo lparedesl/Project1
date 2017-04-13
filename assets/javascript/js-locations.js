@@ -64,8 +64,8 @@ $(document).ready(function($) {
 			$("#add-new-item").click(function(event) {
 				event.preventDefault();
 
-				var fromTimestamp = moment($("#date-input").val().trim() + " " + $("#hr-from-input").val().trim(), "MM/DD/YY HH:mm").format("X");
-				var toTimestamp = moment($("#date-input").val().trim() + " " + $("#hr-to-input").val().trim(), "MM/DD/YY HH:mm").format("X");
+				var fromTimestamp = parseInt(moment($("#date-input").val().trim() + " " + $("#hr-from-input").val().trim(), "MM/DD/YY HH:mm").format("X"));
+				var toTimestamp = parseInt(moment($("#date-input").val().trim() + " " + $("#hr-to-input").val().trim(), "MM/DD/YY HH:mm").format("X"));
 
 				// Push data to database
 				locationsDB.ref().push({
@@ -77,7 +77,7 @@ $(document).ready(function($) {
 				  address: $("#address-input").val().trim(),
 				  city: $("#city-input").val().trim(),
 				  state: $("#state-input").val().trim(),
-				  zipCode: $("#zip-code-input").val().trim(),
+				  zipCode: parseInt($("#zip-code-input").val().trim()),
 				});
 
 				// Clear input fields
