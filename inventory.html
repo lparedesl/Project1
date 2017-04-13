@@ -110,16 +110,18 @@
 	<!-- Content -->
 	<div class="container">
 		<div class="table-content">
-			<h2>Inventory</h2>
-			<button id="inventory-expand" type="button" class="btn btn-default expand-table">Expand</button><button id="inventory-collapse" type="button" class="btn btn-default collapse-table">Collapse</button>
-			<button type="button" class="btn btn-default pull-right" id="create-item">Create item</button>
+			<div class="table-action-row">
+				<h2>Inventory</h2>
+				<button id="inventory-expand" type="button" class="btn btn-default expand-table">Expand</button><button id="inventory-collapse" type="button" class="btn btn-default collapse-table">Collapse</button>
+				<button type="button" class="btn btn-default pull-right" id="create-item">Create item</button>
+			</div>
 			<div class="wrapper inventory-table-wrapper">
 				<table class="table table-hover" id="inventory-table">
 					<thead>
 						<tr>
-							<th>Name<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="0"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="0"></i></th>
+							<th>Product Type<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="0"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="0"></i></th>
 							<th>Price ($)<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="1"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="1"></i></th>
-							<th>Category<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="2"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="2"></i></th>
+							<th>Gluten-free<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="2"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="2"></i></th>
 							<th>Description<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="3"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="3"></i></th>
 							<th>Quantity<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="4"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="4"></i></th>
 							<th></th>

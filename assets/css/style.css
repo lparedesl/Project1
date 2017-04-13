@@ -308,7 +308,27 @@
   display: block;
   margin: auto;
 }
-
+.inventory-table-wrapper {
+  background-color: #fff;
+  padding: 20px;
+  font-family: 'helvetica';
+  color: #333;
+  border-radius: 5px;
+}
+.table-content h2 {
+  font-family: 'helvetica';
+}
+.table-action-row {
+  display: block;
+  width: 100%;
+  margin-bottom: 20px;
+}
+.table-action-row button {
+  margin-right: 5px;
+}
+.table-action-row button.pull-right {
+  margin-right: 0;
+}
 span.copy {
   color: #fff;
   font-size: 10px;
