@@ -105,23 +105,19 @@ $(document).ready(function($) {
             successElement.classList.add('visible');
             // Check if customer exists
             var email = $("#email-input").val().trim();
-            var n = 0;
             customersDB.ref().once("value", function(snapshot) {
-                if (n === 0) {
-                    customerExists = false;
-                    var sv = snapshot.val();
-                    if (sv !== null) {
-                        keys = Object.keys(sv);
-                        for (var i = 0; i < keys.length; i++) {
-                            if (sv[keys[i]].email === email) {
-                                customerExists = true;
-                                break;
-                            }
+                customerExists = false;
+                var sv = snapshot.val();
+                if (sv !== null) {
+                    keys = Object.keys(sv);
+                    for (var i = 0; i < keys.length; i++) {
+                        if (sv[keys[i]].email === email) {
+                            customerExists = true;
+                            break;
                         }
                     }
-                    n++;
-                    payment();
                 }
+                payment();
             });
         } else if (result.error) {
             errorElement.textContent = result.error.message;
@@ -282,37 +278,47 @@ $(document).ready(function($) {
                         success: function(response) {
                             cardId = response.id;
 
-                            // Check if new card exists in customer profile
+                            // Set new card as default
                             $.ajax({
-                                type: "GET",
+                                type: "POST",
                                 url: "https://api.stripe.com/v1/customers/" + customerId,
                                 headers: {
                                     Authorization: "Bearer " + auth
                                 },
+                                data: {
+                                    default_source: cardId,
+                                },
                                 success: function(response) {
-                                    var lastCardIndex = response.sources.data.length - 1;
-                                    for (var i = 0; i < lastCardIndex; i++) {
-                                        var expMonth = response.sources.data[i].exp_month;
-                                        var expYear = response.sources.data[i].exp_year;
-                                        var last4 = response.sources.data[i].last4;
-
-                                        if (expMonth === response.sources.data[lastCardIndex].exp_month && expYear === response.sources.data[lastCardIndex].exp_year && last4 === response.sources.data[lastCardIndex].last4) {
-                                            // Delete created card
-                                            $.ajax({
-                                                type: "DELETE",
-                                                url: "https://api.stripe.com/v1/customers/" + customerId + "/sources/" + cardId,
-                                                headers: {
-                                                    Authorization: "Bearer " + auth
-                                                },
-                                                success: function(response) {
-                                                    createCharge();
-                                                },
-                                            });
-                                            break;
-                                        } else {
+                                    // Check if new card exists in customer profile
+                                    $.ajax({
+                                        type: "GET",
+                                        url: "https://api.stripe.com/v1/customers/" + customerId,
+                                        headers: {
+                                            Authorization: "Bearer " + auth
+                                        },
+                                        success: function(response) {
                                             createCharge();
-                                        }
-                                    }
+
+                                            var lastCardIndex = response.sources.data.length - 1;
+                                            for (var i = 0; i < lastCardIndex; i++) {
+                                                var expMonth = response.sources.data[i].exp_month;
+                                                var expYear = response.sources.data[i].exp_year;
+                                                var last4 = response.sources.data[i].last4;
+
+                                                if (expMonth === response.sources.data[lastCardIndex].exp_month && expYear === response.sources.data[lastCardIndex].exp_year && last4 === response.sources.data[lastCardIndex].last4) {
+                                                    // Delete created card
+                                                    $.ajax({
+                                                        type: "DELETE",
+                                                        url: "https://api.stripe.com/v1/customers/" + customerId + "/sources/" + response.sources.data[lastCardIndex].id,
+                                                        headers: {
+                                                            Authorization: "Bearer " + auth
+                                                        },
+                                                    });
+                                                    break;
+                                                }
+                                            }
+                                        },
+                                    });
                                 },
                             });
                         },
