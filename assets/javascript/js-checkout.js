@@ -105,19 +105,23 @@ $(document).ready(function($) {
             successElement.classList.add('visible');
             // Check if customer exists
             var email = $("#email-input").val().trim();
+            var n = 0;
             customersDB.ref().once("value", function(snapshot) {
-                customerExists = false;
-                var sv = snapshot.val();
-                if (sv !== null) {
-                    keys = Object.keys(sv);
-                    for (var i = 0; i < keys.length; i++) {
-                        if (sv[keys[i]].email === email) {
-                            customerExists = true;
-                            break;
+                if (n === 0) {
+                    customerExists = false;
+                    var sv = snapshot.val();
+                    if (sv !== null) {
+                        keys = Object.keys(sv);
+                        for (var i = 0; i < keys.length; i++) {
+                            if (sv[keys[i]].email === email) {
+                                customerExists = true;
+                                break;
+                            }
                         }
                     }
+                    n++;
+                    payment();
                 }
-                payment();
             });
         } else if (result.error) {
             errorElement.textContent = result.error.message;

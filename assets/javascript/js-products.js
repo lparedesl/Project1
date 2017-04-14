@@ -245,31 +245,31 @@ $(document).ready(function($) {
 	function showCart() {
 		$("#cart-items").empty();
 
-		itemsList = JSON.parse(localStorage.getItem("items"));
-		quantitiesList = JSON.parse(localStorage.getItem("quantities"));
+		items = JSON.parse(localStorage.getItem("items"));
+		quantities = JSON.parse(localStorage.getItem("quantities"));
 
-		if (!Array.isArray(itemsList)) {
-			itemsList = [];
+		if (!Array.isArray(items)) {
+			items = [];
 		}
 
-		if (!Array.isArray(quantitiesList)) {
-			quantitiesList = [];
+		if (!Array.isArray(quantities)) {
+			quantities = [];
 		}
 
-		if (itemsList.length > 0) {
+		if (items.length > 0) {
 			$(".cart").removeClass("hidden");
 		} else {
 			$(".cart").addClass("hidden");
 		}
 
 		database.ref().on("value", function(snapshot) {
-			if (itemsList !== cartBackup) {
+			if (items !== cartBackup) {
 				sv = snapshot.val();
 
-				for (var i = 0; i < itemsList.length; i++) {
+				for (var i = 0; i < items.length; i++) {
 					var name = $("<p>")
 					.addClass("cart-item-name")
-					.text(sv[itemsList[i]].name);
+					.text(sv[items[i]].name);
 					var remove = $("<a>")
 					.addClass("delete")
 					.attr("data-index", i)
@@ -285,7 +285,7 @@ $(document).ready(function($) {
 					for (var j = 0; j < 10; j++) {
 						var option = $("<option>");
 						option.attr("value", j+1);
-						if (j+1 === parseInt(quantitiesList[i])) {
+						if (j+1 === parseInt(quantities[i])) {
 							option.attr("selected", "selected");
 						}
 						option.text(j+1);
@@ -298,7 +298,7 @@ $(document).ready(function($) {
 
 					var price = $("<p>")
 					.addClass("cart-item-price")
-					.text("$" + (parseFloat(sv[itemsList[i]].price) * parseInt(quantitiesList[i])));
+					.text("$" + (parseFloat(sv[items[i]].price) * parseInt(quantities[i])));
 
 					var colPrice = $("<div>");
 					colPrice.addClass("col-md-2 col-sm-4");
@@ -309,14 +309,14 @@ $(document).ready(function($) {
 					.attr("id", "item-" + i)
 					.append(colName, colQty, colPrice);
 
-					totalPrice += (parseFloat(sv[itemsList[i]].price) * parseInt(quantitiesList[i]));
+					totalPrice += (parseFloat(sv[items[i]].price) * parseInt(quantities[i]));
 
 					getTotalQty();
 
 					$("#cart-items").append(item);
 					$("#total-price").text("Total: $" + totalPrice);
 
-					cartBackup = itemsList;
+					cartBackup = items;
 				}
 			}
 		});
@@ -328,32 +328,56 @@ $(document).ready(function($) {
 	$(document).on("click", "#add-to-cart", function() {
 		event.preventDefault();
 		if ($(this).text() === "Add to cart") {
-			var items = JSON.parse(localStorage.getItem("items"));
-			if (!Array.isArray(items)) {
-				items = [];
-			}
-			totalPrice = 0;
-			var quantities = JSON.parse(localStorage.getItem("quantities"));
+			var self = $(this);
 
-			// If item is not in cart
-			if (items.indexOf($(this).attr("data-key")) === -1) {
-				var itemKey = $(this).attr("data-key");
-				var quantity = 1;
-				itemsList.push(itemKey);
-				quantitiesList.push(quantity);
-				localStorage.setItem("items", JSON.stringify(itemsList));
-				localStorage.setItem("quantities", JSON.stringify(quantitiesList));
-				showCart();
+			database.ref().once("value", function(snapshot) {
+				var sv = snapshot.val();
+				var keys = Object.keys(sv);
+				var items = JSON.parse(localStorage.getItem("items"));
+				if (!Array.isArray(items)) {
+					items = [];
+				}
+				totalPrice = 0;
+				var quantities = JSON.parse(localStorage.getItem("quantities"));
+				if (!Array.isArray(quantities)) {
+					quantities = [];
+				}
+				var itemIndex = items.indexOf(self.attr("data-key"));
+				var thisKey = items[itemIndex];
 
-			// If item is in the cart
-			} else {
-				var itemIndex = items.indexOf($(this).attr("data-key"));
-				var newQuantity = parseInt(quantities[itemIndex]);
-				newQuantity++;
-				quantities[itemIndex] = newQuantity;
-				localStorage.setItem("quantities", JSON.stringify(quantities));
+				// If item is not in cart
+				if (items.indexOf(self.attr("data-key")) === -1) {
+					var itemKey = self.attr("data-key");
+					var quantity = 1;
+					items.push(itemKey);
+					quantities.push(quantity);
+					localStorage.setItem("items", JSON.stringify(items));
+					localStorage.setItem("quantities", JSON.stringify(quantities));
+
+				// If item is in the cart
+				} else {
+					var newQuantity = parseInt(quantities[itemIndex]);
+					newQuantity++;
+					// If inventory is less than new quantity, set value to max and show alert
+					if (sv[thisKey].quantity < newQuantity) {
+						newQuantity = sv[thisKey].quantity;
+						var txt = $("<p>");
+						txt.attr("data-index", itemIndex);
+						txt.text(sv[thisKey].name + "s " + "currently in stock: " + sv[thisKey].quantity);
+						$("#quantity-alert").append(txt);
+						$("#quantity-alert").removeClass("hidden");
+					} else {
+						var numOfAlerts = $("#quantity-alert").children().length;
+						if (numOfAlerts === 1) {
+							$("#quantity-alert").addClass("hidden");
+						}
+						$("#quantity-alert").children("p[data-index=\"" + itemIndex + "\"]").remove();
+					}
+					quantities[itemIndex] = newQuantity;
+					localStorage.setItem("quantities", JSON.stringify(quantities));
+				}
 				showCart();
-			}
+			});
 		}
 	});
 
