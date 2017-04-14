@@ -52,7 +52,7 @@ $(document).ready(function($) {
 			});
 
 			$("#open-orders-collapse").click(function() {
-				$(".open-orders-table-wrapper").css({
+				$(".picked-up-orders-table-wrapper").css({
 					"max-height": "345px"
 				});
 			});
@@ -63,7 +63,7 @@ $(document).ready(function($) {
 					console.log("numItems", numItems);
 					if (numItems > 5) {
 						var height = (numItems * 62.5 + 37) + 17;
-						$(".picked-up-table-wrapper").css({
+						$(".picked-up-orders-table-wrapper").css({
 							"max-height": height + "px",
 						});
 					}
