@@ -33,7 +33,6 @@ $(document).ready(function($) {
 			    cartQuantities = JSON.parse(localStorage.getItem("quantities"));
 
 			    if (Array.isArray(cartQuantities)) {
-			        console.log("false");
 			        for (var i = 0; i < cartQuantities.length; i++) {
 			            totalQty += cartQuantities[i];
 			        }
@@ -65,14 +64,14 @@ $(document).ready(function($) {
 				database.ref().push({
 				  name: $("#name-input").val().trim(),
 				  price: parseFloat($("#price-input").val().trim()),
-				  category: $("#category-input").val().trim(),
+				  glutenFree: $("#gluten-free-input").val().trim(),
 				  description: $("#description-input").val().trim(),
 				  quantity: parseInt($("#quantity-input").val().trim()),
 				  imgName: imgName,
 				});
 
 				// Clear input fields
-				var inputs = [$("#name-input"), $("#price-input"), $("#category-input"), $("#description-input"), $("#quantity-input"), $("#upload")];
+				var inputs = [$("#name-input"), $("#price-input"), $("#gluten-free-input"), $("#description-input"), $("#quantity-input"), $("#upload")];
 				for (i = 0; i < inputs.length; i++) {
 					inputs[i].val("");
 				}
@@ -95,7 +94,7 @@ $(document).ready(function($) {
 			  		.children("tr")
 			  		.eq(n)
 			  		.children("td");
-			  	var headings = [child.name, child.price, child.category, child.description, child.quantity];
+			  	var headings = [child.name, child.price, child.glutenFree, child.description, child.quantity];
 			  	for (var i = 0; i < headings.length; i++) {
 			  		rowTds.eq(i).text(headings[i]);
 			  	}
@@ -154,7 +153,7 @@ $(document).ready(function($) {
 				// Show current values on form
 				$("#update-name-input").val(object.name);
 				$("#update-price-input").val(object.price);
-				$("#update-category-input").val(object.category);
+				$("#update-gluten-free-input").val(object.glutenFree);
 				$("#update-description-input").val(object.description);
 				$("#update-quantity-input").val(object.quantity);
 				updateImgName = object.imgName;
@@ -172,7 +171,7 @@ $(document).ready(function($) {
 				database.ref("/" + $(this).attr("data-key")).update({
 				  name: $("#update-name-input").val().trim(),
 				  price: parseFloat($("#update-price-input").val().trim()),
-				  category: $("#update-category-input").val().trim(),
+				  glutenFree: $("#update-gluten-free-input").val().trim(),
 				  description: $("#update-description-input").val().trim(),
 				  quantity: parseInt($("#update-quantity-input").val().trim()),
 				  imgName: updateImgName,
@@ -194,7 +193,7 @@ $(document).ready(function($) {
 					.children("td");
 
 				// Update table on page
-				var headings = [child.name, child.price, child.category, child.description, child.quantity];
+				var headings = [child.name, child.price, child.glutenFree, child.description, child.quantity];
 				for (var i = 0; i < headings.length; i++) {
 					rowTds.eq(i).text(headings[i]);
 				}
