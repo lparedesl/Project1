@@ -35,46 +35,44 @@
 </head>
 <body>
 	<!-- Navbar -->
-	<div class="navbar-wrap">
-	    <div class="container">
-	        <a href="index.html" class="logo"></a>
-	        <div class="navbar-links-container">
-	            <a href="index.html">Home</a>
-	            <a href="products.html">Products</a>
-	            <a href="products.html"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart <span class="badge" id="cart-total-qty"></span></a>
-	            <button type="button" class="nav-btn dropdown" id="userMenu">
-	                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span id="user"></span><i class="fa fa-caret-down" aria-hidden="true"></i></a>
-	                <ul class="dropdown-menu pull-right">
-	                    <li><a href="inventory.html">Inventory</a></li>
-	                    <li><a href="sales.html">Sales</a></li>
-	                    <li><a href="customers.html">Customers</a></li>
-	                    <li role="separator" class="divider"></li>
-	                    <li><a id="btn-logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Sign Out</a></li>
-	                </ul>
-	            </button>
-	        </div>
-	    </div>
-	</div>
+    <div class="navbar-wrap">
+        <div class="container">
+            <a href="index.html" class="logo"></a>
+            <div class="navbar-links-container">
+                <a href="index.html">Home</a>
+                <a href="products.html">Products</a>
+                <a href="products.html"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart <span class="badge" id="cart-total-qty"></span></a>
+                <button type="button" class="nav-btn dropdown" id="userMenu">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span id="user"></span><i class="fa fa-caret-down" aria-hidden="true"></i></a>
+                    <ul class="dropdown-menu pull-right">
+                        <li><a href="inventory.html">Inventory</a></li>
+                        <li><a href="locations.html">Locations</a></li>
+                        <li><a href="sales.html">Sales</a></li>
+                        <li><a href="customers.html">Customers</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a id="btn-logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Sign Out</a></li>
+                    </ul>
+                </button>
+            </div>
+        </div>
+    </div>
 
 	<!-- Content -->
 	<div class="container">
 		<div class="table-content">
 			<h2>Customers</h2>
-			<button id="customers-expand" type="button" class="btn btn-default expand-table">Expand</button><button id="customers-collapse" type="button" class="btn btn-default collapse-table">Collapse</button>
-			<div class="wrapper customers-table-wrapper">
-				<table class="table table-hover" id="customers-table">
-					<thead>
-						<tr>
-							<th>Customer ID<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="0"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="0"></i></th>
-							<th>Date Created<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="1"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="1"></i></th>
-							<th>Name<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="2"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="2"></i></th>
-							<th>Email<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="3"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="3"></i></th>
-							<th>Phone Number<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="4"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="4"></i></th>
-						</tr>
-					</thead>
-					<tbody></tbody>
-				</table>
-			</div>
+			<table class="table table-hover" id="customers-table">
+				<thead>
+					<tr>
+						<th>Customer ID<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="0"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="0"></i></th>
+						<th>Date Created<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="1"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="1"></i></th>
+						<th>Name<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="2"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="2"></i></th>
+						<th>Email<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="3"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="3"></i></th>
+						<th>Phone Number<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="4"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="4"></i></th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
 		</div>
 	</div>
 

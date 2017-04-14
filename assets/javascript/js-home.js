@@ -12,12 +12,17 @@ $(document).ready(function($) {
 
     var database = firebase.database();
     var n = 0;
-    var m= 0;
+    var m = 0;
     var totalPrice = 0;
 
+    // variable for map
     var fLat = 0;
     var fLon = 0;
+    var dLon = 0;
+    var dLat = 0;
     var mymap = "";
+    var routeObj = {};
+    var locMarker = {};
 
     $("#btn-login").click(function(event) {
         $("#login-window").removeClass("hidden");
@@ -59,7 +64,18 @@ $(document).ready(function($) {
         });
         $("#input-username").val("");
         $("#input-password").val("");
+    });
+
+    $("#close-login").click(function() {
         $(".update-bg").addClass("hidden");
+        $("#password-incorrect").addClass("hidden");
+        $("#user-nonexistent").addClass("hidden");
+        $("#bad-email").addClass("hidden");
+        $("#input-username").val("");
+        $("#input-password").val("");
+        $("#login-window").css({
+            height: "46vh",
+        });
     });
 
     $("#signup").click(function(event) {
@@ -164,18 +180,18 @@ $(document).ready(function($) {
         var totalQty = 0;
         cartQuantities = JSON.parse(localStorage.getItem("quantities"));
 
-        for (var i = 0; i < cartQuantities.length; i++) {
-            totalQty += cartQuantities[i];
+        if (Array.isArray(cartQuantities)) {
+            console.log("false");
+            for (var i = 0; i < cartQuantities.length; i++) {
+                totalQty += cartQuantities[i];
+            }
         }
-
         $("#cart-total-qty").text(totalQty);
     }
     getTotalQty();
 
-    mymap = L.map("mapid").setView([35.065017, -80.782693], 14);
-    var marker = L.marker([35.065017, -80.782693]).addTo(mymap);
-    marker.bindPopup("<h4>BakeSale2Go is here!</h4>").openPopup();
-
+    // initialize map
+    mymap = L.map("mapid").setView([35.204697, -80.835403], 11);
 
     mapLink =
         '<a href="#">ESRI 2017</a>';
@@ -185,28 +201,93 @@ $(document).ready(function($) {
             maxZoom: 18,
         }).addTo(mymap);
 
-    // alternate map style - fast load, doesn't look that great
+    // ----------------------------------------------------------------- //
 
-    // mapLink =
-    //     '<a href="https://openstreetmap.org">OpenStreetMap</a>';
-    // L.tileLayer(
-    //     'https://a.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    //         attribution: '&copy; ' + mapLink + ' Contributors',
-    //         maxZoom: 18,
-    //     }).addTo(mymap);
+    var configLocations = {
+        apiKey: "AIzaSyCsJTE4AtEAPYpmZ0gWDDph_8TIlcQap00",
+        authDomain: "project-1-locations.firebaseapp.com",
+        databaseURL: "https://project-1-locations.firebaseio.com",
+        projectId: "project-1-locations",
+        storageBucket: "project-1-locations.appspot.com",
+        messagingSenderId: "431733192725"
+    };
+    var locationsApp = firebase.initializeApp(configLocations, "Locations");
+    var locationsDB = locationsApp.database();
 
+    var n = 0;
 
-    // alternate map style - looks good but slow loading
+    // Add locations to page
+    locationsDB.ref().on("child_added", function(snapshot) {
+        var child = snapshot.val();
+        var key = snapshot.key;
+        var timeFrom = child.fromTimestamp;
+        var timeTo = child.toTimestamp;
+        var now = parseInt(moment().format("X"));
 
-    // mapLink =
-    //     '<a href="http://stamen.com">Stamen Design</a>';
-    // L.tileLayer(
-    //     'https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png', {
-    //         attribution: '&copy; ' + mapLink + ' Contributors',
-    //         maxZoom: 18,
-    //     }).addTo(mymap);
+        var location = $("<div>")
+            .addClass("location-item")
+            .attr("data-key", key)
+            .html(`
+            <div class="col-md-8">
+                <p class="address" data-index="${n}">${child.address}</p>
+                <p><span class="city" data-index="${n}">${child.city}, </span><span class="state" data-index="${n}">${child.state}</span></p>
+                <p class="zip-code" data-index="${n}">${child.zipCode}</p>
+                <button type="button" class="btn btn-primary route" data-index="${n}" data-lon="${child.lon}" data-lat="${child.lat}">Get Route</button>
+                <h4><span class="label label-success hidden" id="in-progress" data-index="${n}">We are here now!</span></h4>
+            </div>
+            <div class="col-md-4">
+                <p class="date" data-index="${n}">${child.date}</p>
+                <p class="hr-from" data-index="${n}">From ${child.from}</p>
+                <p class="hr-to" data-index="${n}">Until ${child.to}</p>
+            </div>
+    `);
 
+        $(".location-list-wrap").append(location);
+
+        if (now > timeFrom && now < timeTo) {
+            $(".location-list-wrap").children(".location-item[data-key=" + key + "]").children(".col-md-8").children("h4").children("#in-progress[data-index=" + n + "]").removeClass("hidden");
+        }
+
+        n++;
+
+        //-- add markers to map --//
+        var lon = child.lon;
+        var lat = child.lat;
+        var popupText = child.address;
+        var popupText = "<h5>" + child.address + "</h5><h6>" + child.city + ", " + child.state + " " + child.zipCode + "</h6>";
+        var markerLocation = new L.LatLng(lat, lon);
+        var marker = new L.Marker(markerLocation);
+        mymap.addLayer(marker);
+        marker.bindPopup(popupText);
+        //-----------------------//
+
+    }, function(errorObject) {
+        console.log("Errors handled: " + errorObject.code);
+    });
+
+    // ----------------------------------------------------------------- //
+
+    // get lon & lat from button and call getRoute()
+    function getRoutebtn() {
+        if (fLat === 0) {
+            $("#locations-list .alert").removeClass("hidden");
+            return;
+        }
+        dLon = $(this).data('lon');
+        dLat = $(this).data('lat');
+
+        getRoute(dLat, dLon, fLat, fLon);
+    }
+
+    // get geolocation of user and plot on map. if previous location is on the map, remove it first.
     function mapMe() {
+        if (Object.getOwnPropertyNames(routeObj).length !== 0) {
+            routeObj.remove();
+        }
+        if (Object.getOwnPropertyNames(locMarker).length !== 0) {
+            locMarker.remove();
+        }
+
         var userPositionPromise = new Promise(function(resolve, reject) {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function(data) {
@@ -223,18 +304,51 @@ $(document).ready(function($) {
 
         userPositionPromise
             .then(function(data) {
+                L.Icon.Big = L.Icon.Default.extend({
+                    options: {
+                        // iconSize: new L.Point(45, 81),
+                        iconSize: new L.Point(30, 60),
+                    }
+                });
+
+                var bigIcon = new L.Icon.Big();
+
                 fLat = data.coords.latitude;
                 fLon = data.coords.longitude;
 
-                getRoute(fLat, fLon);
+                var popupText = "<h4>Your Location</h4>";
+                var markerLocation = new L.LatLng(fLat, fLon);
+                locMarker = new L.Marker(markerLocation);
+                locMarker.setIcon(bigIcon);
+                mymap.addLayer(locMarker);
+                locMarker.bindPopup(popupText).openPopup();
+                mymap.panTo(markerLocation);
+
             })
             .catch(function(error) {
                 console.log('Error', error);
             });
     };
 
+    // take user input and call MapQuest API to get lon & lat. place location pin on map. 
     function geocodeAddress() {
         event.preventDefault();
+
+        if (Object.getOwnPropertyNames(routeObj).length !== 0) {
+            routeObj.remove();
+        }
+        if (Object.getOwnPropertyNames(locMarker).length !== 0) {
+            locMarker.remove();
+        }
+
+        L.Icon.Big = L.Icon.Default.extend({
+            options: {
+                // iconSize: new L.Point(45, 81),
+                iconSize: new L.Point(30, 60),
+            }
+        });
+
+        var bigIcon = new L.Icon.Big();
 
         var addr = $("#fAddress").val().trim();
         addr = addr.split(' ').join('+');
@@ -248,27 +362,36 @@ $(document).ready(function($) {
                 url: queryURL,
                 method: "GET"
             })
-            .done(function(response) {
-
-                // console.log(response);
+            .then(function(response) {
 
                 $("#latitude").html("Latitude: " + response.results[0].locations[0].latLng.lat);
                 $("#longitude").html("Longitude: " + response.results[0].locations[0].latLng.lng);
                 $("#locMap").attr("src", response.results[0].locations[0].mapUrl);
-                long = response.results[0].locations[0].latLng.lng;
-                lati = response.results[0].locations[0].latLng.lat;
-                getRoute(lati, long);
-            });
+                fLon = response.results[0].locations[0].latLng.lng;
+                fLat = response.results[0].locations[0].latLng.lat;
 
+                var popupText = "<h4>Your Location</h4>";
+                var markerLocation = new L.LatLng(fLat, fLon);
+                locMarker = new L.Marker(markerLocation);
+                locMarker.setIcon(bigIcon);
+                mymap.addLayer(locMarker);
+                locMarker.bindPopup(popupText).openPopup();
+                mymap.panTo(markerLocation);
+
+            });
     }
 
-    function getRoute(y, x) {
-        // var umarker = L.marker([y, x]).addTo(mymap);
-        // umarker.bindPopup("<h4>You are here!</h4>").openPopup();
-        var routeObj = L.Routing.control({
+    // function to get route and plot on map. remove previous route if there is one
+    function getRoute(y, x, y1, x1) {
+
+        if (Object.getOwnPropertyNames(routeObj).length !== 0) {
+            routeObj.remove();
+        }
+
+        routeObj = L.Routing.control({
             waypoints: [
                 L.latLng(y, x),
-                L.latLng(35.065017, -80.782693)
+                L.latLng(y1, x1)
             ],
             lineOptions: {
                 styles: [{ color: 'red', opacity: .5, weight: 10 }]
@@ -279,10 +402,10 @@ $(document).ready(function($) {
             fitSelectedRoutes: true,
             router: L.Routing.mapbox('pk.eyJ1IjoiZGxwaGlsbGlwcyIsImEiOiJjajE2dW81bDEwNDFmMzJvN3U1MWk4MWNiIn0.xbXgZRPMshuOtr-I8OxIeA')
         }).addTo(mymap);
-        console.log(routeObj);
+        // console.log(routeObj._altContainer.innerHTML);
     };
 
-
+    $(document).on("click", ".route", getRoutebtn);
     $(document).on("click", "#locMe", mapMe);
     $(document).on("click", "#aSubmit", geocodeAddress);
 });

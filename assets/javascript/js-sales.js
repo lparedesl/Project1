@@ -77,14 +77,16 @@ $(document).ready(function($) {
 			});
 
 			function getTotalQty() {
-				var totalQty = 0;
-				cartQuantities = JSON.parse(localStorage.getItem("quantities"));
+			    var totalQty = 0;
+			    cartQuantities = JSON.parse(localStorage.getItem("quantities"));
 
-				for (var i = 0; i < cartQuantities.length; i++) {
-					totalQty += cartQuantities[i];
-				}
-
-				$("#cart-total-qty").text(totalQty);
+			    if (Array.isArray(cartQuantities)) {
+			        console.log("false");
+			        for (var i = 0; i < cartQuantities.length; i++) {
+			            totalQty += cartQuantities[i];
+			        }
+			    }
+			    $("#cart-total-qty").text(totalQty);
 			}
 			getTotalQty();
 

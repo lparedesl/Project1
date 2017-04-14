@@ -16,11 +16,11 @@ $(document).ready(function($) {
 			// Initialize customers database
 			var configCustomers = {
 				apiKey: "AIzaSyBGvojl_lmUCBdcOBC2UlqUZo8KXKzlpa8",
-		    authDomain: "project-1-customers.firebaseapp.com",
-		    databaseURL: "https://project-1-customers.firebaseio.com",
-		    projectId: "project-1-customers",
-		    storageBucket: "project-1-customers.appspot.com",
-		    messagingSenderId: "686478727174"
+			    authDomain: "project-1-customers.firebaseapp.com",
+			    databaseURL: "https://project-1-customers.firebaseio.com",
+			    projectId: "project-1-customers",
+			    storageBucket: "project-1-customers.appspot.com",
+			    messagingSenderId: "686478727174"
 			};
 			var customersApp = firebase.initializeApp(configCustomers, "Customers");
 			var customersDB = customersApp.database();
@@ -37,33 +37,17 @@ $(document).ready(function($) {
 				firebase.auth().signOut();
 			});
 
-			$("#customers-expand").click(function() {
-				customersDB.ref().once("value", function(snapshot) {
-					var numItems = snapshot.numChildren() + 1;
-					if (numItems > 5) {
-						var height = ((numItems + 1) * 37) + 17;
-						$(".customers-table-wrapper").css({
-							"max-height": height + "px",
-						});
-					}
-				});
-			});
-
-			$("#customers-collapse").click(function() {
-				$(".customers-table-wrapper").css({
-					"max-height": "690px"
-				});
-			});
-
 			function getTotalQty() {
-				var totalQty = 0;
-				cartQuantities = JSON.parse(localStorage.getItem("quantities"));
+			    var totalQty = 0;
+			    cartQuantities = JSON.parse(localStorage.getItem("quantities"));
 
-				for (var i = 0; i < cartQuantities.length; i++) {
-					totalQty += cartQuantities[i];
-				}
-
-				$("#cart-total-qty").text(totalQty);
+			    if (Array.isArray(cartQuantities)) {
+			        console.log("false");
+			        for (var i = 0; i < cartQuantities.length; i++) {
+			            totalQty += cartQuantities[i];
+			        }
+			    }
+			    $("#cart-total-qty").text(totalQty);
 			}
 			getTotalQty();
 

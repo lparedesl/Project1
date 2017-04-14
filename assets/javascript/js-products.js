@@ -60,7 +60,18 @@ $(document).ready(function($) {
 		});
 		$("#input-username").val("");
 		$("#input-password").val("");
+	});
+
+	$("#close-login").click(function() {
 		$(".update-bg").addClass("hidden");
+		$("#password-incorrect").addClass("hidden");
+		$("#user-nonexistent").addClass("hidden");
+		$("#bad-email").addClass("hidden");
+		$("#input-username").val("");
+		$("#input-password").val("");
+		$("#login-window").css({
+			height: "46vh",
+		});
 	});
 
 	$("#signup").click(function(event) {
@@ -162,83 +173,74 @@ $(document).ready(function($) {
 	});
 
 	function getTotalQty() {
-		var totalQty = 0;
-		cartQuantities = JSON.parse(localStorage.getItem("quantities"));
+	    var totalQty = 0;
+	    cartQuantities = JSON.parse(localStorage.getItem("quantities"));
 
-		for (var i = 0; i < cartQuantities.length; i++) {
-			totalQty += cartQuantities[i];
-		}
-
-		$("#cart-total-qty").text(totalQty);
+	    if (Array.isArray(cartQuantities)) {
+	        console.log("false");
+	        for (var i = 0; i < cartQuantities.length; i++) {
+	            totalQty += cartQuantities[i];
+	        }
+	    }
+	    $("#cart-total-qty").text(totalQty);
 	}
 	getTotalQty();
 
 	// Add item to page
-	// database.ref().on("child_added", function(snapshot) {
-	// 	var child = snapshot.val();
-	// 	var key = snapshot.key;
-	// 	var name = child.name.capitalizeFirstLetter();
-	//   	var description = child.description.capitalizeFirstLetter();
-	//   	var price = child.price;
-	//   	var img = "assets/images/" + child.imgName;
+	database.ref().on("child_added", function(snapshot) {
+		var child = snapshot.val();
+		var key = snapshot.key;
+		var name = child.name.capitalizeFirstLetter();
+	  	var description = child.description.capitalizeFirstLetter();
+	  	var price = child.price;
+	  	var img = "assets/images/" + child.imgName;
 
-	//   	// Create row
-	//   	if (n % 3 === 0) {
-	//   		var row = $("<div>");
-	//   		row.addClass("row");
-	//   		row.attr("data-index", m);
-	//   		$(".products-content").append(row);
-	//   	}
+	  	var itemPrice = $("<div>")
+	  	.addClass("price pull-left")
+	  	.text("$" + price);
 
-	//   	var itemPrice = $("<div>");
-	//   	itemPrice.addClass("price pull-left");
-	//   	itemPrice.text("$" + price);
+	  	var addToCart = $("<button>")
+	  	.attr("type", "button")
+	  	.attr("id", "add-to-cart")
+	  	.attr("data-key", key);
+	  	if (child.quantity > 0) {
+	  		addToCart.addClass("btn btn-primary pull-right")
+	  		.text("Add to cart");
+	  	} else {
+	  		addToCart.addClass("btn btn-danger disabled pull-right")
+	  		.text("Out of stock");
+	  	}
 
-	//   	var addToCart = $("<button>");
-	//   	addToCart.attr("type", "button");
-	//   	addToCart.attr("id", "add-to-cart");
-	//   	addToCart.attr("data-key", key);
-	//   	if (child.quantity > 0) {
-	//   		addToCart.addClass("btn btn-primary pull-right");
-	//   		addToCart.text("Add to cart");
-	//   	} else {
-	//   		addToCart.addClass("btn btn-danger disabled pull-right");
-	//   		addToCart.text("Out of stock");
-	//   	}
+	  	var buyContent = $("<div>")
+	  	.addClass("clearfix")
+	  	.append(itemPrice)
+	  	.append(addToCart);
 
-	//   	var buyContent = $("<div>");
-	//   	buyContent.addClass("clearfix");
-	//   	buyContent.append(itemPrice);
-	//   	buyContent.append(addToCart);
+	  	var caption = $("<div>")
+	  	.addClass("caption")
+	  	.html("<h3>" + name + "</h3><p class=\"description\">" + description + "</p>")
+	  	.append(buyContent);
 
-	//   	var caption = $("<div>");
-	//   	caption.addClass("caption");
-	//   	caption.html("<h3>" + name + "</h3><p class=\"description\">" + description + "</p>");
-	//   	caption.append(buyContent);
+	  	var itemImg = $("<img>")
+	  	.attr("src", img)
+	  	.attr("alt", name);
 
-	//   	var itemImg = $("<img>");
-	//   	itemImg.attr("src", img);
-	//   	itemImg.attr("alt", name);
+	  	var itemCard = $("<div>")
+	  	.addClass("thumbnail")
+	  	.append(itemImg)
+	  	.append(caption);
 
-	//   	var itemCard = $("<div>");
-	//   	itemCard.addClass("thumbnail");
-	//   	itemCard.append(itemImg);
-	//   	itemCard.append(caption);
+	  	var item = $("<div>")
+	  	// item.addClass("col-sm-6 col-md-4");
+	  	.addClass("col-xs-12 col-sm-6 col-md-4")
+	  	.append(itemCard);
 
-	//   	var item = $("<div>");
-	//   	item.addClass("col-sm-6 col-md-4");
-	//   	item.append(itemCard);
+	  	$(".products-content .row").append(item);
 
-	//   	$(".row[data-index=" + m + "]").append(item);
-
-	//   	if (n % 3 === 2) {
-	//   		m++;
-	//   	}
-
-	//   	n++;
-	// }, function(errorObject) {
-	// 	console.log("Errors handled: " + errorObject.code);
-	// });
+	  	n++;
+	}, function(errorObject) {
+		console.log("Errors handled: " + errorObject.code);
+	});
 
 	function showCart() {
 		$("#cart-items").empty();
@@ -274,7 +276,7 @@ $(document).ready(function($) {
 					.text("Remove");
 
 					var colName = $("<div>");
-					colName.addClass("col-md-6");
+					colName.addClass("col-md-6 col-sm-4");
 					colName.append(name, remove);
 
 					var quantity = $("<select>");
@@ -291,7 +293,7 @@ $(document).ready(function($) {
 					}
 
 					var colQty = $("<div>");
-					colQty.addClass("col-md-4");
+					colQty.addClass("col-md-4 col-sm-4");
 					colQty.append(quantity);
 
 					var price = $("<p>")
@@ -299,7 +301,7 @@ $(document).ready(function($) {
 					.text("$" + (parseFloat(sv[itemsList[i]].price) * parseInt(quantitiesList[i])));
 
 					var colPrice = $("<div>");
-					colPrice.addClass("col-md-2");
+					colPrice.addClass("col-md-2 col-sm-4");
 					colPrice.append(price);
 
 					var item = $("<div>")
@@ -325,47 +327,6 @@ $(document).ready(function($) {
 	// Add item to cart
 	$(document).on("click", "#add-to-cart", function() {
 		event.preventDefault();
-		var items = JSON.parse(localStorage.getItem("items"));
-		if (!Array.isArray(items)) {
-			items = [];
-		}
-		totalPrice = 0;
-		var quantities = JSON.parse(localStorage.getItem("quantities"));
-
-		// If item is not in cart
-		if (items.indexOf($(this).attr("data-key")) === -1) {
-			var itemKey = $(this).attr("data-key");
-			var quantity = 1;
-			itemsList.push(itemKey);
-			quantitiesList.push(quantity);
-			localStorage.setItem("items", JSON.stringify(itemsList));
-			localStorage.setItem("quantities", JSON.stringify(quantitiesList));
-			showCart();
-
-		// If item is in the cart
-		} else {
-			var itemIndex = items.indexOf($(this).attr("data-key"));
-			var newQuantity = parseInt(quantities[itemIndex]);
-			newQuantity++;
-			quantities[itemIndex] = newQuantity;
-			localStorage.setItem("quantities", JSON.stringify(quantities));
-			showCart();
-		}
-	});
-
-	// Update item quantity
-	$(document).on("change", "select", function() {
-		totalPrice = 0;
-		var itemIndex = $(this).attr("data-index");
-		var quantities = JSON.parse(localStorage.getItem("quantities"));
-		var newQuantity = parseInt($(this).val());
-		quantities[itemIndex] = newQuantity;
-		localStorage.setItem("quantities", JSON.stringify(quantities));
-		showCart();
-	});
-
-	// Remove item from cart
-	$(document).on("click", "button.delete", function() {
 		if ($(this).text() === "Add to cart") {
 			var items = JSON.parse(localStorage.getItem("items"));
 			if (!Array.isArray(items)) {
@@ -443,10 +404,16 @@ $(document).ready(function($) {
 		localStorage.setItem("items", JSON.stringify(items));
 		localStorage.setItem("quantities", JSON.stringify(quantities));
 
-		// $(this).parent().remove();
 		$("#item-" + $(this).attr("data-index")).remove();
 
 		totalPrice = 0;
+
+		if (quantities.length === 0) {
+			localStorage.removeItem("items");
+			localStorage.removeItem("quantities");
+			totalQty = 0;
+			$("#cart-total-qty").text(totalQty);
+		}
 		showCart();
 	});
 });

@@ -42,25 +42,6 @@
     background-color: #e24533;
     text-align: center;
   }
-  button.nav-btn {
-    background-color: #5babff;
-    border: 0;
-    color: #fff;
-    font-family: "museo_sans500";
-    font-size: 20px;
-    padding: 10px 20px;
-    border-radius: 10px;
-    transition: all 0.2s ease-in-out;
-    @media(max-width:991px) {
-      font-size: 18px;
-    }
-    &:hover {
-      background-color: #ff00a4;
-      @media(max-width:767px){
-        background-color: #6f3029;
-      }
-    }
-  }
   a {
     display: inline-block;
     color: #fff;
@@ -92,6 +73,53 @@
       height: 3px;
       background-color: #fff;
       transition: all 0.2s ease-in-out;
+    }
+  }
+  button.nav-btn {
+    background-color: #5babff;
+    border: 0;
+    color: #fff;
+    font-family: "helvetica";
+    font-size: 20px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    transition: all 0.2s ease-in-out;
+    @media(max-width:991px) {
+      font-size: 18px;
+    }
+    &:hover {
+      background-color: #ff00a4;
+      @media(max-width:767px){
+        background-color: #6f3029;
+      }
+    }
+    a {
+      margin: 0;
+      padding: 0;
+
+      &:after {
+        height: 0;
+      }
+    }
+
+    .dropdown-menu {
+      a {
+        color: #333;
+        width: 100%;
+        padding: 0 20px;
+      }
+    }
+  }
+}
+
+@media(max-width:767px) {
+  .navbar-wrap {
+    position: absolute;
+
+    .navbar-links-container {
+      position: -webkit-sticky;
+      position: sticky;
+      top: 0px;
     }
   }
 }

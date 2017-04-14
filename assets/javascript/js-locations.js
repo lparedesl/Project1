@@ -8,10 +8,21 @@ $(document).ready(function($) {
 		messagingSenderId: "554989098289"
 	};
 	firebase.initializeApp(config);
+	var database = firebase.database();
 
 	firebase.auth().onAuthStateChanged(function(firebaseUser) {
 		if (firebaseUser) {
-			var database = firebase.database();
+			// Initialize customers database
+			var configLocations = {
+				apiKey: "AIzaSyCsJTE4AtEAPYpmZ0gWDDph_8TIlcQap00",
+			    authDomain: "project-1-locations.firebaseapp.com",
+			    databaseURL: "https://project-1-locations.firebaseio.com",
+			    projectId: "project-1-locations",
+			    storageBucket: "project-1-locations.appspot.com",
+			    messagingSenderId: "431733192725"
+			};
+			var locationsApp = firebase.initializeApp(configLocations, "Locations");
+			var locationsDB = locationsApp.database();
 			var imgName = "";
 			var updateImgName = "";
 			var n = 0;
@@ -42,60 +53,58 @@ $(document).ready(function($) {
 			}
 			getTotalQty();
 
-			// Get image name
-			$("#upload").change(function () {
-				imgName = this.value.split(/(\\|\/)/g).pop();
-			});
-
-			$("#update-upload").change(function () {
-				updateImgName = this.value.split(/(\\|\/)/g).pop();
-			});
-
-			// Show add item window
-			$("#create-item").click(function() {
+			// Show add location window
+			$("#add-location").click(function() {
 				$(".update-bg").removeClass("hidden");
-				$("#create-item-window").removeClass("hidden");
+				$("#create-location-window").removeClass("hidden");
+				console.log("works");
 			});
 
 			// Add item to database
 			$("#add-new-item").click(function(event) {
 				event.preventDefault();
 
+				var fromTimestamp = parseInt(moment($("#date-input").val().trim() + " " + $("#hr-from-input").val().trim(), "MM/DD/YY HH:mm").format("X"));
+				var toTimestamp = parseInt(moment($("#date-input").val().trim() + " " + $("#hr-to-input").val().trim(), "MM/DD/YY HH:mm").format("X"));
+
 				// Push data to database
-				database.ref().push({
-				  name: $("#name-input").val().trim(),
-				  price: parseFloat($("#price-input").val().trim()),
-				  category: $("#category-input").val().trim(),
-				  description: $("#description-input").val().trim(),
-				  quantity: parseInt($("#quantity-input").val().trim()),
-				  imgName: imgName,
+				locationsDB.ref().push({
+				  date: $("#date-input").val().trim(),
+				  from: $("#hr-from-input").val().trim(),
+				  fromTimestamp: fromTimestamp,
+				  to: $("#hr-to-input").val().trim(),
+				  toTimestamp: toTimestamp,
+				  address: $("#address-input").val().trim(),
+				  city: $("#city-input").val().trim(),
+				  state: $("#state-input").val().trim(),
+				  zipCode: parseInt($("#zip-code-input").val().trim()),
 				});
 
 				// Clear input fields
-				var inputs = [$("#name-input"), $("#price-input"), $("#category-input"), $("#description-input"), $("#quantity-input"), $("#upload")];
+				var inputs = [$("#date-input"), $("#hr-from-input"), $("#hr-to-input"), $("#address-input"), $("#city-input"), $("#state-input"), $("#zip-code-input")];
 				for (i = 0; i < inputs.length; i++) {
 					inputs[i].val("");
 				}
 				$(".update-bg").addClass("hidden");
-				$("#create-item-window").addClass("hidden");
+				$("#create-location-window").addClass("hidden");
 			});
 
 			// Add item to table
-			database.ref().on("child_added", function(snapshot) {
+			locationsDB.ref().on("child_added", function(snapshot) {
 				var child = snapshot.val();
 				var key = snapshot.key;
 
 			  	// Create row
-			  	$("#inventory-table tbody").append("<tr data-key=\"" + key + "\"><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
+			  	$("#locations-table tbody").append("<tr data-key=\"" + key + "\"><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>");
 
 			  	// Add values to corresponding column
-			  	var rowTds = $("#inventory-table")
+			  	var rowTds = $("#locations-table")
 			  		.children()
 			  		.eq(1)
 			  		.children("tr")
 			  		.eq(n)
 			  		.children("td");
-			  	var headings = [child.name, child.price, child.category, child.description, child.quantity];
+			  	var headings = [child.date, child.from, child.to, child.address, child.city, child.state, child.zipCode];
 			  	for (var i = 0; i < headings.length; i++) {
 			  		rowTds.eq(i).text(headings[i]);
 			  	}
@@ -106,7 +115,7 @@ $(document).ready(function($) {
 			  	removeButton.attr("data-key", key);
 			  	removeButton.attr("class", "btn btn-danger remove-button");
 			  	removeButton.html("<i class=\"fa fa-trash\" aria-hidden=\"true\"></i>");
-			  	$("#inventory-table tbody tr:last td:last").append(removeButton);
+			  	$("#locations-table tbody tr:last td:last").append(removeButton);
 
 			  	// Append Edit Button
 			  	var editButton = $("<button>");
@@ -114,7 +123,7 @@ $(document).ready(function($) {
 			  	editButton.attr("data-key", key);
 			  	editButton.attr("class", "btn btn-primary edit-button");
 			  	editButton.html("<i class=\"fa fa-pencil\" aria-hidden=\"true\"></i>");
-			  	$("#inventory-table tbody tr:last td:last").append(editButton);
+			  	$("#locations-table tbody tr:last td:last").append(editButton);
 
 			  	n++;
 			}, function(errorObject) {
@@ -125,7 +134,7 @@ $(document).ready(function($) {
 			$("#cancel-new-item").click(function(event) {
 				event.preventDefault();
 				$(".update-bg").addClass("hidden");
-				$("#create-item-window").addClass("hidden");
+				$("#create-location-window").addClass("hidden");
 			});
 
 			// Remove item
@@ -133,18 +142,18 @@ $(document).ready(function($) {
 				// Remove item from table
 				$("tr[data-key=" + $(this).attr("data-key") + "]").remove();
 				// Remove item from the database
-				database.ref().child($(this).data("key")).remove();
+				locationsDB.ref().child($(this).data("key")).remove();
 				n--;
 			});
 
 			// Show update window
 			$(document).on("click", ".edit-button", function() {
 				$(".update-bg").removeClass("hidden");
-				$("#update-window").removeClass("hidden");
+				$("#update-location-window").removeClass("hidden");
 
 				var self = $(this);
 				// Get object from database
-				database.ref().on("value", function(snapshot) {
+				locationsDB.ref().on("value", function(snapshot) {
 					var sv = snapshot.val();
 					object = sv[self.attr("data-key")];
 				}, function(errorObject) {
@@ -152,12 +161,13 @@ $(document).ready(function($) {
 				});
 
 				// Show current values on form
-				$("#update-name-input").val(object.name);
-				$("#update-price-input").val(object.price);
-				$("#update-category-input").val(object.category);
-				$("#update-description-input").val(object.description);
-				$("#update-quantity-input").val(object.quantity);
-				updateImgName = object.imgName;
+				$("#update-date-input").val(object.date);
+				$("#update-hr-from-input").val(object.from);
+				$("#update-hr-to-input").val(object.to);
+				$("#update-address-input").val(object.address);
+				$("#update-city-input").val(object.city);
+				$("#update-state-input").val(object.state);
+				$("#update-zip-code-input").val(object.zipCode);
 
 				$("#submit-update").attr("data-key", $(this).data("key"));
 			});
@@ -166,35 +176,41 @@ $(document).ready(function($) {
 			$("#submit-update").click(function(event) {
 				event.preventDefault();
 				$(".update-bg").addClass("hidden");
-				$("#update-window").addClass("hidden");
+				$("#update-location-window").addClass("hidden");
+
+				var fromTimestamp = parseInt(moment($("#update-date-input").val().trim() + " " + $("#update-hr-from-input").val().trim(), "MM/DD/YY HH:mm").format("X"));
+				var toTimestamp = parseInt(moment($("#update-date-input").val().trim() + " " + $("#update-hr-to-input").val().trim(), "MM/DD/YY HH:mm").format("X"));
 
 				// Update object in database
-				database.ref("/" + $(this).attr("data-key")).update({
-				  name: $("#update-name-input").val().trim(),
-				  price: parseFloat($("#update-price-input").val().trim()),
-				  category: $("#update-category-input").val().trim(),
-				  description: $("#update-description-input").val().trim(),
-				  quantity: parseInt($("#update-quantity-input").val().trim()),
-				  imgName: updateImgName,
+				locationsDB.ref("/" + $(this).attr("data-key")).update({
+				  date: $("#update-date-input").val().trim(),
+				  from: $("#update-hr-from-input").val().trim(),
+				  fromTimestamp: fromTimestamp,
+				  to: $("#update-hr-to-input").val().trim(),
+				  toTimestamp: toTimestamp,
+				  address: $("#update-address-input").val().trim(),
+				  city: $("#update-city-input").val().trim(),
+				  state: $("#update-state-input").val().trim(),
+				  zipCode: parseInt($("#update-zip-code-input").val().trim()),
 				});
 
 				$("#submit-update").removeAttr("data-key");
 			});
 
 			// Update item in table
-			database.ref().on("child_changed", function(snapshot) {
+			locationsDB.ref().on("child_changed", function(snapshot) {
 				var child = snapshot.val();
 				var key = snapshot.key;
 
 				// Update table
-				var rowTds = $("#inventory-table")
+				var rowTds = $("#locations-table")
 					.children()
 					.eq(1)
 					.children("tr[data-key=" + key + "]")
 					.children("td");
 
 				// Update table on page
-				var headings = [child.name, child.price, child.category, child.description, child.quantity];
+				var headings = [child.date, child.from, child.to, child.address, child.city, child.state, child.zipCode];
 				for (var i = 0; i < headings.length; i++) {
 					rowTds.eq(i).text(headings[i]);
 				}
@@ -204,14 +220,14 @@ $(document).ready(function($) {
 			$("#cancel-update").click(function(event) {
 				event.preventDefault();
 				$(".update-bg").addClass("hidden");
-				$("#update-window").addClass("hidden");
+				$("#update-location-window").addClass("hidden");
 				$("#submit-update").removeAttr("data-key");
 			});
 
 			// Sort Table Ascending
 			$(".fa-caret-down").click(function() {
 				var table, rows, switching, x, y, shouldSwitch;
-				table = document.getElementById("inventory-table");
+				table = document.getElementById("locations-table");
 				switching = true;
 				while (switching) {
 					switching = false;
@@ -220,8 +236,20 @@ $(document).ready(function($) {
 						shouldSwitch = false;
 						x = rows[i].getElementsByTagName("TD")[$(this).attr("data-index")];
 						y = rows[i+1].getElementsByTagName("TD")[$(this).attr("data-index")];
-						if ($(this).attr("data-index") === "1" || $(this).attr("data-index") === "4") {
+						if ($(this).attr("data-index") === "6") {
 							if (parseInt(x.innerHTML) > parseInt(y.innerHTML)) {
+								shouldSwitch= true;
+								break;
+							}
+						}
+						else if ($(this).attr("data-index") === "0") {
+							if (moment(x.innerHTML, "MM/DD/YY").format("X") > moment(y.innerHTML, "MM/DD/YY").format("X")) {
+								shouldSwitch= true;
+								break;
+							}
+						}
+						else if ($(this).attr("data-index") === "1" || $(this).attr("data-index") === "2") {
+							if (moment(x.innerHTML, "HH:mm").format("X") > moment(y.innerHTML, "HH:mm").format("X")) {
 								shouldSwitch= true;
 								break;
 							}
@@ -246,7 +274,7 @@ $(document).ready(function($) {
 			// Sort Table Descending
 			$(".fa-caret-up").click(function() {
 				var table, rows, switching, x, y, shouldSwitch;
-				table = document.getElementById("inventory-table");
+				table = document.getElementById("locations-table");
 				switching = true;
 				while (switching) {
 					switching = false;
@@ -255,8 +283,20 @@ $(document).ready(function($) {
 						shouldSwitch = false;
 						x = rows[i].getElementsByTagName("TD")[$(this).attr("data-index")];
 						y = rows[i+1].getElementsByTagName("TD")[$(this).attr("data-index")];
-						if ($(this).attr("data-index") === "1" || $(this).attr("data-index") === "4") {
+						if ($(this).attr("data-index") === "6") {
 							if (parseInt(x.innerHTML) < parseInt(y.innerHTML)) {
+								shouldSwitch= true;
+								break;
+							}
+						}
+						else if ($(this).attr("data-index") === "0") {
+							if (moment(x.innerHTML, "MM/DD/YY").format("X") < moment(y.innerHTML, "MM/DD/YY").format("X")) {
+								shouldSwitch= true;
+								break;
+							}
+						}
+						else if ($(this).attr("data-index") === "1" || $(this).attr("data-index") === "2") {
+							if (moment(x.innerHTML, "HH:mm").format("X") < moment(y.innerHTML, "HH:mm").format("X")) {
 								shouldSwitch= true;
 								break;
 							}

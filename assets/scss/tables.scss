@@ -1,4 +1,4 @@
-#create-item {
+#create-item, #add-location {
 	margin-bottom: 20px;
 }
 
@@ -63,76 +63,117 @@
 		}
 	}
 
-	.inventory-table-wrapper, .customers-table-wrapper {
-		max-height: 690px;
+	#inventory-table {
+		color: #fff;
 
-		#inventory-table {
-			color: #fff;
-
-			.sorter {
-				float: right;
-				padding: 2px 6px;
-				font-size: 16px;
-			}
-
-			.fa-caret-down {
-				margin-right: 5px;
-			}
-
-			td:nth-child(1) {
-				width: 20%;
-			}
-
-			td:nth-child(2), td:nth-child(5) {
-				width: 12%;
-			}
-
-			td:nth-child(3) {
-				width: 15%;
-			}
-
-			td:nth-child(4) {
-				width: 34%;
-			}
-
-			td:nth-child(6) {
-				width: 7%;
-			}
-
-			button {
-				float: right;
-				padding: 2px 6px;
-				font-size: 12px;
-				margin: 0;
-			}
-
-			.edit-button {
-				margin-right: 5px;
-			}
+		.sorter {
+			float: right;
+			padding: 2px 6px;
+			font-size: 16px;
 		}
 
-		#customers-table {
-			.sorter {
-				float: right;
-				padding: 2px 6px;
-				font-size: 16px;
-			}
+		.fa-caret-down {
+			margin-right: 5px;
+		}
 
-			.fa-caret-down {
-				margin-right: 5px;
-			}
+		td:nth-child(1) {
+			width: 20%;
+		}
 
-			td:nth-child(1), td:nth-child(2) {
-				width: 15%;
-			}
+		td:nth-child(2), td:nth-child(5) {
+			width: 12%;
+		}
 
-			td:nth-child(3), td:nth-child(5) {
-				width: 12%;
-			}
+		td:nth-child(3) {
+			width: 15%;
+		}
 
-			td:nth-child(4) {
-				width: 20%;
-			}
+		td:nth-child(4) {
+			width: 34%;
+		}
+
+		td:nth-child(6) {
+			width: 7%;
+		}
+
+		button {
+			float: right;
+			padding: 2px 6px;
+			font-size: 12px;
+			margin: 0;
+		}
+
+		.edit-button {
+			margin-right: 5px;
+		}
+	}
+
+	#locations-table {
+		color: #fff;
+
+		.sorter {
+			float: right;
+			padding: 2px 6px;
+			font-size: 16px;
+		}
+
+		.fa-caret-down {
+			margin-right: 5px;
+		}
+
+		td:nth-child(1), td:nth-child(2), td:nth-child(3) {
+			width: 9%;
+		}
+
+		td:nth-child(4) {
+			width: 25%;
+		}
+
+		td:nth-child(5) {
+			width: 18%;
+		}
+
+		td:nth-child(6) {
+			width: 10%;
+		}
+
+		td:nth-child(7) {
+			width: 12%;
+		}
+
+		button {
+			float: right;
+			padding: 2px 6px;
+			font-size: 12px;
+			margin: 0;
+		}
+
+		.edit-button {
+			margin-right: 5px;
+		}
+	}
+
+	#customers-table {
+		.sorter {
+			float: right;
+			padding: 2px 6px;
+			font-size: 16px;
+		}
+
+		.fa-caret-down {
+			margin-right: 5px;
+		}
+
+		td:nth-child(1), td:nth-child(2) {
+			width: 15%;
+		}
+
+		td:nth-child(3), td:nth-child(5) {
+			width: 12%;
+		}
+
+		td:nth-child(4) {
+			width: 20%;
 		}
 	}
 }

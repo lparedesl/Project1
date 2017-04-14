@@ -35,31 +35,32 @@
 </head>
 <body>
 	<!-- Navbar -->
-	<div class="navbar-wrap">
-	    <div class="container">
-	        <a href="index.html" class="logo"></a>
-	        <div class="navbar-links-container">
-	            <a href="index.html">Home</a>
-	            <a href="products.html">Products</a>
-	            <a href="products.html"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart <span class="badge" id="cart-total-qty"></span></a>
-	            <button type="button" class="nav-btn dropdown" id="userMenu">
-	                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span id="user"></span><i class="fa fa-caret-down" aria-hidden="true"></i></a>
-	                <ul class="dropdown-menu pull-right">
-	                    <li><a href="inventory.html">Inventory</a></li>
-	                    <li><a href="sales.html">Sales</a></li>
-	                    <li><a href="customers.html">Customers</a></li>
-	                    <li role="separator" class="divider"></li>
-	                    <li><a id="btn-logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Sign Out</a></li>
-	                </ul>
-	            </button>
-	        </div>
-	    </div>
-	</div>
+    <div class="navbar-wrap">
+        <div class="container">
+            <a href="index.html" class="logo"></a>
+            <div class="navbar-links-container">
+                <a href="index.html">Home</a>
+                <a href="products.html">Products</a>
+                <a href="products.html"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart <span class="badge" id="cart-total-qty"></span></a>
+                <button type="button" class="nav-btn dropdown" id="userMenu">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span id="user"></span><i class="fa fa-caret-down" aria-hidden="true"></i></a>
+                    <ul class="dropdown-menu pull-right">
+                        <li><a href="inventory.html">Inventory</a></li>
+                        <li><a href="locations.html">Locations</a></li>
+                        <li><a href="sales.html">Sales</a></li>
+                        <li><a href="customers.html">Customers</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a id="btn-logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Sign Out</a></li>
+                    </ul>
+                </button>
+            </div>
+        </div>
+    </div>
 
 	<!-- Content -->
 	<div class="container">
 		<div class="table-content">
-			<h2>Open Orders</h2>
+			<h2>Open Sales</h2>
 			<button id="open-orders-expand" type="button" class="btn btn-default expand-table">Expand</button><button id="open-orders-collapse" type="button" class="btn btn-default collapse-table">Collapse</button>
 			<div class="wrapper open-orders-table-wrapper">
 				<table class="table table-hover" id="open-table">
@@ -81,7 +82,7 @@
 		</div>
 
 		<div class="table-content">
-			<h2>Picked Up Orders</h2>
+			<h2>Picked Up Sales</h2>
 			<button id="picked-up-orders-expand" type="button" class="btn btn-default expand-table">Expand</button><button id="picked-up-orders-collapse" type="button" class="btn btn-default collapse-table">Collapse</button>
 			<div class="wrapper picked-up-orders-table-wrapper">
 				<table class="table table-hover" id="picked-up-table">

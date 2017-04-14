@@ -35,9 +35,14 @@ $(document).ready(function($) {
     var customersApp = firebase.initializeApp(configCustomers, "Customers");
     var customersDB = customersApp.database();
 
+    // live key: sk_live_tEwBRxDvKlbB06GQCB4BUUAr
+    // test key: sk_test_WGpUaEkdiJuUYiXlaDEeow10
+    var auth = "sk_test_WGpUaEkdiJuUYiXlaDEeow10";
+
     // Get total price from cart
     function getTotalPrice() {
         totalPrice = 0;
+        description = "";
         cartItems = JSON.parse(localStorage.getItem("items"));
         cartQuantities = JSON.parse(localStorage.getItem("quantities"));
 
@@ -46,6 +51,7 @@ $(document).ready(function($) {
 
             for (var i = 0; i < cartItems.length; i++) {
                 totalPrice += (parseFloat(sv[cartItems[i]].price) * cartQuantities[i]);
+                description += cartQuantities[i] + " " + sv[cartItems[i]].name + ", ";
             }
 
             $("#cart-total").text(totalPrice);
@@ -131,9 +137,6 @@ $(document).ready(function($) {
         var items = JSON.parse(localStorage.getItem("items"));
         var quantities = JSON.parse(localStorage.getItem("quantities"));
 
-        // get name & email address that were entered at checkout
-        var emailNm = JSON.parse(localStorage.getItem("emailName"));
-        var emailAd = JSON.parse(localStorage.getItem("emailAddress"));
         var totalSale = 0;
         var promises = [];
         var itemQuantity = [];
@@ -158,78 +161,72 @@ $(document).ready(function($) {
         }
 
         Promise.all(promises)
-            .then(function(data) {
-            	// update line item totals 
-                for (var i = 0; i < data.length; i++) {
-                    iQ = quantities[i];
-                    data[i].itemQuantity = iQ;
-                    data[i].itemTotal = data[i].itemPrice * data[i].itemQuantity;
-                    totalSale += data[i].itemTotal;
-                }
+        .then(function(data) {
+        	// update line item totals
+            for (var i = 0; i < data.length; i++) {
+                iQ = quantities[i];
+                data[i].itemQuantity = iQ;
+                data[i].itemTotal = data[i].itemPrice * data[i].itemQuantity;
+                totalSale += data[i].itemTotal;
+            }
 
-                // add $ for proper formatting
-                for (var i = 0; i < data.length; i++) {
-                    iQ = quantities[i];
-                    data[i].itemTotal = "$" + data[i].itemTotal;
-                    data[i].itemPrice = "$" + data[i].itemPrice;
-                }
+            // add $ for proper formatting
+            for (var i = 0; i < data.length; i++) {
+                iQ = quantities[i];
+                data[i].itemTotal = "$" + data[i].itemTotal;
+                data[i].itemPrice = "$" + data[i].itemPrice;
+            }
 
-                // add empty data so email call doesn't puke
-                for (var j = 7 - data.length; j <= 6; j++) {
-                    data.push({ itemQuantity: " ", itemName: " ", itemPrice: "", itemTotal: "" });
-                }
+            for (var j = data.length; j < 7; j++) {
+                data.push({
+                    itemQuantity: " ",
+                    itemName: " ",
+                    itemPrice: "",
+                    itemTotal: ""
+                });
+            }
 
-                // send email 
-
-                // emailjs.send("default_service", "receipt2", {
-                //     uName: emailNm,
-                //     uEmail: emailAd,
-                //     totalPaid: totalSale
-                //     itemQuan1: data[0].itemQuantity,
-                //     itemDesc1: data[0].itemName,
-                //     itemPrice1: data[0].itemPrice,
-                //     tot1: data[0].itemTotal,
-                //     itemQuan2: data[1].itemQuantity,
-                //     itemDesc2: data[1].itemName,
-                //     itemPrice2: data[1].itemPrice,
-                //     tot2: data[1].itemTotal,
-                //     itemQuan3: data[2].itemQuantity,
-                //     itemDesc3: data[2].itemName,
-                //     itemPrice3: data[2].itemPrice,
-                //     tot3: data[2].itemTotal,
-                //     itemQuan4: data[3].itemQuantity,
-                //     itemDesc4: data[3].itemName,
-                //     itemPrice4: data[3].itemPrice,
-                //     tot4: data[3].itemTotal,
-                //     itemQuan5: data[4].itemQuantity,
-                //     itemDesc5: data[4].itemName,
-                //     itemPrice5: data[4].itemPrice,
-                //     tot5: data[4].itemTotal,
-                //     itemQuan6: data[5].itemQuantity,
-                //     itemDesc6: data[5].itemName,
-                //     itemPrice6: data[5].itemPrice,
-                //     tot6: data[5].itemTotal
-                // })
-
-
+            // send email
+            emailjs.send("default_service", "receipt2", {
+                uName: name,
+                uEmail: email,
+                totalPaid: totalSale,
+                itemQuan1: data[0].itemQuantity,
+                itemDesc1: data[0].itemName,
+                itemPrice1: data[0].itemPrice,
+                tot1: data[0].itemTotal,
+                itemQuan2: data[1].itemQuantity,
+                itemDesc2: data[1].itemName,
+                itemPrice2: data[1].itemPrice,
+                tot2: data[1].itemTotal,
+                itemQuan3: data[2].itemQuantity,
+                itemDesc3: data[2].itemName,
+                itemPrice3: data[2].itemPrice,
+                tot3: data[2].itemTotal,
+                itemQuan4: data[3].itemQuantity,
+                itemDesc4: data[3].itemName,
+                itemPrice4: data[3].itemPrice,
+                tot4: data[3].itemTotal,
+                itemQuan5: data[4].itemQuantity,
+                itemDesc5: data[4].itemName,
+                itemPrice5: data[4].itemPrice,
+                tot5: data[4].itemTotal,
+                itemQuan6: data[5].itemQuantity,
+                itemDesc6: data[5].itemName,
+                itemPrice6: data[5].itemPrice,
+                tot6: data[5].itemTotal
+            })
+            .then(function(response) {
+                window.location = "paysuccess.html";
             });
-
+        });
     }
-    // ---------------- //
-
 
     // Payment
     function payment() {
         name = $("#name-input").val().trim();
-        var email = $("#email-input").val().trim();
+        email = $("#email-input").val().trim();
         var phone = $("#phone-input").val().trim();
-
-        //---- added for email function ----//
-
-        localStorage.setItem("emailName", JSON.stringify(name));
-        localStorage.setItem("emailAddress", JSON.stringify(email));
-
-        //----------------------------------//
 
         if (customerExists === false) {
             // Create customer
@@ -237,7 +234,7 @@ $(document).ready(function($) {
                 type: "POST",
                 url: "https://api.stripe.com/v1/customers",
                 headers: {
-                    Authorization: "Bearer sk_test_WGpUaEkdiJuUYiXlaDEeow10"
+                    Authorization: "Bearer " + auth
                 },
                 data: {
                     description: "Customer for " + email,
@@ -273,7 +270,7 @@ $(document).ready(function($) {
                         type: "POST",
                         url: "https://api.stripe.com/v1/customers/" + customerId + "/sources",
                         headers: {
-                            Authorization: "Bearer sk_test_WGpUaEkdiJuUYiXlaDEeow10"
+                            Authorization: "Bearer " + auth
                         },
                         data: {
                             source: token,
@@ -286,7 +283,7 @@ $(document).ready(function($) {
                                 type: "GET",
                                 url: "https://api.stripe.com/v1/customers/" + customerId,
                                 headers: {
-                                    Authorization: "Bearer sk_test_WGpUaEkdiJuUYiXlaDEeow10"
+                                    Authorization: "Bearer " + auth
                                 },
                                 success: function(response) {
                                     var lastCardIndex = response.sources.data.length - 1;
@@ -301,7 +298,7 @@ $(document).ready(function($) {
                                                 type: "DELETE",
                                                 url: "https://api.stripe.com/v1/customers/" + customerId + "/sources/" + cardId,
                                                 headers: {
-                                                    Authorization: "Bearer sk_test_WGpUaEkdiJuUYiXlaDEeow10"
+                                                    Authorization: "Bearer " + auth
                                                 },
                                                 success: function(response) {
                                                     createCharge();
@@ -326,17 +323,15 @@ $(document).ready(function($) {
             type: "POST",
             url: "https://api.stripe.com/v1/charges",
             headers: {
-                Authorization: "Bearer sk_test_WGpUaEkdiJuUYiXlaDEeow10"
+                Authorization: "Bearer " + auth
             },
             data: {
                 amount: totalPrice * 100,
                 currency: "usd",
                 customer: customerId,
-                description: "BakeSale2Go sale"
+                description: description,
             },
             success: function(response) {
-                sendEmail();
-
                 var dateTime = moment(response.created, "X").format("MMM DD, YYYY hh:mm:ss");
                 salesDB.ref().once("value", function(snapshot) {
                     var orderNumber = snapshot.numChildren() + 1;
@@ -373,12 +368,11 @@ $(document).ready(function($) {
                         }
                     });
 
-
-                    window.location = "paysuccess.html";
+                    sendEmail();
 
                     // Empty cart
-                    localStorage.setItem("items", JSON.stringify([]));
-                    localStorage.setItem("quantities", JSON.stringify([]));
+                    localStorage.removeItem("items");
+                    localStorage.removeItem("quantities");
                 });
             },
             error: function(response) {

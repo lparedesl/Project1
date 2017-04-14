@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Bakesale2Go | Inventory</title>
+	<title>Bakesale2Go | Locations</title>
 	<link rel="icon" href="https://img.clipartfest.com/13f531b408a295650b4273a6342b6f54_-gingerbread-manpng-gingerbread-man-bake-sale-clipart_1876-2352.png">
 
 	<!-- Reset CSS -->
@@ -27,8 +27,9 @@
 
 	<!-- JavaScript -->
 	<script src="https://use.fontawesome.com/d1c076a58a.js"></script>
+	<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
-	<script type="text/javascript" src="assets/javascript/js-inventory.js"></script>
+	<script type="text/javascript" src="assets/javascript/js-locations.js"></script>
 </head>
 <body>
 	<!-- Navbar -->
@@ -57,50 +58,54 @@
 	<!-- Popup Windows -->
 	<div class="container popups">
 		<div class="update-bg hidden">
-			<!-- Add item window -->
-			<div class="jumbotron hidden" id="create-item-window">
+			<!-- Add locations window -->
+			<div class="jumbotron hidden" id="create-location-window">
 				<div class="container">
-					<legend>Create Item</legend>
+					<legend>Add Location</legend>
 					<form role="form">
 						<div class="form-group">
-							<label for="">Name</label>
-							<input type="text" class="form-control" id="name-input" placeholder="Item Name">
-							<label for="">Price ($)</label>
-							<input type="text" class="form-control" id="price-input" placeholder="10">
-							<label for="">Category</label>
-							<input type="text" class="form-control" id="category-input" placeholder="Category">
-							<label for="">Description</label>
-							<textarea class="form-control" rows="3" id="description-input" placeholder="Description of item"></textarea>
-							<label for="">Quantity</label>
-							<input type="text" class="form-control" id="quantity-input" placeholder="5">
-							<label for="">Image</label>
-							<input type="file" id="upload">
+							<label for="">Date</label>
+							<input type="text" class="form-control" id="date-input" placeholder="05/08/17">
+							<label for="">From</label>
+							<input type="text" class="form-control" id="hr-from-input" placeholder="09:30">
+							<label for="">To</label>
+							<input type="text" class="form-control" id="hr-to-input" placeholder="13:30">
+							<label for="">Address</label>
+							<input type="text" class="form-control" id="address-input" placeholder="123 Main St">
+							<label for="">City</label>
+							<input type="text" class="form-control" id="city-input" placeholder="Charlotte">
+							<label for="">State</label>
+							<input type="text" class="form-control" id="state-input" placeholder="NC">
+							<label for="">Zip Code</label>
+							<input type="text" class="form-control" id="zip-code-input" placeholder="28262">
 						</div>
-						<button type="submit" class="btn btn-primary" id="add-new-item">Add item</button>
+						<button type="submit" class="btn btn-primary" id="add-new-item">Add location</button>
 						<button type="submit" class="btn btn-danger" id="cancel-new-item">Cancel</button>
 					</form>
 				</div>
 			</div>
 			<!-- Update window -->
-			<div class="jumbotron hidden" id="update-window">
+			<div class="jumbotron hidden" id="update-location-window">
 				<div class="container">
-					<legend>Update Item</legend>
+					<legend>Update Location</legend>
 					<form role="form">
 						<div class="form-group">
-							<label for="">Name</label>
-							<input type="text" class="form-control" id="update-name-input" placeholder="Item Name">
-							<label for="">Price ($)</label>
-							<input type="text" class="form-control" id="update-price-input" placeholder="10">
-							<label for="">Category</label>
-							<input type="text" class="form-control" id="update-category-input" placeholder="Category">
-							<label for="">Description</label>
-							<textarea class="form-control" rows="3" id="update-description-input" placeholder="Description of item"></textarea>
-							<label for="">Quantity</label>
-							<input type="text" class="form-control" id="update-quantity-input" placeholder="5">
-							<label for="">Image</label>
-							<input type="file" id="update-upload">
+							<label for="">Date</label>
+							<input type="text" class="form-control" id="update-date-input" placeholder="05/08/17">
+							<label for="">From</label>
+							<input type="text" class="form-control" id="update-hr-from-input" placeholder="09:30">
+							<label for="">To</label>
+							<input type="text" class="form-control" id="update-hr-to-input" placeholder="13:30">
+							<label for="">Address</label>
+							<input type="text" class="form-control" id="update-address-input" placeholder="123 Main St">
+							<label for="">City</label>
+							<input type="text" class="form-control" id="update-city-input" placeholder="Charlotte">
+							<label for="">State</label>
+							<input type="text" class="form-control" id="update-state-input" placeholder="NC">
+							<label for="">Zip Code</label>
+							<input type="text" class="form-control" id="update-zip-code-input" placeholder="28262">
 						</div>
-						<button type="submit" class="btn btn-primary" id="submit-update">Update item</button>
+						<button type="submit" class="btn btn-primary" id="submit-update">Update location</button>
 						<button type="submit" class="btn btn-danger" id="cancel-update">Cancel</button>
 					</form>
 				</div>
@@ -111,18 +116,18 @@
 	<!-- Content -->
 	<div class="container">
 		<div class="table-content">
-			<div class="table-action-row">
-				<h2>Inventory</h2>
-				<button type="button" class="btn btn-default pull-right" id="create-item">Create item</button>
-			</div>
-			<table class="table table-hover" id="inventory-table">
+			<h2>Locations</h2>
+			<button type="button" class="btn btn-default pull-right" id="add-location">Add location</button>
+			<table class="table table-hover" id="locations-table">
 				<thead>
 					<tr>
-						<th>Product Type<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="0"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="0"></i></th>
-						<th>Price ($)<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="1"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="1"></i></th>
-						<th>Gluten-free<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="2"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="2"></i></th>
-						<th>Description<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="3"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="3"></i></th>
-						<th>Quantity<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="4"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="4"></i></th>
+						<th>Date<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="0"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="0"></i></th>
+						<th>From<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="1"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="1"></i></th>
+						<th>To<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="2"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="2"></i></th>
+						<th>Address<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="3"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="3"></i></th>
+						<th>City<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="4"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="4"></i></th>
+						<th>State<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="5"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="5"></i></th>
+						<th>Zip Code<i class="fa fa-caret-down sorter" aria-hidden="true" data-index="6"></i><i class="fa fa-caret-up sorter" aria-hidden="true" data-index="6"></i></th>
 						<th></th>
 					</tr>
 				</thead>

@@ -1,8 +1,8 @@
 @import 'fonts.scss';
 @import 'navbar.scss';
-// @import 'popup_windows.scss';
+@import 'popup_windows.scss';
 @import 'product_list.scss';
-// @import 'tables.scss';
+@import 'tables.scss';
 @import 'footer.scss';
 
 * {
@@ -25,10 +25,10 @@ html {
 body {
 	font-family: "museo_sans500";
 	margin-bottom: 241px;
+	margin-top: 133.5px;
 	background-color: #333333;
 	font-family: "museo_sans500";
 	margin-bottom: 241px;
-	margin-top: 128.5px;
 	background-color: #210D00;
 	color: #fff;
 }
@@ -37,72 +37,195 @@ input {
 	margin-bottom: 20px;
 }
 
-.page-hero {
-	float: left;
-	width: 100%;
-	h1 {
-		color: #fff;
+.container {
+	.form-group {
+		width: 90%;
+
+		#fAddress {
+			width: 53%;
+		}
+
+		#fCity {
+			width: 12%;
+		}
+
+		#fState {
+			width: 5%;
+		}
+
+		#fZip {
+			width: 10%;
+		}
 	}
 }
 
-.admin-table {
-	background-color: #fff;
-.map {
-	#mapid {
-	    position: inherit;
-	    height: 680px;
-	    margin: 0;
-	    padding: 0;
-	    // border: 1px solid black;
-	    // border-radius: 8px;
-	    z-index: 0;
+.search-col-wrap {
+  position: absolute;
+  width: 45%;
+  padding: 0;
+  top: 113.5px;
 
-	    .leaflet-control-container {
-	    	width: 100%;
-	    }
-	}
+  .locate-search-form-wrap {
+    float: left;
+    width: 100%;
+    padding: 20px;
+    background-color: #fff;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #ddd;
+
+    .locate-btn {
+      float: left;
+      width: 100%;
+      font-family: 'helvetica';
+      padding: 10px 30px;
+      transition: all 0.2s ease-in-out;
+      margin-bottom: 10px;
+      background-image: url('../images/compass.svg');
+      background-color: #f3f3f3;
+      border: 1px solid #ddd;
+      color: #5f5f5f;
+      text-shadow: none;
+      letter-spacing: 0.02em;
+      background-repeat: no-repeat;
+      background-size: 30px;
+      background-position: 20px center;
+
+      &:hover {
+        background-color: #e24533;
+        color: #fff;
+      }
+    }
+
+    form {
+    	.form-group {
+    		float: left;
+    		width: 33.3333333%;
+    		padding-right: 5px;
+
+    		input {
+    		  width: 100%;
+    		}
+		}
+
+		.address-input {
+			float: left;
+			width: 100%;
+			margin-bottom: 10px;
+			padding-right: 0;
+
+			input {
+				width: 100%;
+			}
+		}
+
+		.zip-input {
+		  padding-right: 0;
+		}
+
+		.action-btn {
+			.btn.btn-primary {
+			  width: 100%;
+			  max-width: 300px;
+			  float: right;
+			  margin-top: 10px;
+			}
+		}
+    }
+  }
+
+  .locations-container {
+    float: left;
+    width: 100%;
+    height: auto;
+
+    .location-list-wrap {
+    	height: auto;
+    	max-height: 530px;
+    	margin-bottom: 60px;
+    	overflow: auto;
+		width: 100%;
+		float: left;
+		padding: 20px;
+
+      .location-item {
+        float: left;
+        width: 100%;
+        padding: 20px;
+        margin-bottom: 10px;
+        background-color: #581e0c;
+        border-radius: 5px;
+
+        p {
+          font-family: 'helvetica';
+          margin-bottom: 0;
+
+          .address {
+            font-size: 25px;
+          }
+        }
+
+        .btn {
+        	margin-top: 10px;
+        }
+      }
+    }
+
+    @media(max-width:991px){
+      .location-list-wrap {
+        overflow: initial;
+        max-height: initial;
+      }
+    }
+  }
 }
 
-.location-content {
-	h1,
-	h2,
-	h3,
-	h4,
-	h5 {
-	    color: #7dc9d4;
-	    font-family: 'helvetica';
-	}
+@media(max-width:991px){
+  .search-col-wrap {
+    width: 100%;
+    position: initial;
+    float: left;
+    padding-top: 200px;
+    overflow: initial;
+  }
+}
 
-	form {
-	    float: center;
-	    width: auto;
-	}
+.full-map-container {
+  position: absolute;
+  right: 0;
+  top: 113.5px;
+  bottom: 0;
+  height: -webkit-calc(100% - 113.5px);
+  height:    -moz-calc(100% - 113.5px);
+  height:         calc(100% - 113.5px);
+  width: 55%;
 
-	.leaflet-routing-container-hide {
-	    display: none;
-	}
+  .leaflet-control-container {
+  	width: 100%;
+  }
+}
+
+@media(max-width:991px){
+  .full-map-container {
+    position: initial;
+    width: 100%;
+  }
 }
 
  // Responsive Tablet Sizes
 @media only screen and (max-width: 991px) {
-	// body {
-	// 	padding-top: 156px;
-	// }
-}
-
-@media only screen and (max-width: 769px) {
-	// body {
-	// 	padding-top: 100px;
-	// }
+	body {
+		margin-top: 230.5px;
+	}
 }
 
 @media only screen and (max-width: 749px) {
 	body {
-		margin-bottom: 377px;
+		margin-bottom: 154px !important;
+		margin-top: 185.5px;
 	}
 
 	footer {
-		height: 377px;
+		height: 154px;
 		.centered {
 			flex-wrap:wrap;
 			.footer-contact {
@@ -123,32 +246,19 @@ input {
 
  // Responsive Mobile Sizes
 @media only screen and (max-width: 699px) {
-
+	body {
+		margin-top: 185.5px;
+	}
 }
-
 
 @media only screen and (max-width: 500px) {
 	body {
-		margin-bottom: 600px !important;
-	}
-
-	footer {
-		height: 505px;
-
-		.centered {
-			margin-right : 0;
-			margin-left  : 0;
-
-			.footer-contact {
-				width  : 100%;
-				margin : 0 auto;
-			}
-
-			.footer-connect {
-				width  : 100%;
-				margin : 0 auto;
-			}
-		}
+		margin-top: 230.5px;
 	}
 }
+
+@media only screen and (max-width: 350px) {
+	body {
+		margin-top: 296.5px;
+	}
 }
