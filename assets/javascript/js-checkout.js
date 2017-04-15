@@ -35,7 +35,7 @@ $(document).ready(function($) {
     var customersApp = firebase.initializeApp(configCustomers, "Customers");
     var customersDB = customersApp.database();
 
-    var auth = "sk_live_tEwBRxDvKlbB06GQCB4BUUAr";
+    var auth = "sk_test_WGpUaEkdiJuUYiXlaDEeow10";
     var orderNumber = "";
 
     // Get total price from cart
@@ -61,7 +61,7 @@ $(document).ready(function($) {
     getTotalPrice();
 
     // Show card input field on the page
-    var stripe = Stripe("pk_live_APkGdjN2AWieKbvUbJVj8WgP");
+    var stripe = Stripe("pk_test_zWFvhJOfoM9WR1AijVf0WcRb");
     var elements = stripe.elements();
 
     var card = elements.create('card', {
