@@ -1076,6 +1076,59 @@ input {
   height: 100%;
   width: 55%;
 }
+.cart-container {
+  float: left;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 5px;
+  color: #444;
+  padding: 20px 40px 30px 40px;
+  margin-bottom: 20px;
+}
+.cart-container .row {
+  border-bottom: 1px solid #ddd;
+  padding: 20px 0;
+}
+.cart-container .cart-item-name {
+  font-size: 22px;
+}
+.cart-container .cart-item-price {
+  float: right;
+  font-size: 22px;
+  margin-top: 6px;
+  margin-right: 16px;
+}
+.cart-container .row:nth-child(odd) {
+  background-color: #f5f5f5;
+}
+.cart-container #total-price {
+  float: right;
+  font-size: 30px;
+  margin-top: 20px;
+}
+#checkout {
+  padding: 10px 25px;
+  float: right;
+  width: 100%;
+  max-width: 300px;
+  background-color: #5babff;
+  font-size: 19px;
+  color: #fff;
+  clear: both;
+  text-align: center;
+  border-radius: 11px;
+  margin-top: 25px;
+  transition: all 0.2s ease-in-out;
+}
+#checkout:focus,
+#checkout:hover {
+  text-decoration: none;
+  background-color: #ff00a4;
+}
+#cart-items select {
+  width: 60px;
+  float: right;
+}
 @media(max-width:991px){
   .leaflet-container.leaflet-touch-drag.leaflet-touch-zoom {
     position: absolute;
