@@ -27,13 +27,13 @@
 
 .logo {
   background-image: url("../images/bakesale2go-logo.svg");
-  background-position: 0 12px;
+  background-position: center;
   background-size: 100%;
   background-repeat: no-repeat;
   float: left;
   height: 100px;
   width: 100%;
-  max-width: 300px;
+  max-width: 225px;
 }
 @media (max-width: 767px) {
   .logo {
@@ -64,6 +64,13 @@
 @media (max-width: 991px) {
   .navbar-links-container a {
     font-size: 18px;
+  }
+}
+@media (max-width: 600px) {
+  .navbar-links-container a {
+    font-size: 18px;
+    padding-right: 5px;
+    padding-left: 5px;
   }
 }
 @media (max-width: 767px) {
@@ -102,6 +109,13 @@
 @media (max-width: 991px) {
   .navbar-links-container button.nav-btn {
     font-size: 18px;
+  }
+}
+@media(max-width: 600px){
+  .navbar-links-container button.nav-btn {
+    font-size: 14px;
+    font-weight: bolder;
+    border-radius: 5px;
   }
 }
 .navbar-links-container button.nav-btn:hover {
@@ -962,8 +976,9 @@ input {
   position: absolute;
   width: 45%;
   padding: 0;
-  top: 113.5px;
+  top: 113px;
 }
+
 .search-col-wrap .locate-search-form-wrap {
   float: left;
   width: 100%;
@@ -1051,6 +1066,26 @@ input {
 .search-col-wrap .locations-container .location-list-wrap .location-item .btn {
   margin-top: 10px;
 }
+.leaflet-top {
+  z-index: 999;
+}
+.leaflet-container.leaflet-touch-drag.leaflet-touch-zoom {
+  position: fixed;
+  right: 0;
+  top: 112px;
+  height: 100%;
+  width: 55%;
+}
+@media(max-width:991px){
+  .leaflet-container.leaflet-touch-drag.leaflet-touch-zoom {
+    position: absolute;
+    height: 266px;
+    width: 100%;
+  }
+  .leaflet-touch .leaflet-control-attribution {
+    display: none;
+  }
+}
 @media (max-width: 991px) {
   .search-col-wrap .locations-container .location-list-wrap {
     overflow: initial;
@@ -1063,19 +1098,21 @@ input {
     width: 100%;
     position: initial;
     float: left;
-    padding-top: 200px;
+    padding-top: 0;
     overflow: initial;
+    margin-top: 146px;
   }
 }
-.full-map-container {
-  position: absolute;
-  right: 0;
-  top: 113.5px;
-  bottom: 0;
-  height: -webkit-calc(100% - 113.5px);
-  height: -moz-calc(100% - 113.5px);
-  height: calc(100% - 113.5px);
-  width: 55%;
+@media(max-width: 767px){
+  .search-col-wrap {
+    position: absolute;
+    z-index: 999;
+    top: 200px;
+}
+  }
+}
+.leaflet-touch .leaflet-control-attribution {
+  display: none;
 }
 .full-map-container .leaflet-control-container {
   width: 100%;
@@ -1083,8 +1120,15 @@ input {
 
 @media (max-width: 991px) {
   .full-map-container {
-    position: initial;
+    height: 268px;
     width: 100%;
+    position: absolute;
+    top: 110px;
+  }
+}
+@media(max-width: 767px){
+  .full-map-container {
+    top: 165px;
   }
 }
 @media only screen and (max-width: 991px) {
