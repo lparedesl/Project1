@@ -158,7 +158,7 @@
 .popups .update-bg {
   position: fixed;
   /* Stay in place */
-  z-index: 1;
+  z-index: 9999;
   /* Sit on top */
   left: 0;
   top: 0;
@@ -174,16 +174,21 @@
   /* Black w/ opacity */
   color: #333;
 }
+button.close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
 .popups .update-bg #login-window {
-  border-radius: 10px;
-  font-size: 16px;
-  height: 46vh;
-  margin-left: 41%;
-  padding: 2vh 2vh;
-  position: fixed;
-  top: 27vh;
-  width: 18%;
-  z-index: 1001;
+  position: absolute;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+  width: 100%;
+  max-width: 500px;
+  max-height: 550px;
 }
 .popups .update-bg #login-window form {
   height: 26vh;
@@ -294,10 +299,12 @@
   background-color: #ffffff;
 }
 .popups .update-bg #login-window form #login {
-  margin-left: 61px;
+  width: 100%;
+  margin-bottom: 10px;
 }
 .popups .update-bg #login-window form #signup {
-  margin-left: 20px;
+  width: 100%;
+  margin-bottom: 10px;
 }
 .popups .update-bg #login-window form a {
   clear: both;
