@@ -177,7 +177,6 @@ $(document).ready(function($) {
 	    cartQuantities = JSON.parse(localStorage.getItem("quantities"));
 
 	    if (Array.isArray(cartQuantities)) {
-	        console.log("false");
 	        for (var i = 0; i < cartQuantities.length; i++) {
 	            totalQty += cartQuantities[i];
 	        }

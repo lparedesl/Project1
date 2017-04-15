@@ -35,9 +35,7 @@ $(document).ready(function($) {
     var customersApp = firebase.initializeApp(configCustomers, "Customers");
     var customersDB = customersApp.database();
 
-    // live key: sk_live_tEwBRxDvKlbB06GQCB4BUUAr
-    // test key: sk_test_WGpUaEkdiJuUYiXlaDEeow10
-    var auth = "sk_test_WGpUaEkdiJuUYiXlaDEeow10";
+    var auth = "sk_live_tEwBRxDvKlbB06GQCB4BUUAr";
     var orderNumber = "";
 
     // Get total price from cart

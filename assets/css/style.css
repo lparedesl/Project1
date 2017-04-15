@@ -27,13 +27,13 @@
 
 .logo {
   background-image: url("../images/bakesale2go-logo.svg");
-  background-position: 0 12px;
+  background-position: center;
   background-size: 100%;
   background-repeat: no-repeat;
   float: left;
   height: 100px;
   width: 100%;
-  max-width: 300px;
+  max-width: 225px;
 }
 @media (max-width: 767px) {
   .logo {
@@ -64,6 +64,13 @@
 @media (max-width: 991px) {
   .navbar-links-container a {
     font-size: 18px;
+  }
+}
+@media (max-width: 600px) {
+  .navbar-links-container a {
+    font-size: 18px;
+    padding-right: 5px;
+    padding-left: 5px;
   }
 }
 @media (max-width: 767px) {
@@ -102,6 +109,13 @@
 @media (max-width: 991px) {
   .navbar-links-container button.nav-btn {
     font-size: 18px;
+  }
+}
+@media(max-width: 600px){
+  .navbar-links-container button.nav-btn {
+    font-size: 14px;
+    font-weight: bolder;
+    border-radius: 5px;
   }
 }
 .navbar-links-container button.nav-btn:hover {
@@ -144,7 +158,7 @@
 .popups .update-bg {
   position: fixed;
   /* Stay in place */
-  z-index: 1;
+  z-index: 9999;
   /* Sit on top */
   left: 0;
   top: 0;
@@ -160,16 +174,21 @@
   /* Black w/ opacity */
   color: #333;
 }
+button.close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
 .popups .update-bg #login-window {
-  border-radius: 10px;
-  font-size: 16px;
-  height: 46vh;
-  margin-left: 41%;
-  padding: 2vh 2vh;
-  position: fixed;
-  top: 27vh;
-  width: 18%;
-  z-index: 1001;
+  position: absolute;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+  width: 100%;
+  max-width: 500px;
+  max-height: 550px;
 }
 .popups .update-bg #login-window form {
   height: 26vh;
@@ -280,10 +299,12 @@
   background-color: #ffffff;
 }
 .popups .update-bg #login-window form #login {
-  margin-left: 61px;
+  width: 100%;
+  margin-bottom: 10px;
 }
 .popups .update-bg #login-window form #signup {
-  margin-left: 20px;
+  width: 100%;
+  margin-bottom: 10px;
 }
 .popups .update-bg #login-window form a {
   clear: both;
@@ -669,9 +690,12 @@
   max-height: 345px;
   margin-bottom: 60px;
   overflow: auto;
-}
-.table-content .wrapper #open-table, .table-content .wrapper #picked-up-table {
-  color: #fff;
+
+  background-color: #fff;
+  border-radius: 5px;
+  color: #444;
+  padding: 20px 40px 30px 40px;
+  margin-bottom: 20px;
 }
 .table-content .wrapper #open-table .sorter, .table-content .wrapper #picked-up-table .sorter {
   float: right;
@@ -699,7 +723,13 @@
   font-size: 12px;
 }
 .table-content #inventory-table {
-  color: #fff;
+  /*color: #fff;*/
+
+  background-color: #fff;
+  border-radius: 5px;
+  color: #444;
+  padding: 20px 40px 30px 40px;
+  margin-bottom: 20px;
 }
 .table-content #inventory-table .sorter {
   float: right;
@@ -734,7 +764,13 @@
   margin-right: 5px;
 }
 .table-content #locations-table {
-  color: #fff;
+  /*color: #fff;*/
+
+  background-color: #fff;
+  border-radius: 5px;
+  color: #444;
+  padding: 20px 40px 30px 40px;
+  margin-bottom: 20px;
 }
 .table-content #locations-table .sorter {
   float: right;
@@ -767,6 +803,15 @@
 }
 .table-content #locations-table .edit-button {
   margin-right: 5px;
+}
+.table-content #customers-table {
+  /*color: #fff;*/
+
+  background-color: #fff;
+  border-radius: 5px;
+  color: #444;
+  padding: 20px 40px 30px 40px;
+  margin-bottom: 20px;
 }
 .table-content #customers-table .sorter {
   float: right;
@@ -962,8 +1007,9 @@ input {
   position: absolute;
   width: 45%;
   padding: 0;
-  top: 113.5px;
+  top: 113px;
 }
+
 .search-col-wrap .locate-search-form-wrap {
   float: left;
   width: 100%;
@@ -1051,6 +1097,79 @@ input {
 .search-col-wrap .locations-container .location-list-wrap .location-item .btn {
   margin-top: 10px;
 }
+.leaflet-top {
+  z-index: 999;
+}
+.leaflet-container.leaflet-touch-drag.leaflet-touch-zoom {
+  position: fixed;
+  right: 0;
+  top: 112px;
+  height: 100%;
+  width: 55%;
+}
+.cart-container {
+  float: left;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 5px;
+  color: #444;
+  padding: 20px 40px 30px 40px;
+  margin-bottom: 20px;
+}
+.cart-container .row {
+  border-bottom: 1px solid #ddd;
+  padding: 20px 0;
+}
+.cart-container .cart-item-name {
+  font-size: 22px;
+}
+.cart-container .cart-item-price {
+  float: right;
+  font-size: 22px;
+  margin-top: 6px;
+  margin-right: 16px;
+}
+.cart-container .row:nth-child(odd) {
+  background-color: #f5f5f5;
+}
+.cart-container #total-price {
+  float: right;
+  font-size: 30px;
+  margin-top: 20px;
+}
+#checkout {
+  padding: 10px 25px;
+  float: right;
+  width: 100%;
+  max-width: 300px;
+  background-color: #5babff;
+  font-size: 19px;
+  color: #fff;
+  clear: both;
+  text-align: center;
+  border-radius: 11px;
+  margin-top: 25px;
+  transition: all 0.2s ease-in-out;
+}
+#checkout:focus,
+#checkout:hover {
+  text-decoration: none;
+  background-color: #ff00a4;
+}
+#cart-items select {
+  width: 60px;
+  float: right;
+}
+@media(max-width:991px){
+  .leaflet-container.leaflet-touch-drag.leaflet-touch-zoom {
+    position: absolute;
+    height: 266px;
+    width: 100%;
+  }
+  .leaflet-touch .leaflet-control-attribution {
+    display: none;
+  }
+}
 @media (max-width: 991px) {
   .search-col-wrap .locations-container .location-list-wrap {
     overflow: initial;
@@ -1063,19 +1182,21 @@ input {
     width: 100%;
     position: initial;
     float: left;
-    padding-top: 200px;
+    padding-top: 0;
     overflow: initial;
+    margin-top: 146px;
   }
 }
-.full-map-container {
-  position: absolute;
-  right: 0;
-  top: 113.5px;
-  bottom: 0;
-  height: -webkit-calc(100% - 113.5px);
-  height: -moz-calc(100% - 113.5px);
-  height: calc(100% - 113.5px);
-  width: 55%;
+@media(max-width: 767px){
+  .search-col-wrap {
+    position: absolute;
+    z-index: 999;
+    top: 200px;
+}
+  }
+}
+.leaflet-touch .leaflet-control-attribution {
+  display: none;
 }
 .full-map-container .leaflet-control-container {
   width: 100%;
@@ -1083,8 +1204,15 @@ input {
 
 @media (max-width: 991px) {
   .full-map-container {
-    position: initial;
+    height: 268px;
     width: 100%;
+    position: absolute;
+    top: 110px;
+  }
+}
+@media(max-width: 767px){
+  .full-map-container {
+    top: 165px;
   }
 }
 @media only screen and (max-width: 991px) {

@@ -214,10 +214,8 @@ $(document).ready(function($) {
     var locationsApp = firebase.initializeApp(configLocations, "Locations");
     var locationsDB = locationsApp.database();
 
-    var n = 0;
-
     // Add locations to page
-    locationsDB.ref().on("child_added", function(snapshot) {
+    locationsDB.ref().orderByChild("fromTimestamp").on("child_added", function(snapshot) {
         var child = snapshot.val();
         var key = snapshot.key;
         var timeFrom = child.fromTimestamp;
@@ -240,7 +238,7 @@ $(document).ready(function($) {
                 <p class="hr-from" data-index="${n}">From ${child.from}</p>
                 <p class="hr-to" data-index="${n}">Until ${child.to}</p>
             </div>
-    `);
+            `);
 
         $(".location-list-wrap").append(location);
 
