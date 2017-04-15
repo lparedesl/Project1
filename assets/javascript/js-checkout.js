@@ -61,7 +61,7 @@ $(document).ready(function($) {
     getTotalPrice();
 
     // Show card input field on the page
-    var stripe = Stripe('pk_test_zWFvhJOfoM9WR1AijVf0WcRb');
+    var stripe = Stripe("pk_live_APkGdjN2AWieKbvUbJVj8WgP");
     var elements = stripe.elements();
 
     var card = elements.create('card', {
