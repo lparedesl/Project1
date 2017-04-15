@@ -38,6 +38,7 @@ $(document).ready(function($) {
     // live key: sk_live_tEwBRxDvKlbB06GQCB4BUUAr
     // test key: sk_test_WGpUaEkdiJuUYiXlaDEeow10
     var auth = "sk_test_WGpUaEkdiJuUYiXlaDEeow10";
+    var orderNumber = "";
 
     // Get total price from cart
     function getTotalPrice() {
@@ -53,6 +54,7 @@ $(document).ready(function($) {
                 totalPrice += (parseFloat(sv[cartItems[i]].price) * cartQuantities[i]);
                 description += cartQuantities[i] + " " + sv[cartItems[i]].name + ", ";
             }
+            description = description.substring(0, description.length-2);
 
             $("#cart-total").text(totalPrice);
             $("#chargeAmount").text(totalPrice);
@@ -100,9 +102,6 @@ $(document).ready(function($) {
 
         if (result.token) {
             token = result.token.id;
-            $(".success").append($('<input type="hidden" name="stripeToken" />').val(token));
-            $(".success").append($('<input type="hidden" name="chargeAmount" />').val(totalPrice));
-            successElement.classList.add('visible');
             // Check if customer exists
             var email = $("#email-input").val().trim();
             customersDB.ref().once("value", function(snapshot) {
@@ -128,7 +127,6 @@ $(document).ready(function($) {
     card.on('change', function(event) {
         setOutcome(event);
     });
-
 
     // -----email function ----- //
     function sendEmail() {
@@ -191,6 +189,7 @@ $(document).ready(function($) {
                 uName: name,
                 uEmail: email,
                 totalPaid: totalSale,
+                orderNum: orderNumber,
                 itemQuan1: data[0].itemQuantity,
                 itemDesc1: data[0].itemName,
                 itemPrice1: data[0].itemPrice,
@@ -344,7 +343,7 @@ $(document).ready(function($) {
             success: function(response) {
                 var dateTime = moment(response.created, "X").format("MMM DD, YYYY hh:mm:ss");
                 salesDB.ref().once("value", function(snapshot) {
-                    var orderNumber = snapshot.numChildren() + 1;
+                    orderNumber = snapshot.numChildren() + 1;
                     if (orderNumber < 10) {
                         orderNumber = "000" + String(orderNumber);
                     } else if (orderNumber < 100) {

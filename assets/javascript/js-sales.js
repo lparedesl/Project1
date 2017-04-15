@@ -52,7 +52,7 @@ $(document).ready(function($) {
 			});
 
 			$("#open-orders-collapse").click(function() {
-				$(".picked-up-orders-table-wrapper").css({
+				$(".open-orders-table-wrapper").css({
 					"max-height": "345px"
 				});
 			});

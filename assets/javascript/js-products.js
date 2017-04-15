@@ -275,16 +275,16 @@ $(document).ready(function($) {
 					.attr("data-index", i)
 					.text("Remove");
 
-					var colName = $("<div>");
-					colName.addClass("col-md-6 col-sm-4");
-					colName.append(name, remove);
+					var colName = $("<div>")
+					.addClass("col-md-6 col-sm-4")
+					.append(name, remove);
 
-					var quantity = $("<select>");
-					quantity.addClass("form-control");
-					quantity.attr("data-index", i);
+					var quantity = $("<select>")
+					.addClass("form-control")
+					.attr("data-index", i);
 					for (var j = 0; j < 10; j++) {
-						var option = $("<option>");
-						option.attr("value", j+1);
+						var option = $("<option>")
+						.attr("value", j+1);
 						if (j+1 === parseInt(quantities[i])) {
 							option.attr("selected", "selected");
 						}
@@ -292,17 +292,17 @@ $(document).ready(function($) {
 						quantity.append(option);
 					}
 
-					var colQty = $("<div>");
-					colQty.addClass("col-md-4 col-sm-4");
-					colQty.append(quantity);
+					var colQty = $("<div>")
+					.addClass("col-md-4 col-sm-4")
+					.append(quantity);
 
 					var price = $("<p>")
 					.addClass("cart-item-price")
 					.text("$" + (parseFloat(sv[items[i]].price) * parseInt(quantities[i])));
 
-					var colPrice = $("<div>");
-					colPrice.addClass("col-md-2 col-sm-4");
-					colPrice.append(price);
+					var colPrice = $("<div>")
+					.addClass("col-md-2 col-sm-4")
+					.append(price);
 
 					var item = $("<div>")
 					.addClass("row")
@@ -361,9 +361,9 @@ $(document).ready(function($) {
 					// If inventory is less than new quantity, set value to max and show alert
 					if (sv[thisKey].quantity < newQuantity) {
 						newQuantity = sv[thisKey].quantity;
-						var txt = $("<p>");
-						txt.attr("data-index", itemIndex);
-						txt.text(sv[thisKey].name + "s " + "currently in stock: " + sv[thisKey].quantity);
+						var txt = $("<p>")
+						.attr("data-index", itemIndex)
+						.text(sv[thisKey].name + "s " + "currently in stock: " + sv[thisKey].quantity);
 						$("#quantity-alert").append(txt);
 						$("#quantity-alert").removeClass("hidden");
 					} else {
@@ -395,9 +395,9 @@ $(document).ready(function($) {
 			// If inventory is less than quantity selected, set value to max and show alert
 			if (sv[thisKey].quantity < parseInt(self.val())) {
 				self.val(sv[thisKey].quantity);
-				var txt = $("<p>");
-				txt.attr("data-index", itemIndex);
-				txt.text(sv[thisKey].name + "s " + "currently in stock: " + sv[thisKey].quantity);
+				var txt = $("<p>")
+				.attr("data-index", itemIndex)
+				.text(sv[thisKey].name + "s " + "currently in stock: " + sv[thisKey].quantity);
 				$("#quantity-alert").append(txt);
 				$("#quantity-alert").removeClass("hidden");
 			} else {
