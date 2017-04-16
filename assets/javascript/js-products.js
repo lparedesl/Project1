@@ -69,9 +69,6 @@ $(document).ready(function($) {
 		$("#bad-email").addClass("hidden");
 		$("#input-username").val("");
 		$("#input-password").val("");
-		$("#login-window").css({
-			height: "46vh",
-		});
 	});
 
 	$("#signup").click(function(event) {
